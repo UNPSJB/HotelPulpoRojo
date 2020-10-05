@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from decimal import Decimal
 
 # Pais, Provincia, Localidad
 class Pais(models.Model):
@@ -17,7 +19,16 @@ class Provincia(models.Model):
     def __str__(self):
         return self.nombre
 
+class LocalidadManager(models.Manager):
+    def crear_zona(self, nombre):
+        return self.model.objects.all()
+
+class LocalidadQuerySet(models.QuerySet):
+    pass
+
 class Localidad(models.Model):
+    objects = LocalidadManager.from_queryset(LocalidadQuerySet)()
+
     nombre = models.CharField(max_length=200)
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
 
@@ -72,7 +83,7 @@ class TipoHabitacion(models.Model):
     def __str__(self):
         return self.nombre
 
-# Encargados, Clientes, Vendedores
+# Las Personas
 class Persona(models.Model):
     DNI = 0
     PASAPORTE = 1
@@ -86,6 +97,7 @@ class Persona(models.Model):
     documento = models.CharField(max_length=13)
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
+    usuario = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
@@ -104,6 +116,8 @@ class Persona(models.Model):
     def sos(self, Klass):
         return any([isinstance(rol, Klass) for rol in self.roles_related()])
 
+# Usamos patron roles para
+# Encargados, Clientes, Vendedores
 class Rol(models.Model):
     TIPO = 0
     TIPOS = [
@@ -137,13 +151,13 @@ class Vendedor(Rol):
     TIPO = 2
 
     # Coeficiente de Ganancia
-    coeficiente = models.DecimalField(max_digits=3, decimal_places=2)
+    coeficiente = models.DecimalField(max_digits=3, decimal_places=2, default=Decimal(0))
 
 class Cliente(Rol):
     TIPO = 3
 
     # Puntos
-    puntos = models.PositiveIntegerField()
+    puntos = models.PositiveIntegerField(default=0)
 
 for Klass in [Encargado, Vendedor, Cliente]:
     Rol.register(Klass)
