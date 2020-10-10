@@ -14,8 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from core.views import listarPersona, editarPersona, crearPersona, crearZona, eliminarPersona,iniciarSesion
+from core.class_views import PersonaCreate,PersonaDelete,PersonaList,PersonaUpdate
 
 urlpatterns = [
+
+    #Views
     path('admin/', admin.site.urls),
+    #path('listar_persona/',listarPersona,name = 'listar_persona'),
+    #path('crear_persona/',crearPersona,name = 'crear_persona'),
+    #path('editar_persona/<int:id>/',editarPersona,name = 'editar_persona'),
+    #path('eliminar_persona/<int:id>/', eliminarPersona, name = 'eliminar_persona'),
+
+    #Class_view
+    path('listar_persona/',PersonaList.as_view() ,name = 'listar_persona'),
+    path('crear_persona/',PersonaCreate.as_view(),name = 'crear_persona'),
+    path('editar_persona/<int:pk>/',PersonaUpdate.as_view(),name = 'editar_persona'),
+    path('eliminar_persona/<int:pk>/', PersonaDelete.as_view(), name = 'eliminar_persona'),
+    path('iniciar_sesion/', iniciarSesion, name = 'iniciar_sesion'),
+    
+    
+    path('crear_zona/',crearZona,name = 'crear_zona'),
 ]

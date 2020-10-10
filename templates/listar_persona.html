@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de contactos{% endblock titulo %}
+
+{% block cuerpo %}
+
+    <h1>Listado de personas</h1>
+
+    <div class="ui raised very padded text container segment">
+        <h2 class="ui header">Listado de personas</h2>
+        <table class="ui single line table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Tipo Documento</th>
+                    <th>Documento</th>
+                    <th>OPCION</th>
+                </tr>
+                <tbody>
+                    {% for persona in object_list %} 
+                    
+                    <tr>
+                        <td>{{persona.nombre}}</td>
+                        <td>{{persona.apellido}}</td>
+                        <td>{{persona.tipo_documento}}</td>
+                        <td>{{persona.documento}}</td>
+                        <td>
+                            <a href="{% url 'editar_persona' persona.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_persona' persona.id %}"><i class="trash icon"></i></a> 
+                            <a href=""><i class="info circle icon"></i></a> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+        <a href="{% url 'crear_persona' %}">CREAR PERSONA</a>
+    </div>
+{% endblock cuerpo %}
