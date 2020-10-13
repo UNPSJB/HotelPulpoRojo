@@ -1,3 +1,4 @@
 {
-  "python.venvPath": "~/.virtualenvs"
+  "python.venvPath": "~/.virtualenvs",
+  "python.pythonPath": "c:\\Users\\Dutzo\\Django\\myvenv\\Scripts\\python.exe"
 }

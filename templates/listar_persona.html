@@ -16,7 +16,7 @@
                     <th>Apellido</th>
                     <th>Tipo Documento</th>
                     <th>Documento</th>
-                    <th>OPCION</th>
+                    <th>OPCIÓN</th>
                 </tr>
                 <tbody>
                     {% for persona in object_list %} 
@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{persona.nombre}}</td>
                         <td>{{persona.apellido}}</td>
-                        <td>{{persona.tipo_documento}}</td>
+                        <td>{{persona.get_tipo_documento_display}}</td>
                         <td>{{persona.documento}}</td>
                         <td>
                             <a href="{% url 'editar_persona' persona.id %}"><i class="edit icon"></i></a>
