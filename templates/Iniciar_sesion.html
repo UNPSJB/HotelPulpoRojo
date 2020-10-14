@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +18,46 @@
             max-width: 450px;
         }
     </style>
+
+    <script>
+        $(document)
+        .ready(function() {
+            $('.ui.form')
+                .form({
+                fields: {
+                    username: {
+                    identifier  : 'username',
+                    rules: [
+                        {
+                        type   : 'empty',
+                        prompt : 'Por favor, ingrese su usuario'
+                        },
+                        {
+                        type   : 'username',
+                        prompt : 'Por favor, ingrese un usuario válido'
+                        }
+                    ]
+                    },
+                    password: {
+                    identifier  : 'password',
+                    rules: [
+                        {
+                        type   : 'empty',
+                        prompt : 'Por favor, ingrese su contraseña'
+                        },
+                        {
+                        type   : 'length[6]',
+                        prompt : 'Su contraseña debe poseer al menos 6 caracteres'
+                        }
+                    ]
+                    }
+                }
+                })
+            ;
+        })
+        ;
+    </script>
+
 </head>
 
 <body>
@@ -26,23 +65,41 @@
         <div class="column">
             
         <h2 class="ui image header">
-            <a href="https://imgur.com/HPWWdrQ"><img src="https://i.imgur.com/HPWWdrQ.png" title="source: imgur.com" /></a>
+            <a><img src="https://i.imgur.com/HPWWdrQ.png" title="source: imgur.com" /></a>
         </h2>
 
-        <form method="POST">
-            {{ form.as_p }}
-            {% csrf_token %}
-
-
-            <button class="ui fluid large black submit button" type="submit">Iniciar Sesión</button>
-        </form>
+        <form class="ui form" method="POST">
+                        
+            <div class="ui stacked segment">
+                
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input for='{{ form.username }}' type="text" name="username" autofocus="" required="" id="id_username" placeholder="Usuario">
+                    </div>
+                </div>
     
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input for='{{ form.password }}' type="password" name="password" placeholder="Contraseña"> 
+                    </div>
+                </div>
+
+                <div>
+                    <button class="ui fluid large black submit button" type="submit">Iniciar Sesión</button>
+                </div>
+                
+                <div class="ui error message"></div>
+            
+                {% csrf_token %}
+        </form>
+
         <div class="ui message">
-            ¿Olvidaste tu contraseña? <a href="#"> Haz click aquí.</a>
+            ¿Olvidaste tu contraseña? <a href="#"> Haz click aquí</a>
         </div>
         </div>
     </div>
 </body>
 
 </html>
-
