@@ -11,29 +11,72 @@
 </head>
 
 <body>
+    
     <div class="ui bottom attached clearing segment pushable">
-        <div class="ui visible inverted top vertical sidebar menu">
-            <a class="ui right floated  button" href="/cerrar_sesion">Cerrar sesión</a>
-        </div>
-        <div class="ui visible inverted left vertical sidebar menu">
-            <div class="ui dropdown item">
-                <i class="dropdown icon"></i>
-                <i class="home icon"></i>
-                Hoteles
-                <div class="menu">
-                    <a class="item">Crear</a>
-                    <a class="item">Listado</a>
+        <!-- Barra Superior -->
+        <div class="ui inverted menu " id="Barra Superior">
+            <div class="ui container">
+                <a href="#" class="header item">
+                <!-- <img class="logo" src="assets/images/logo.png"> ACÁ PODEMOS METER EL LOGO DE PULPO ROJO -->
+                    Hotel Pulpo Rojo
+                </a>
+                <a href="/" class="item">Página Principal</a>
+                
+                <div class="ui simple dropdown item">
+                    Hoteles <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item" href="#">Afiliar</a>
+                            <a class="item" href="#">Listado</a>
+                        </div>
                 </div>
+
+                <div class="ui simple dropdown item">
+                    Alquileres <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item" href="#">Alquilar Habitación</a>
+                            <a class="item" href="#">Venta de Paquete Turístico</a>
+                            <a class="item" href="#">Listado</a>
+                        </div>
+                </div>
+
+                <div class="ui simple dropdown item">
+                    Liquidaciones <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item" href="#">Realizar Liquidación</a>
+                            <a class="item" href="#">Listado</a>
+                        </div>
+                </div>
+
+                <a href="#" class="item">Listado de Clientes</a>
+
+            </div>
+            <a class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
+                <i class="power off icon"></i>
+                CERRAR SESION
+            </a>
+        </div>
+
+        <!-- Menú Lateral --> 
+        <!-- <div class="ui  visible inverted vertical left sidebar menu" style="width: auto;">
+            <div class="ui simple dropdown item">
+                Hoteles 
+                <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#">Crear</a>
+                        <a class="item" href="#">Listado</a>
+                    </div>
             </div>
             <a class="item">
                 <i class="block layout icon"></i>
-                Example item 2
-            </a>
+                Alquileres
+            </a> 
+            
             <a class="item">
                 <i class="smile icon"></i>
-                Example item 3
+                Consultas
             </a>
-        </div>
+            </div> -->
+
         <div class="pusher">
         <div class="ui basic segment">
             {% block cuerpo %}
@@ -49,7 +92,6 @@
 
 {% block js %}
 <script>
-// showing multiple
 $('.visible.example .ui.sidebar')
     .sidebar({
         context: '.visible.example .bottom.segment'
@@ -59,3 +101,27 @@ $('.visible.example .ui.sidebar')
 
 </script>
 {% endblock js %}
+
+
+
+
+<!-- Ejemplo de Menú con Submenúes re piola
+    <div class="ui simple dropdown item">
+        Menú desplegable de prueba 
+        <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="#">Opción 1</a>
+                <a class="item" href="#">Opción 2</a>
+                <div class="divider"></div>
+                <div class="header">Título</div>
+                <div class="item">
+                    <i class="dropdown icon"></i>
+                    Sub Menu
+                    <div class="menu">
+                        <a class="item" href="#">Opción 3</a>
+                        <a class="item" href="#">Opción 4</a>
+                    </div>
+                </div>
+                <a class="item" href="#">Opción 5</a>
+            </div> 
+        </div>-->
