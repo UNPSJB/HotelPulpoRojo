@@ -11,7 +11,7 @@
 
     <div class="ui bottom attached clearing segment pushable">
         <!-- Barra Superior -->
-        <div class="ui inverted menu" id="Barra Superior">
+        <div class="ui menu" id="Barra Superior">
             <div class="ui container">
                 <a href="#" class="header item">
                 <!-- <img class="logo" src="assets/images/logo.png"> ACÁ PODEMOS METER EL LOGO DE PULPO ROJO -->
@@ -46,11 +46,33 @@
 
                 <a href="/listar_persona" class="item">Listado de Clientes</a>
 
+
+                <!-- Boton de Admin -->
+                <div class="ui simple dropdown item">
+                    Administración
+                    <i class="dropdown icon"></i>
+                        <div class="menu">
+                            <a class="item" href="/listar_tipo_habitacion">Tipo de Habitación</a>
+                            <div class="item">
+                                <i class="dropdown icon"></i>
+                                Categoría y Servicios
+                                <div class="menu">
+                                    <a class="item" href="/listar_categoria">Categoría</a>
+                                    <a class="item" href="/listar_servicio">Servicios</a>
+                                </div>
+                            </div>
+                            <a class="item" href="/listar_zona">Gestionar Zonas</a>
+                            <a class="item" href="/listar_persona">Gestionar Personas</a>
+                        </div> 
+                </div>
             </div>
+
+            <!-- Boton Cerrar Sesion -->
             <a class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
                 <i class="power off icon"></i>
                 CERRAR SESION
             </a>
+            
         </div>
 
         <div class="pusher">
