@@ -8,13 +8,10 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
     <title>{% block titulo %}{% endblock titulo %}</title>
-</head>
 
-<body>
-    
     <div class="ui bottom attached clearing segment pushable">
         <!-- Barra Superior -->
-        <div class="ui inverted menu" style="color:olive;" id="Barra Superior">
+        <div class="ui inverted menu" id="Barra Superior">
             <div class="ui container">
                 <a href="#" class="header item">
                 <!-- <img class="logo" src="assets/images/logo.png"> ACÁ PODEMOS METER EL LOGO DE PULPO ROJO -->
@@ -57,12 +54,18 @@
         </div>
 
         <div class="pusher">
-        <div class="ui basic segment">
-            {% block cuerpo %}
-            {% endblock cuerpo %}
-        </div>
+            <div class="ui basic segment">
+                {% block cuerpo %}
+                {% endblock cuerpo %}
+            </div>
         </div>
     </div>
+
+</head>
+
+<body>
+    
+    
 
 </body>
 
