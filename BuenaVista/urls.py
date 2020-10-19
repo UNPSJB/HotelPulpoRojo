@@ -16,7 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core.views import listarPersona, editarPersona, crearPersona, crearZona, eliminarPersona, iniciarSesion, cerrarSesion, index
+from hotel.views import listarHotel
 from core.class_views import PersonaCreate,PersonaDelete,PersonaList,PersonaUpdate
+from hotel.class_views import HotelCreate,HotelDelete,HotelList,HotelUpdate
 
 urlpatterns = [
 
@@ -30,12 +32,20 @@ urlpatterns = [
     #path('eliminar_persona/<int:id>/', eliminarPersona, name = 'eliminar_persona'),
 
     #Class_view
+    #Core
+    path('iniciar_sesion/', iniciarSesion, name = 'iniciar_sesion'),
+    path('cerrar_sesion/', cerrarSesion, name = 'cerrar_sesion'),
+    #Persona
     path('listar_persona/',PersonaList.as_view() ,name = 'listar_persona'),
     path('crear_persona/',PersonaCreate.as_view(),name = 'crear_persona'),
     path('editar_persona/<int:pk>/',PersonaUpdate.as_view(),name = 'editar_persona'),
     path('eliminar_persona/<int:pk>/', PersonaDelete.as_view(), name = 'eliminar_persona'),
-    path('iniciar_sesion/', iniciarSesion, name = 'iniciar_sesion'),
-    path('cerrar_sesion/', cerrarSesion, name = 'cerrar_sesion'),
+    #Hotel
+    path('listar_hotel/',HotelList.as_view() ,name = 'listar_hotel'),
+    path('crear_hotel/',HotelCreate.as_view(),name = 'crear_hotel'),
+    path('editar_hotel/<int:pk>/',HotelUpdate.as_view(),name = 'editar_hotel'),
+    path('eliminar_hotel/<int:pk>/', HotelDelete.as_view(), name = 'eliminar_hotel'),
+    
     
     path('crear_zona/',crearZona,name = 'crear_zona')
 ]
