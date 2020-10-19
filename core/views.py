@@ -8,6 +8,13 @@ from django.contrib.auth import login as do_login
 from .models import Persona
 from .forms import PersonaForm,ProvinciaForm,LocalidadForm,PaisForm
 
+def index(request):
+    # Si estamos identificados devolvemos la portada
+    if request.user.is_authenticated:
+        return render(request, "index.html")
+    # En otro caso redireccionamos al login
+    return redirect('/iniciar_sesion')
+
 def listarPersona(request):
     personas = Persona.objects.all() #select * from Persona
     contexto = { 

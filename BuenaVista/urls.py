@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import listarPersona, editarPersona, crearPersona, crearZona, eliminarPersona, iniciarSesion, cerrarSesion
+from core.views import listarPersona, editarPersona, crearPersona, crearZona, eliminarPersona, iniciarSesion, cerrarSesion, index
 from core.class_views import PersonaCreate,PersonaDelete,PersonaList,PersonaUpdate
 
 urlpatterns = [
 
     #Views
     path('admin/', admin.site.urls),
+    path('', index, name= 'index'),
     
     #path('listar_persona/',listarPersona,name = 'listar_persona'),
     #path('crear_persona/',crearPersona,name = 'crear_persona'),

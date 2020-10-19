@@ -11,12 +11,20 @@
 </head>
 
 <body>
-    <div class="ui bottom attached segment pushable">
+    <div class="ui bottom attached clearing segment pushable">
+        <div class="ui visible inverted top vertical sidebar menu">
+            <a class="ui right floated  button" href="/cerrar_sesion">Cerrar sesión</a>
+        </div>
         <div class="ui visible inverted left vertical sidebar menu">
-            <a class="item">
+            <div class="ui dropdown item">
+                <i class="dropdown icon"></i>
                 <i class="home icon"></i>
                 Hoteles
-            </a>
+                <div class="menu">
+                    <a class="item">Crear</a>
+                    <a class="item">Listado</a>
+                </div>
+            </div>
             <a class="item">
                 <i class="block layout icon"></i>
                 Example item 2
@@ -24,10 +32,6 @@
             <a class="item">
                 <i class="smile icon"></i>
                 Example item 3
-            </a>
-            <a class="item" href="{% url 'iniciar_sesion' %}">
-                <i class="power off icon"></i>
-                CERRAR SESION
             </a>
         </div>
         <div class="pusher">
