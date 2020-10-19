@@ -80,7 +80,7 @@ def iniciarSesion(request):
                 # Hacemos el login manualmente
                 do_login(request, user)
                 # Y le redireccionamos a la portada
-                return redirect('/listar_persona')
+                return redirect('/')
 
     # Si llegamos al final renderizamos el formulario
     return render(request, "iniciar_sesion.html", {'form': form})

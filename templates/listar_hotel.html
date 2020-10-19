@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de Hoteles{% endblock titulo %}
+
+{% block cuerpo %}
+
+    <div class="ui sizer vertical segment">
+        <h1 class="ui huge header" >Listado de Hoteles</h1>
+    </div>
+    <div class="ui raised  container segment">
+        <h2 class="ui header">Listado de Hoteles</h2>
+        
+            <table class="ui single line table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Dirección</th>
+                        <th>Localidad</th>
+                        <th>Categoria</th>
+                        <th>Encargado</th>
+                        <th>Teléfono</th>
+                        <th>OPCIÓN</th>
+                    </tr>
+                    <tbody>
+                        {% for hotel in object_list %} 
+                        
+                        <tr>
+                            <td>{{hotel.nombre}}</td>
+                            <td>{{hotel.direccion}}</td>
+                            <td>{{hotel.localidad}}</td>
+                            <td>{{hotel.get_categoria_display}}</td>
+                            <td>{{hotel.encargado}}</td>
+                            <td>{{hotel.telefono}}</td>
+                            <td>
+                                <a href="{% url 'editar_hotel' hotel.id %}"><i class="edit icon"></i></a>
+                                <a href="{% url 'eliminar_hotel' hotel.id %}"><i class="trash icon"></i></a> 
+                                <a href=""><i class="info circle icon"></i></a> 
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+        
+        <a href="{% url 'crear_hotel' %}">CREAR HOTEL</a>
+    </div>
+{% endblock cuerpo %}

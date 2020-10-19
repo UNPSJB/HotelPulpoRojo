@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from .forms import PersonaForm
 from .models import Persona
 
+# Persona
 class PersonaList(ListView):
     model = Persona
     template_name = 'listar_persona.html'
@@ -24,3 +25,4 @@ class PersonaDelete(DeleteView):
     model = Persona
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_persona')
+
