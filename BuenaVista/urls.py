@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import listarPersona, editarPersona, crearPersona, crearZona, eliminarPersona, iniciarSesion, cerrarSesion, index
+from core.views import iniciarSesion, cerrarSesion, index
 from hotel.views import listarHotel
 from core.class_views import PersonaCreate,PersonaDelete,PersonaList,PersonaUpdate
 from hotel.class_views import HotelCreate,HotelDelete,HotelList,HotelUpdate
@@ -54,5 +54,5 @@ urlpatterns = [
 
     #Tipo de Habitación
 
-    
+
 ]
