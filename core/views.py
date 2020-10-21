@@ -3,7 +3,8 @@ from django.contrib.auth import logout as do_logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
-
+from .models import TipoHabitacion
+from .forms import TipoHabitacionForm
 
 
 def index(request):
@@ -47,3 +48,12 @@ def cerrarSesion(request):
     # Redireccionamos a la portada
     return redirect('/')
 
+def tipoHabitacion(request):
+    form = TipoHabitacionForm(request.POST)
+    contexto = {
+        'form':form
+    }
+    if form.is_valid():
+        form.save()
+        return redirect('index')
+    return render(request,'crear_tipo_habitacion.html',contexto)

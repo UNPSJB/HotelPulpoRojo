@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import iniciarSesion, cerrarSesion, index
+from core.views import iniciarSesion, cerrarSesion, tipoHabitacion, index
 from hotel.views import listarHotel
-from core.class_views import PersonaCreate,PersonaDelete,PersonaList,PersonaUpdate
+from core.class_views import PersonaCreate,PersonaDelete,PersonaList,PersonaUpdate, TipoHabitacionCreate
 from hotel.class_views import HotelCreate,HotelDelete,HotelList,HotelUpdate
 
 urlpatterns = [
@@ -35,6 +35,7 @@ urlpatterns = [
     #Core
     path('iniciar_sesion/', iniciarSesion, name = 'iniciar_sesion'),
     path('cerrar_sesion/', cerrarSesion, name = 'cerrar_sesion'),
+    path('crear_tipo_habitacion/', TipoHabitacionCreate.as_view(), name = 'crear_tipo_habitacion'),
     #Persona
     path('listar_persona/',PersonaList.as_view() ,name = 'listar_persona'),
     path('crear_persona/',PersonaCreate.as_view(),name = 'crear_persona'),
