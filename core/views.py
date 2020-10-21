@@ -55,5 +55,5 @@ def tipoHabitacion(request):
     }
     if form.is_valid():
         form.save()
-        return redirect('index')
+        return redirect('listar_tipo_habitacion')
     return render(request,'crear_tipo_habitacion.html',contexto)

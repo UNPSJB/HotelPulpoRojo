@@ -33,4 +33,19 @@ class TipoHabitacionCreate(CreateView):
     model = TipoHabitacion
     form_class = TipoHabitacionForm
     template_name = 'crear_tipo_habitacion.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('listar_tipo_habitacion')
+
+class TipoHabitacionList(ListView):
+    model = TipoHabitacion
+    template_name = 'listar_tipo_habitacion.html'
+
+class TipoHabitacionUpdate(UpdateView):
+    model = TipoHabitacion
+    form_class = TipoHabitacionForm
+    template_name = 'crear_tipo_habitacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
+
+class TipoHabitacionDelete(DeleteView):
+    model = TipoHabitacion
+    template_name = 'verificacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
