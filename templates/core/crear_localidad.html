@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Crear Localidad{% endblock titulo %}
+
+    {% block cuerpo %}
+        {% csrf_token %}
+        <div class="ui grid">
+            <div class="ui text container">
+                <div class="ui raised very padded text container segment">  
+                    <h2 class="ui header">Crear Localidad</h2>
+
+                    <form class="ui form" method="post">
+                        {% csrf_token %}
+
+                        <div class="field">
+                            <label>Localidad</label>
+                            {{form.nombre}}
+                        </div>
+                        
+                        <div class="field">
+                            <label>Provincia</label>
+                            {{form.provincia}}
+                        </div>
+                        
+                        <a href="{% url 'listar_zona' %}">CANCELAR</a>
+                        <button class="ui right floated button" type="submit">CREAR</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock cuerpo %}
