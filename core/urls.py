@@ -1,7 +1,5 @@
 from django.urls import path
-from . import views
-#from . import class_views
-#from .views import 
+#from .views import (aca ponen las funciones de views que quieran importar)
 from .class_views import ZonaList, PaisCreate, ProvinciaCreate, LocalidadCreate, PaisUpdate, LocalidadUpdate, ProvinciaUpdate, LocalidadDelete, ProvinciaDelete, PaisDelete
 
 urlpatterns = [

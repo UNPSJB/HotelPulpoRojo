@@ -58,7 +58,13 @@ ROOT_URLCONF = 'BuenaVista.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates','templates/core','templates/hotel','templates/venta'],
+        'DIRS': ['templates',
+                'templates/core',
+                'templates/hotel',
+                'templates/venta',
+                'core/templates',
+                'venta/templates',
+                'hotel/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

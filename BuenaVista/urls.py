@@ -45,10 +45,12 @@ urlpatterns = [
     path('crear_hotel/',HotelCreate.as_view(),name = 'crear_hotel'),
     path('editar_hotel/<int:pk>/',HotelUpdate.as_view(),name = 'editar_hotel'),
     path('eliminar_hotel/<int:pk>/', HotelDelete.as_view(), name = 'eliminar_hotel'),
-    #Zona
+    #core
     path('', include('core.urls')),
-    
-    
+    #hotel
+    path('', include('hotel.urls')),
+    #venta
+    path('', include('venta.urls')),
     
     #Categoria
 
