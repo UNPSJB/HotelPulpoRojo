@@ -126,5 +126,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    ("imagenes", "/static/")
+]
+
 #Cuanto es la tolerancia permitida de pasajeros al alquilar
 TOLERANCIA_PASAJEROS = 0

@@ -31,7 +31,7 @@
                         <td>{{persona.apellido}}</td>
                         <td>{{persona.get_tipo_documento_display}}</td>
                         <td>{{persona.documento}}</td>
-                        <td>
+                        <td>{{persona.Tipo}}
                             <a href="{% url 'editar_persona' persona.id %}"><i class="edit icon"></i></a>
                             <a href="{% url 'eliminar_persona' persona.id %}"><i class="trash icon"></i></a> 
                             <a href=""><i class="info circle icon"></i></a> 
