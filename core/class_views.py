@@ -40,12 +40,12 @@ class ProvinciaCreate(CreateView):
     model = Provincia
     form_class = ProvinciaForm
     template_name = 'crear_provincia.html'
-    success_url = reverse_lazy('listar_zona')
+    success_url = reverse_lazy('crear_localidad')
 class PaisCreate(CreateView):
     model = Pais
     form_class = PaisForm
     template_name = 'crear_pais.html'
-    success_url = reverse_lazy('listar_zona')
+    success_url = reverse_lazy('crear_provincia')
 
 class LocalidadUpdate(UpdateView):
     model = Localidad
