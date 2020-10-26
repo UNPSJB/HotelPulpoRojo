@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de contactos{% endblock titulo %}
+
+{% block cuerpo %}
+
+    <div class="ui sizer vertical segment">
+        <!-- <h1 class="ui huge header" style="margin-top: 10px;" >Listado de personas</h1> -->
+        <h1 class="ui huge header" >Listado de tipos de habitacion</h1>
+    </div>
+    <div>
+        <div class="ui center aligned header" style="font: italic; font-size: larger;" >"Porque los clientes también son personas..."</div> 
+    </div>
+    <div class="ui raised very padded text container segment">
+        <h2 class="ui header">Listado de Tipos de habitacion</h2>
+        <table class="ui single line table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Cant. max. de pasajeros</th>
+                    <th>Cant. cuartos</th>
+                    <th>Es departamento?</th>
+                    <th>OPCIÓN</th>
+                </tr>
+                <tbody>
+                    {% for tipo_h in object_list %} 
+                    
+                    <tr>
+                        <td>{{tipo_h.nombre}}</td>
+                        <td>{{tipo_h.descripcion}}</td>
+                        <td>{{tipo_h.pasajeros}}</td>
+                        <td>{{tipo_h.cuartos}}</td>
+                        <td>{{tipo_h.es_departamento}}</td>
+                        <td>
+                            <a href="{% url 'editar_tipo_habitacion' tipo_h.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_tipo_habitacion' tipo_h.id %}"><i class="trash icon"></i></a> 
+                            <a href=""><i class="info circle icon"></i></a> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+        <a href="{% url 'crear_tipo_habitacion' %}">CREAR PERSONA</a>
+    </div>
+{% endblock cuerpo %}

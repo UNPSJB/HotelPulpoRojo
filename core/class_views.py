@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView,ListView,DeleteView,UpdateView #View
 from django.urls import reverse_lazy
-from .forms import PersonaForm, LocalidadForm, ProvinciaForm, PaisForm
-from .models import Persona, Provincia,Localidad,Pais
+from .forms import PersonaForm
+from .models import Persona
+from .forms import TipoHabitacionForm, PersonaForm, LocalidadForm, ProvinciaForm, PaisForm
+from .models import TipoHabitacion, Persona, Provincia,Localidad,Pais
 
 # Persona
 class PersonaList(ListView):
@@ -26,6 +28,27 @@ class PersonaDelete(DeleteView):
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_persona')
 
+# Tipo habitacion
+class TipoHabitacionCreate(CreateView):
+    model = TipoHabitacion
+    form_class = TipoHabitacionForm
+    template_name = 'crear_tipo_habitacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
+
+class TipoHabitacionList(ListView):
+    model = TipoHabitacion
+    template_name = 'listar_tipo_habitacion.html'
+
+class TipoHabitacionUpdate(UpdateView):
+    model = TipoHabitacion
+    form_class = TipoHabitacionForm
+    template_name = 'crear_tipo_habitacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
+
+class TipoHabitacionDelete(DeleteView):
+    model = TipoHabitacion
+    template_name = 'verificacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
 # Zona
 class ZonaList(ListView):
     model = Localidad
