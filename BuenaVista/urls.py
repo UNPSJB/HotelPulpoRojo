@@ -50,9 +50,13 @@ urlpatterns = [
     path('crear_hotel/',HotelCreate.as_view(),name = 'crear_hotel'),
     path('editar_hotel/<int:pk>/',HotelUpdate.as_view(),name = 'editar_hotel'),
     path('eliminar_hotel/<int:pk>/', HotelDelete.as_view(), name = 'eliminar_hotel'),
-    #Zona
-    # path('crear_zona/',ZonaCreate.as_view(),name = 'crear_zona'),
-    # path('editar_zona/<int:pk>/',ZonaUpdate.as_view(),name = 'editar_zona'),
+    #core
+    path('', include('core.urls')),
+    #hotel
+    path('', include('hotel.urls')),
+    #venta
+    path('', include('venta.urls')),
+    
     #Categoria
 
     #Servicio

@@ -58,7 +58,13 @@ ROOT_URLCONF = 'BuenaVista.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates','templates/core','templates/hotel','templates/venta'],
+        'DIRS': ['templates',
+                'templates/core',
+                'templates/hotel',
+                'templates/venta',
+                'core/templates',
+                'venta/templates',
+                'hotel/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,6 +131,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    ("imagenes", "/static/")
+]
 
 #Cuanto es la tolerancia permitida de pasajeros al alquilar
 TOLERANCIA_PASAJEROS = 0
