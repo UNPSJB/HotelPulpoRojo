@@ -8,7 +8,13 @@
         <div class="ui grid">
             <div class="ui text container">
                 <div class="ui raised very padded text container segment">  
-                    <h2 class="ui header">Crear Provincia</h2>
+                    <h2 class="ui header">
+                        {% if request.get_full_path == "/crear_provincia/" %}
+                        <h2 class="ui header">Crear Provincia</h2>
+                        {% else %}
+                        <h2 class="ui header">Editar Provincia</h2>
+                        {% endif %}
+                    </h2>
 
                     <form class="ui form" method="post">
                         {% csrf_token %}
