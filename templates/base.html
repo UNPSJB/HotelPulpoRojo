@@ -11,102 +11,115 @@
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
     <title>{% block titulo %}{% endblock titulo %}</title>
 
-    <div class="ui bottom attached clearing segment pushable">
-        <!-- Barra Superior -->
-        <div class="ui menu" id="Barra Superior">
-            <div class="ui container">
-                <a href="#" class="header item">
-                <img class="logo" src='{% static "pulpito-s.png" %}' style="margin-right: 10px;">
-                    Hotel Pulpo Rojo
-                </a>
-                <a href="/" class="item">Página Principal</a>
-                
-                <div class="ui simple dropdown item">
-                    Hoteles <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a class="item" href="/crear_hotel">Afiliar</a>
-                            <a class="item" href="/listar_hotel">Listado</a>
-                        </div>
-                </div>
-
-                <div class="ui simple dropdown item">
-                    Alquileres <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a class="item" href="#">Alquilar Habitación</a>
-                            <a class="item" href="#">Venta de Paquete Turístico</a>
-                            <a class="item" href="#">Listado</a>
-                        </div>
-                </div>
-
-                <div class="ui simple dropdown item">
-                    Liquidaciones <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a class="item" href="#">Realizar Liquidación</a>
-                            <a class="item" href="#">Listado</a>
-                        </div>
-                </div>
-
-                <a href="/listar_persona" class="item">Listado de Clientes</a>
-
-                <!-- Sección pertinente solo al Superusuario -->
-                {% if request.user.is_superuser %}
-                <!-- Boton de Admin -->
-                <div class="ui simple dropdown item">
-                    Administración
-                    <i class="dropdown icon"></i>
-                        <div class="menu">
-                            <a class="item" href="/listar_tipo_habitacion">Tipo de Habitación</a>
-                            <div class="item">
-                                <i class="dropdown icon"></i>
-                                Categoría y Servicios
-                                <div class="menu">
-                                    <a class="item" href="/listar_categoria">Categoría</a>
-                                    <a class="item" href="/listar_servicio">Servicios</a>
-                                </div>
-                            </div>
-                            <a class="item" href="/listar_zona">Gestionar Zonas</a>
-                            <a class="item" href="/listar_persona">Gestionar Personas</a>
-                        </div> 
-                </div>
-                <!-- Boton de Django -->
-                <a href="/admin" class="header item">
-                    <img class="logo" src='{% static "django-s.png" %}' style="scale: 2;">
-                </a>
-                {% endif %}
-            </div>
-
-            <!-- Boton Cerrar Sesion -->
-            <a class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
-                <i class="power off icon"></i>
-                CERRAR SESION
+    <!-- Barra Superior -->
+    <div class="ui menu" id="Barra Superior">
+        <div class="ui container">
+            <a href="#" class="header item">
+            <img class="logo" src='{% static "pulpito-s.png" %}' style="margin-right: 10px;">
+                Hotel Pulpo Rojo
             </a>
+            <a href="/" class="item">Página Principal</a>
             
+            <div class="ui simple dropdown item">
+                Hoteles <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="/crear_hotel">Afiliar</a>
+                        <a class="item" href="/listar_hotel">Listado</a>
+                    </div>
+            </div>
+
+            <div class="ui simple dropdown item">
+                Alquileres <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#">Alquilar Habitación</a>
+                        <a class="item" href="#">Venta de Paquete Turístico</a>
+                        <a class="item" href="#">Listado</a>
+                    </div>
+            </div>
+
+            <div class="ui simple dropdown item">
+                Liquidaciones <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#">Realizar Liquidación</a>
+                        <a class="item" href="#">Listado</a>
+                    </div>
+            </div>
+
+            <a href="/listar_cliente" class="item">Listado de Clientes</a>
+
+            <!-- Sección pertinente solo al Superusuario -->
+            {% if perms.core.add_tipohabitacion %}
+            <!-- Boton de Admin -->
+            <div class="ui simple dropdown item">
+                Administración
+                <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="/listar_tipo_habitacion">Tipo de Habitación</a>
+                        <div class="item">
+                            <i class="dropdown icon"></i>
+                            Categoría y Servicios
+                            <div class="menu">
+                                <a class="item" href="/listar_categoria">Categoría</a>
+                                <a class="item" href="/listar_servicio">Servicios</a>
+                            </div>
+                        </div>
+                        <a class="item" href="/listar_zona">Gestionar Zonas</a>
+                        <a class="item" href="/listar_persona">Gestionar Personas</a>
+                    </div> 
+            </div>
+            {% endif %}
+            <!-- Boton de Django -->
+            {% if request.user.is_superuser %}
+            <a href="/admin" class="header item">
+                <img class="logo" src='{% static "django-s.png" %}' style="scale: 2;">
+            </a>
+            {% endif %}
         </div>
 
-        <div class="pusher">
-            <div class="ui basic segment">
-                {% block cuerpo %}
-                {% endblock cuerpo %}
-            </div>
-            
-            <!-- Pepe -->
-            <div>
-                <img class="img fixed right" src='{% static "pepe-cry.png" %}' style="position: absolute; bottom: 0;right: 0; margin-bottom: 55px;">
-            </div>
-        </div>
+        <!-- Boton Cerrar Sesion -->
+        <a class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
+            <i class="power off icon"></i>
+            CERRAR SESION
+        </a>
     </div>
 
 </head>
 
 <body>
+    <style>
+        /* Estilo del scrollbar */
+        body::-webkit-scrollbar{
+            width: 1rem;
+        }
+        body::-webkit-scrollbar-track{
+            background: rgb(39, 39, 39);
+        }
+        body::-webkit-scrollbar-thumb{
+            background: rgb(131, 5, 131);
+            border-radius: 5px;
+        }
+        body::-webkit-scrollbar-thumb:active {
+            background: rgb(85, 5, 85);
+        }
+    </style>
     
-    
+    <div class="pusher">
+        <div class="ui basic segment">
+            {% block cuerpo %}
+            {% endblock cuerpo %}
+        </div>
+        
+        <!-- Pepe -->
+        <div>
+            <img class="img fixed right" src='{% static "pepe-cry.png" %}' style="position: fixed; bottom: 0;right: 0; margin-bottom: 0px;">
+        </div>
+    </div>
 </body>
 
 </html>
 
 
-{% block js %}
+<!-- {% block js %}
 <script>
 $('.visible.example .ui.sidebar')
     .sidebar({
@@ -116,7 +129,7 @@ $('.visible.example .ui.sidebar')
 ;
 
 </script>
-{% endblock js %}
+{% endblock js %} -->
 
 
 

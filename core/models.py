@@ -133,6 +133,18 @@ class Persona(models.Model):
 
     def sos(self, Klass):
         return any([isinstance(rol, Klass) for rol in self.roles_related()])
+
+    @property
+    def sos_vendedor(self):
+        return self.sos(Vendedor)
+
+    @property
+    def sos_cliente(self):
+        return self.sos(Cliente)
+    
+    @property
+    def sos_encargado(self):
+        return self.sos(Encargado)
     
     def hacer_vendedor(self, user_name, email, password):
         vendedor = Vendedor()

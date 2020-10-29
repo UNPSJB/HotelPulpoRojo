@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView,ListView,DeleteView,UpdateView #View
 from django.urls import reverse_lazy
-from .forms import PersonaForm, LocalidadForm, ProvinciaForm, PaisForm
-from .models import Persona, Provincia,Localidad,Pais
+from .forms import PersonaForm, ClienteForm, CrearVendedorForm, EditarVendedorForm, EncargadoForm, LocalidadForm, ProvinciaForm, PaisForm
+from .models import Persona, Provincia, Localidad, Pais
 
 # Persona
 class PersonaList(ListView):
@@ -25,6 +25,65 @@ class PersonaDelete(DeleteView):
     model = Persona
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_persona')
+
+#cliente
+class ClienteList(ListView):
+    model = Persona
+    template_name = 'listar_cliente.html'
+
+class ClienteCreate(CreateView):
+    model = Persona
+    form_class = ClienteForm
+    template_name = 'crear_cliente.html'
+    success_url = reverse_lazy('listar_cliente')
+
+class ClienteUpdate(UpdateView):
+    model = Persona
+    form_class = ClienteForm
+    template_name = 'crear_cliente.html'
+    success_url = reverse_lazy('listar_cliente')
+
+class ClienteDelete(DeleteView):
+    model = Persona
+    template_name = 'verificacion_cliente.html'
+    success_url = reverse_lazy('listar_cliente')
+
+#Encargado
+class EncargadoCreate(CreateView):
+    model = Persona
+    form_class = EncargadoForm
+    template_name = 'crear_encargado.html'
+    success_url = reverse_lazy('listar_persona')
+
+class EncargadoUpdate(UpdateView):
+    model = Persona
+    form_class = EncargadoForm
+    template_name = 'crear_encargado.html'
+    success_url = reverse_lazy('listar_persona')
+
+class EncargadoDelete(DeleteView):
+    model = Persona
+    template_name = 'verificacion_encargado.html'
+    success_url = reverse_lazy('listar_persona')
+
+#Vendedor
+class VendedorCreate(CreateView):
+    model = Persona
+    form_class = CrearVendedorForm
+    template_name = 'crear_vendedor.html'
+    success_url = reverse_lazy('listar_persona')
+
+class VendedorUpdate(UpdateView):
+    model = Persona
+    form_class = EditarVendedorForm
+    template_name = 'crear_vendedor.html'
+    success_url = reverse_lazy('listar_persona')
+
+class VendedorDelete(DeleteView):
+    model = Persona
+    template_name = 'verificacion_vendedor.html'
+    success_url = reverse_lazy('listar_persona')
+
 
 # Zona
 class ZonaList(ListView):

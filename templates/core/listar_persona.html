@@ -7,11 +7,78 @@
 
     <div class="ui sizer vertical segment">
         <!-- <h1 class="ui huge header" style="margin-top: 10px;" >Listado de personas</h1> -->
-        <h1 class="ui huge header" >Listado de Clientes</h1>
+        <h1 class="ui huge header" >Listado de Personas</h1>
     </div>
-    <div>
-        <div class="ui center aligned header" style="font: italic; font-size: larger;" >"Porque los clientes también son personas..."</div> 
+    
+    
+    <!-- Vendedores -->
+    <div class="ui raised very padded text container segment">
+        <h2 class="ui header">Listado de Vendedores</h2>
+        <table class="ui single line table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Tipo Documento</th>
+                    <th>Documento</th>
+                    <th>OPCIÓN</th>
+                </tr>
+                <tbody>
+                    {% for persona in object_list %} 
+                        {% if persona.sos_vendedor %}
+                        <tr>
+                            <td>{{persona.nombre}}</td>
+                            <td>{{persona.apellido}}</td>
+                            <td>{{persona.get_tipo_documento_display}}</td>
+                            <td>{{persona.documento}}</td>
+                            <td>{{persona.Tipo}}
+                                <a href="{% url 'editar_vendedor' persona.id %}"><i class="edit icon"></i></a>
+                                <a href="{% url 'eliminar_vendedor' persona.id %}"><i class="trash icon"></i></a> 
+                                <a href=""><i class="info circle icon"></i></a> 
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+        <a class="ui button" href="{% url 'crear_vendedor' %}">CREAR VENDEDOR</a>
     </div>
+
+    <!-- Encargados -->
+    <div class="ui raised very padded text container segment">
+        <h2 class="ui header">Listado de Encargados</h2>
+        <table class="ui single line table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Tipo Documento</th>
+                    <th>Documento</th>
+                    <th>OPCIÓN</th>
+                </tr>
+                <tbody>
+                    {% for persona in object_list %} 
+                    {% if persona.sos_encargado %}
+                    <tr>
+                        <td>{{persona.nombre}}</td>
+                        <td>{{persona.apellido}}</td>
+                        <td>{{persona.get_tipo_documento_display}}</td>
+                        <td>{{persona.documento}}</td>
+                        <td>{{persona.Tipo}}
+                            <a href="{% url 'editar_encargado' persona.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_encargado' persona.id %}"><i class="trash icon"></i></a> 
+                            <a href=""><i class="info circle icon"></i></a> 
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+
+    <!-- Clientes -->
     <div class="ui raised very padded text container segment">
         <h2 class="ui header">Listado de Clientes</h2>
         <table class="ui single line table">
@@ -25,22 +92,23 @@
                 </tr>
                 <tbody>
                     {% for persona in object_list %} 
-                    
+                    {% if persona.sos_cliente %}
                     <tr>
                         <td>{{persona.nombre}}</td>
                         <td>{{persona.apellido}}</td>
                         <td>{{persona.get_tipo_documento_display}}</td>
                         <td>{{persona.documento}}</td>
                         <td>{{persona.Tipo}}
-                            <a href="{% url 'editar_persona' persona.id %}"><i class="edit icon"></i></a>
-                            <a href="{% url 'eliminar_persona' persona.id %}"><i class="trash icon"></i></a> 
+                            <a href="{% url 'editar_cliente' persona.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_cliente' persona.id %}"><i class="trash icon"></i></a> 
                             <a href=""><i class="info circle icon"></i></a> 
                         </td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                 </tbody>
             </thead>
         </table>
-        <a href="{% url 'crear_persona' %}">CREAR PERSONA</a>
     </div>
+    
 {% endblock cuerpo %}
