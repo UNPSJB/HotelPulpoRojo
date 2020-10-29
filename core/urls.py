@@ -5,6 +5,7 @@ from .class_views import ClienteCreate, ClienteDelete, ClienteUpdate, ClienteLis
 from .class_views import VendedorCreate, VendedorDelete, VendedorUpdate
 from .class_views import EncargadoCreate, EncargadoDelete, EncargadoUpdate
 from .class_views import ZonaList, PaisCreate, ProvinciaCreate, LocalidadCreate, PaisUpdate, LocalidadUpdate, ProvinciaUpdate, LocalidadDelete, ProvinciaDelete, PaisDelete
+from .class_views import TipoHabitacionList, TipoHabitacionCreate, TipoHabitacionUpdate, TipoHabitacionDelete
 
 urlpatterns = [
     #Persona
@@ -44,4 +45,10 @@ urlpatterns = [
     path('eliminar_localidad/<int:pk>/', LocalidadDelete.as_view(), name = 'eliminar_localidad'),
     path('eliminar_provincia/<int:pk>/', ProvinciaDelete.as_view(), name = 'eliminar_provincia'),
     path('eliminar_pais/<int:pk>/', PaisDelete.as_view(), name = 'eliminar_pais'),
+
+    #Tipo habitacion
+    path('listar_tipo_habitacion/', TipoHabitacionList.as_view(), name = 'listar_tipo_habitacion'),
+    path('crear_tipo_habitacion/', TipoHabitacionCreate.as_view(), name = 'crear_tipo_habitacion'),
+    path('editar_tipo_habitacion/<int:pk>/',TipoHabitacionUpdate.as_view(),name = 'editar_tipo_habitacion'),
+    path('eliminar_tipo_habitacion/<int:pk>/', TipoHabitacionDelete.as_view(), name = 'eliminar_tipo_habitacion'),
 ]
