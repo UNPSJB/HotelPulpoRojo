@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView,ListView,DeleteView,UpdateView #View
 from django.urls import reverse_lazy
-from .forms import PersonaForm, ClienteForm, CrearVendedorForm, EditarVendedorForm, EncargadoForm, LocalidadForm, ProvinciaForm, PaisForm
-from .models import Persona, Provincia, Localidad, Pais
+from .forms import PersonaForm, ClienteForm, CrearVendedorForm, EditarVendedorForm, EncargadoForm
+from .forms import TipoHabitacionForm, LocalidadForm, ProvinciaForm, PaisForm
+from .models import TipoHabitacion, Persona, Provincia,Localidad,Pais
 
 # Persona
 class PersonaList(ListView):
@@ -85,6 +86,27 @@ class VendedorDelete(DeleteView):
     success_url = reverse_lazy('listar_persona')
 
 
+# Tipo habitacion
+class TipoHabitacionCreate(CreateView):
+    model = TipoHabitacion
+    form_class = TipoHabitacionForm
+    template_name = 'crear_tipo_habitacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
+
+class TipoHabitacionList(ListView):
+    model = TipoHabitacion
+    template_name = 'listar_tipo_habitacion.html'
+
+class TipoHabitacionUpdate(UpdateView):
+    model = TipoHabitacion
+    form_class = TipoHabitacionForm
+    template_name = 'crear_tipo_habitacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
+
+class TipoHabitacionDelete(DeleteView):
+    model = TipoHabitacion
+    template_name = 'verificacion.html'
+    success_url = reverse_lazy('listar_tipo_habitacion')
 # Zona
 class ZonaList(ListView):
     model = Localidad
@@ -99,12 +121,12 @@ class ProvinciaCreate(CreateView):
     model = Provincia
     form_class = ProvinciaForm
     template_name = 'crear_provincia.html'
-    success_url = reverse_lazy('listar_zona')
+    success_url = reverse_lazy('crear_localidad')
 class PaisCreate(CreateView):
     model = Pais
     form_class = PaisForm
     template_name = 'crear_pais.html'
-    success_url = reverse_lazy('listar_zona')
+    success_url = reverse_lazy('crear_provincia')
 
 class LocalidadUpdate(UpdateView):
     model = Localidad

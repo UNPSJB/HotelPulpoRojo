@@ -7,7 +7,7 @@
 
     <div class="ui raised very padded text container segment">
         <h2 class="ui header">Listado de Zonas</h2>
-        <table class="ui blue inverted table">
+        <table class="ui blue inverted center aligned table">
             <thead>
                 <tr>
                     <th>Pais <a href="{% url 'crear_pais' %}"><i class=" inverted plus icon"></i></a> </th>
@@ -18,15 +18,11 @@
                 <tbody>
                     {% for localidad in object_list %} 
                     <tr class="blue">
-                        <td class="selectable blue">
-                            <a href="{% url 'editar_pais' localidad.provincia.pais.id %}">
-                                {{localidad.provincia.pais.nombre}}
-                            </a>
-                        </td>
+                        <td class="selectable blue"><a href="{% url 'editar_pais' localidad.provincia.pais.id %}">{{localidad.provincia.pais.nombre}}</a></td>
                         <td class="selectable blue"><a href="{% url 'editar_provincia' localidad.provincia.id %}">{{localidad.provincia.nombre}}</a></td>
                         <td class="selectable blue"><a href="{% url 'editar_localidad' localidad.id %}">{{localidad.nombre}}</a></td>
-                        <td class="blue">
-                            <a href="{% url 'eliminar_localidad' localidad.id %}"><i class="trash icon"></i></a> 
+                        <td class=" center aligned blue">
+                            <a href="{% url 'eliminar_localidad' localidad.id %}"><i class="trash  icon"></i></a> 
                         </td>
                     </tr>
                     {% endfor %}
