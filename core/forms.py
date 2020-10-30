@@ -91,7 +91,29 @@ class PaisForm(forms.ModelForm):
         model = Pais
         fields = '__all__'
 
+#class TipoHabitacionForm(forms.ModelForm):
+#    class Meta:
+#        model = TipoHabitacion
+#        fields = [
+#            'nombre',
+#            'descripcion',
+#            'pasajeros',
+#            'cuartos',
+#        ]
+#        labels = {
+#            'nombre': 'Nombre',
+#            'descripcion': 'Descripcion',
+#            'pasajeros': 'Pasajeros',
+#            'cuartos': 'Cuartos',
+#        }    
+
+#class CrearTipoHabitacionForm(TipoHabitacionForm):
+#    nombre = forms.CharField(widget=forms.TextInput)
+#    descripcion = forms.CharField(widget=forms.TextInput)
+#    pasajeros = forms
+
+
 class TipoHabitacionForm(forms.ModelForm):
     class Meta:
         model = TipoHabitacion
-        fields = '__all__'    
+        fields = '__all__'

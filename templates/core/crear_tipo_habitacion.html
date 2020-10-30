@@ -8,11 +8,23 @@
 <div class="ui grid">
         
         <div class="ui text container">
+            {% if not object %}
             <h2 class="ui header">Crear tipo de habitacion</h2>
+            {% else %}
+            <h2 class="ui header">Editar tipo de habitacion</h2>
+            {% endif %}
+
+            {{ forms.non_field_errors }}
             <form class="ui form" method="post">
                 {% csrf_token %}
                 {{ form }}
-                <button class="ui button" type="submit">CREAR O EDITAR</button>
+                
+                {% if not object %}
+                <button class="ui button" type="submit">CREAR</button>
+                {% else %}
+                <button class="ui button" type="submit">EDITAR</button>
+                {% endif %}
+                
                 <a href="{% url 'listar_tipo_habitacion' %}">CANCELAR</a>
             </form>
             
