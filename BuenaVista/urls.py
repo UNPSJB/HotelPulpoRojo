@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from core.views import iniciarSesion, cerrarSesion, tipoHabitacion, index
+from core.views import iniciarSesion, cerrarSesion, tipoHabitacion, index#, listarServicio
 from hotel.views import listarHotel
 from core.class_views import PersonaCreate, PersonaDelete, PersonaList, PersonaUpdate
 from core.class_views import TipoHabitacionCreate, TipoHabitacionList, TipoHabitacionUpdate, TipoHabitacionDelete
 from hotel.class_views import HotelCreate,HotelDelete,HotelList,HotelUpdate
+from core.class_views import ServicioList, ServicioCreate#, ServicioDelete, ServicioUpdate
 
 urlpatterns = [
 

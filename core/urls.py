@@ -6,6 +6,7 @@ from .class_views import VendedorCreate, VendedorDelete, VendedorUpdate
 from .class_views import EncargadoCreate, EncargadoDelete, EncargadoUpdate
 from .class_views import ZonaList, PaisCreate, ProvinciaCreate, LocalidadCreate, PaisUpdate, LocalidadUpdate, ProvinciaUpdate, LocalidadDelete, ProvinciaDelete, PaisDelete
 from .class_views import TipoHabitacionList, TipoHabitacionCreate, TipoHabitacionUpdate, TipoHabitacionDelete
+from .class_views import ServicioList, ServicioCreate#, ServicioDelete, ServicioUpdate
 
 urlpatterns = [
     #Persona
@@ -30,7 +31,6 @@ urlpatterns = [
     path('editar_vendedor/<int:pk>/',VendedorUpdate.as_view(),name = 'editar_vendedor'),
     path('eliminar_vendedor/<int:pk>/', VendedorDelete.as_view(), name = 'eliminar_vendedor'),
 
-
     #Zona
     path('listar_zona/', ZonaList.as_view(),name = 'listar_zona'),
 
@@ -51,4 +51,10 @@ urlpatterns = [
     path('crear_tipo_habitacion/', TipoHabitacionCreate.as_view(), name = 'crear_tipo_habitacion'),
     path('editar_tipo_habitacion/<int:pk>/',TipoHabitacionUpdate.as_view(),name = 'editar_tipo_habitacion'),
     path('eliminar_tipo_habitacion/<int:pk>/', TipoHabitacionDelete.as_view(), name = 'eliminar_tipo_habitacion'),
+
+    #Servicio
+    path('listar_servicio/', ServicioList.as_view(), name = 'listar_servicio'),
+    path('crear_servicio/', ServicioCreate.as_view(), name = 'crear_servicio'),
+    #path('editar_servicio/<int:pk>/', ServicioUpdate.as_view(), name = 'editar_servicio'),
+    #path('eliminar_servicio/<int:pk>/', ServicioDelete.as_view(), name = 'eliminar_servicio')
 ]
