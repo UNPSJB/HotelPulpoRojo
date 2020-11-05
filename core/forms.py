@@ -1,5 +1,5 @@
 from django import forms
-from .models import Persona, Encargado, Pais, Provincia,Localidad,TipoHabitacion,Rol,Cliente,Vendedor
+from .models import Persona, Encargado, Pais, Provincia, Localidad, TipoHabitacion, Rol, Cliente, Vendedor, Servicio
 from django.contrib.auth.models import User
 
 #Formularios de personas
@@ -158,3 +158,30 @@ class TipoHabitacionForm(forms.ModelForm):
     class Meta:
         model = TipoHabitacion
         fields = '__all__'    
+
+#formularios de servicio
+class ServicioForm(forms.ModelForm):
+    class Meta:
+        model = Servicio
+        fields = '__all__'    
+
+class CrearServicioForm(ServicioForm):
+    nombre = forms.CharField(widget=forms.TextInput)
+    descripcion = forms.CharField(widget=forms.TextInput)
+    
+    def save(self, commit=True):
+        servicio = ServicioForm(self.cleaned_data).save(commit=commit)
+
+'''
+class ServicioForm(forms.ModelForm):
+    class Meta:
+        model = Servicio
+        fields = [
+            'nombre',
+            'descripcion',
+        ]
+        labels = {
+            'nombre': 'Nombre',
+            'descripcion': 'Descripcion',
+        }
+'''
