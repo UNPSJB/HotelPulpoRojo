@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Listado de contactos{% endblock titulo %}
+{% block titulo %}Listado de Personas{% endblock titulo %}
 
 {% block cuerpo %}
 
@@ -25,7 +25,7 @@
                 </tr>
                 <tbody>
                     {% for persona in object_list %} 
-                        {% if persona.sos_vendedor %}
+                        {% if persona.sos_vendedor %} <!-- Verificación del rol de la persona -->
                         <tr>
                             <td>{{persona.nombre}}</td>
                             <td>{{persona.apellido}}</td>
@@ -59,7 +59,7 @@
                 </tr>
                 <tbody>
                     {% for persona in object_list %} 
-                    {% if persona.sos_encargado %}
+                    {% if persona.sos_encargado %} <!-- Verificación del rol de la persona -->
                     <tr>
                         <td>{{persona.nombre}}</td>
                         <td>{{persona.apellido}}</td>
@@ -76,7 +76,7 @@
                 </tbody>
             </thead>
         </table>
-    </div>
+    </div> <!-- No agregamos botón de crear. La creación del empleado se hace con la creación del hotel. -->
 
     <!-- Clientes -->
     <div class="ui raised very padded text container segment">
@@ -91,8 +91,8 @@
                     <th>OPCIÓN</th>
                 </tr>
                 <tbody>
-                    {% for persona in object_list %} 
-                    {% if persona.sos_cliente %}
+                    {% for persona in object_list %}  
+                    {% if persona.sos_cliente %} <!-- Verificación del rol de la persona -->
                     <tr>
                         <td>{{persona.nombre}}</td>
                         <td>{{persona.apellido}}</td>
@@ -109,6 +109,40 @@
                 </tbody>
             </thead>
         </table>
+    </div> <!-- No agregamos botón de crear. La creación del cliente se hace con la compra de una habitación. -->
+
+    <!-- Administradores -->
+    <div class="ui raised very padded text container segment">
+        <h2 class="ui header">Listado de Administradores</h2>
+        <table class="ui single line table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Tipo Documento</th>
+                    <th>Documento</th>
+                    <th>OPCIÓN</th>
+                </tr>
+                <tbody>
+                    {% for persona in object_list %} 
+                    {% if persona.sos_administrador %} <!-- Verificación del rol de la persona -->
+                    <tr>
+                        <td>{{persona.nombre}}</td>
+                        <td>{{persona.apellido}}</td>
+                        <td>{{persona.get_tipo_documento_display}}</td>
+                        <td>{{persona.documento}}</td>
+                        <td>{{persona.Tipo}}
+                            <a href="{% url 'editar_administrador' persona.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_administrador' persona.id %}"><i class="trash icon"></i></a> 
+                            <a href=""><i class="info circle icon"></i></a> 
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+        <a class="ui button" href="{% url 'crear_administrador' %}">CREAR ADMINISTRADOR</a>
     </div>
     
 {% endblock cuerpo %}

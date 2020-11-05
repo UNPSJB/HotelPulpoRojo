@@ -145,6 +145,10 @@ class Persona(models.Model):
     @property
     def sos_encargado(self):
         return self.sos(Encargado)
+
+    @property
+    def sos_administrador(self):
+        return self.usuario is not None and self.usuario.groups.filter(name="Administrador").exists()
     
     def hacer_vendedor(self, user_name, email, password):
         vendedor = Vendedor()
@@ -154,6 +158,13 @@ class Persona(models.Model):
         self.save()
         return vendedor
 
+    def hacer_administrador(self, user_name, email, password):
+        self.usuario = User.objects.create_user(user_name, email, password)
+        self.usuario.groups.add(Group.objects.get(name="Administrador"))
+        self.save()
+        return self
+
+    
 # Usamos patron roles para
 # Encargados, Clientes, Vendedores
 class Rol(models.Model):
