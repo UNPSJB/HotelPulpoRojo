@@ -1,18 +1,24 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Formulario de Persona{% endblock titulo %}
+{% block titulo %}Formulario de Administrador{% endblock titulo %}
 
 {% block cuerpo%} 
 
 <div class="ui grid">
         
         <div class="ui text container">
-            <h2 class="ui header">Crear persona</h2>
+            {% if not object %}
+            <h2 class="ui header">Crear Administrador</h2>
+            {% else %}
+            <h2 class="ui header">Editar Administrador</h2>
+            {% endif %}
+            
+            {{ forms.non_field_errors }}
             <form class="ui form" method="post">
                 {% csrf_token %}
                 {{ form }}
-                <button class="ui button" type="submit">CREAR O EDITAR</button>
+                <button class="ui button" type="submit">GUARDAR</button>
                 <a href="{% url 'listar_persona' %}">CANCELAR</a>
             </form>
             

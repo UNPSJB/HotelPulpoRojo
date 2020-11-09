@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Listado de categorias{% endblock titulo %}
+
+{% block cuerpo %}
+<div class="ui sizer vertical segment">
+    <h1 class="ui huge header" >Seleccione una categoria:</h1>
+</div>
+<div class="ui raised very padded text container segment">
+    <h2 class="ui header">Listado de Categorias</h2>
+    <table class="ui single line table">
+        <thead>
+            <tr>
+                <th>Categoria/Estrellas</th>
+                <th>Nombre</th>
+            </tr>
+            <tbody>
+            {% if object_list %}
+                {% for categoria in object_list %} 
+                <tr>
+                    <td>{{categoria.estrellas}}</td>
+                    <td>{{categoria.nombre}}</td>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </thead>
+    </table>
+</div>
+
+{% endblock cuerpo %}
