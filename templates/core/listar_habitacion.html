@@ -1,22 +1,21 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Listado de tipos de habitacion{% endblock titulo %}
+{% block titulo %}Listado de habitaciones{% endblock titulo %}
 
 {% block cuerpo %}
 
     <div class="ui sizer vertical segment">
-        <h1 class="ui huge header" >Listado de tipos de habitacion</h1>
+        <h1 class="ui huge header" >Listado de habitaciones</h1>
     </div>
     <div class="ui raised very padded text container segment">
         <table class="ui blue inverted center aligned table">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Cant. max. de huespedes</th>
-                    <th>Cant. cuartos</th>
-                    <th>¿Es un departamento?</th>
+                    <th>Hotel</th>
+                    <th>Número</th>
+                    <th>Piso</th>
+                    <th>Tipo de habitacion</th>
                     <th>OPCIÓN</th>
                 </tr>
                 <tbody>
@@ -26,20 +25,15 @@
                         <td class="blue">{{tipo_h.descripcion}}</td>
                         <td class="blue">{{tipo_h.pasajeros}}</td>
                         <td class="blue">{{tipo_h.cuartos}}</td>
-                        {% if tipo_h.es_departamento %}
-                        <td class="blue">Si</td>
-                        {% else %}
-                        <td class="blue">No</td>
-                        {% endif %}
                         <td class="center aligned blue">
-                            <a href="{% url 'editar_tipo_habitacion' tipo_h.id %}"><i class="edit icon"></i></a>
-                            <a href="{% url 'eliminar_tipo_habitacion' tipo_h.id %}"><i class="trash icon"></i></a> 
+                            <a href="{% url 'editar_habitacion' tipo_h.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_habitacion' tipo_h.id %}"><i class="trash icon"></i></a> 
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </thead>
         </table>
-        <a class="ui button" href="{% url 'crear_tipo_habitacion' %}">CREAR TIPO HABITACION</a>
+        <a class="ui button" href="{% url 'crear_habitacion' %}">CREAR TIPO HABITACION</a>
     </div>
 {% endblock cuerpo %}
