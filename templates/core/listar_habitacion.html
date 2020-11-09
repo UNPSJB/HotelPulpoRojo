@@ -19,21 +19,21 @@
                     <th>OPCIÓN</th>
                 </tr>
                 <tbody>
-                    {% for tipo_h in object_list %} 
+                    {% for habitacion in object_list %} 
                     <tr>
-                        <td class="blue">{{tipo_h.nombre}}</td>
-                        <td class="blue">{{tipo_h.descripcion}}</td>
-                        <td class="blue">{{tipo_h.pasajeros}}</td>
-                        <td class="blue">{{tipo_h.cuartos}}</td>
+                        <td class="blue">{{habitacion.hotel}}</td>
+                        <td class="blue">{{habitacion.numero}}</td>
+                        <td class="blue">{{habitacion.numero}}</td>
+                        <td class="blue">{{habitacion.tipo}}</td>
                         <td class="center aligned blue">
-                            <a href="{% url 'editar_habitacion' tipo_h.id %}"><i class="edit icon"></i></a>
-                            <a href="{% url 'eliminar_habitacion' tipo_h.id %}"><i class="trash icon"></i></a> 
+                            <a href="{% url 'editar_habitacion' habitacion.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_habitacion' habitacion.id %}"><i class="trash icon"></i></a> 
                         </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </thead>
         </table>
-        <a class="ui button" href="{% url 'crear_habitacion' %}">CREAR TIPO HABITACION</a>
+        <a class="ui button" href="{% url 'crear_habitacion' %}">CREAR HABITACION</a>
     </div>
 {% endblock cuerpo %}
