@@ -3,8 +3,9 @@ from django.contrib.auth import logout as do_logout
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as do_login
-from .models import TipoHabitacion
-from .forms import TipoHabitacionForm
+from .models import TipoHabitacion, Servicio, Categoria
+from .forms import TipoHabitacionForm, ServicioForm, CategoriaForm
+from django.views.generic import ListView, CreateView
 
 
 def index(request):
@@ -48,6 +49,7 @@ def cerrarSesion(request):
     # Redireccionamos a la portada
     return redirect('/')
 
+#Tipo Habitacion
 def tipoHabitacion(request):
     form = TipoHabitacionForm(request.POST)
     contexto = {
@@ -57,3 +59,24 @@ def tipoHabitacion(request):
         form.save()
         return redirect('listar_tipo_habitacion')
     return render(request,'crear_tipo_habitacion.html',contexto)
+
+#Servicio
+'''
+def listarServicio(request):
+    servicio = Servicio.objects.all()
+    contexto = {'servicio':servicio}
+    return render(request, '/listar_servicio.html', contexto)
+'''
+class ServicioList (ListView):
+    model = Servicio
+    template_name = 'templates/core/listar_servicio.html'
+
+class ServicioCreate (CreateView):
+    model = Servicio
+    form_class = ServicioForm
+    template_name = 'templates/core/crear_servicio.html'
+    
+#Categoria
+class CategoriaList (ListView):
+    model = Categoria
+    template_name = 'templates/core/listar_categoria.html'

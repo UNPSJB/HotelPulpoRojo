@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Listado de tipos de habitacion{% endblock titulo %}
+{% block titulo %}Listado tipos de habitacion{% endblock titulo %}
 
 {% block cuerpo %}
 
     <div class="ui sizer vertical segment">
-        <h1 class="ui huge header" >Listado de tipos de habitacion</h1>
+        <!-- <h1 class="ui huge header" style="margin-top: 10px;" >Listado de tipos de habitacion</h1> -->
+        <h1 class="ui huge header" >Listado tipos de habitacion</h1>
     </div>
-    <div class="ui raised very padded text container segment">
-        <table class="ui blue inverted center aligned table">
+    <div class="ui raised container segment">
+        <h2 class="ui header">Listado Tipos de habitacion</h2>
+        <table class="ui single line table">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -40,6 +42,6 @@
                 </tbody>
             </thead>
         </table>
-        <a class="ui button" href="{% url 'crear_tipo_habitacion' %}">CREAR TIPO HABITACION</a>
+        <a href="{% url 'crear_tipo_habitacion' %}">CREAR TIPO DE HABITACION</a>
     </div>
 {% endblock cuerpo %}

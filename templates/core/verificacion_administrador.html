@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar{% endblock titulo %}
+
+{% block cuerpo %}
+    <h2 class="ui header">Eliminar</h2>
+    <div class="ui text container">
+        <form class="ui form" method = "POST">
+            {% csrf_token %}
+            <h1>¿Desea eliminar al administrador {{ object }}?</h1>
+            <!-- Agregar un ingreso de contraseña -->
+            <button class="ui button" type="submit" name="button">Confirmar</button>
+            <a href="{% url 'listar_persona' %}">CANCELAR</a>
+        </form>
+    </div>
+{% endblock cuerpo %}

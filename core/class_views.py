@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView,ListView,DeleteView,UpdateView #View
 from django.urls import reverse_lazy
-from .forms import PersonaForm, ClienteForm, CrearVendedorForm, EditarVendedorForm, EncargadoForm
-from .forms import TipoHabitacionForm, LocalidadForm, ProvinciaForm, PaisForm
-from .models import TipoHabitacion, Persona, Provincia,Localidad,Pais
+from .forms import PersonaForm, ClienteForm, CrearVendedorForm, EditarVendedorForm, EncargadoForm, AdministradorForm, CrearAdministradorForm, EditarAdministradorForm
+from .forms import TipoHabitacionForm, LocalidadForm, ProvinciaForm, PaisForm, ServicioForm, CategoriaForm
+from .models import TipoHabitacion, Persona, Provincia, Localidad, Pais, Servicio, Categoria
 
 # Persona
 class PersonaList(ListView):
@@ -19,7 +19,7 @@ class PersonaCreate(CreateView):
 class PersonaUpdate(UpdateView):
     model = Persona
     form_class = PersonaForm
-    template_name = 'crear_persona.html'
+    template_name = 'crear_persona.html' #Reutiliza la vista del crear para no usar dos templates diferentes
     success_url = reverse_lazy('listar_persona')
 
 class PersonaDelete(DeleteView):
@@ -41,7 +41,7 @@ class ClienteCreate(CreateView):
 class ClienteUpdate(UpdateView):
     model = Persona
     form_class = ClienteForm
-    template_name = 'crear_cliente.html'
+    template_name = 'crear_cliente.html' #Reutiliza la vista del crear para no usar dos templates diferentes
     success_url = reverse_lazy('listar_cliente')
 
 class ClienteDelete(DeleteView):
@@ -59,7 +59,7 @@ class EncargadoCreate(CreateView):
 class EncargadoUpdate(UpdateView):
     model = Persona
     form_class = EncargadoForm
-    template_name = 'crear_encargado.html'
+    template_name = 'crear_encargado.html' #Reutiliza la vista del crear para no usar dos templates diferentes
     success_url = reverse_lazy('listar_persona')
 
 class EncargadoDelete(DeleteView):
@@ -77,7 +77,7 @@ class VendedorCreate(CreateView):
 class VendedorUpdate(UpdateView):
     model = Persona
     form_class = EditarVendedorForm
-    template_name = 'crear_vendedor.html'
+    template_name = 'crear_vendedor.html' #Reutiliza la vista del crear para no usar dos templates diferentes
     success_url = reverse_lazy('listar_persona')
 
 class VendedorDelete(DeleteView):
@@ -85,6 +85,24 @@ class VendedorDelete(DeleteView):
     template_name = 'verificacion_vendedor.html'
     success_url = reverse_lazy('listar_persona')
 
+
+#Administrador
+class AdministradorCreate(CreateView):
+    model = Persona
+    form_class = CrearAdministradorForm
+    template_name = 'crear_administrador.html'
+    success_url = reverse_lazy('listar_persona')
+
+class AdministradorUpdate(UpdateView):
+    model = Persona
+    form_class = EditarAdministradorForm
+    template_name = 'crear_administrador.html' #Reutiliza la vista del crear para no usar dos templates diferentes
+    success_url = reverse_lazy('listar_persona')
+
+class AdministradorDelete(DeleteView):
+    model = Persona
+    template_name = 'verificacion_administrador.html'
+    success_url = reverse_lazy('listar_persona')
 
 # Tipo habitacion
 class TipoHabitacionCreate(CreateView):
@@ -156,3 +174,32 @@ class PaisDelete(DeleteView):
     model = Pais
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_zona')
+
+# Servicio
+class ServicioCreate(CreateView):
+    model = Servicio
+    form_class = ServicioForm
+    template_name = 'crear_servicio.html'
+    success_url = reverse_lazy('listar_servicio')
+
+class ServicioList(ListView):
+    model = Servicio
+    template_name = 'listar_servicio.html'
+    success_url = reverse_lazy('listar_servicio')
+'''
+class ServicioUpdate(UpdateView):
+    model = Servicio
+    form_class = ServicioForm
+    template_name = 'crear_servicio.html'
+    success_url = reverse_lazy('listar_servicio')
+
+class ServicioDelete(DeleteView):
+    model = Servicio
+    template_name = 'verificacion.html'
+    success_url = reverse_lazy('listar_servicio')
+'''
+# Categoria
+class CategoriaList(ListView):
+    model = Categoria
+    template_name = 'listar_categoria.html'
+    success_url = reverse_lazy('listar_ctegoria')
