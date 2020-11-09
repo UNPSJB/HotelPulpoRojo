@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView,ListView,DeleteView,UpdateView #View
 from django.urls import reverse_lazy
 from .forms import PersonaForm, ClienteForm, CrearVendedorForm, EditarVendedorForm, EncargadoForm, AdministradorForm, CrearAdministradorForm, EditarAdministradorForm
-from .forms import TipoHabitacionForm, LocalidadForm, ProvinciaForm, PaisForm, ServicioForm
-from .models import TipoHabitacion, Persona, Provincia, Localidad, Pais, Servicio
+from .forms import TipoHabitacionForm, LocalidadForm, ProvinciaForm, PaisForm, ServicioForm, CategoriaForm
+from .models import TipoHabitacion, Persona, Provincia, Localidad, Pais, Servicio, Categoria
 
 # Persona
 class PersonaList(ListView):
@@ -198,3 +198,8 @@ class ServicioDelete(DeleteView):
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_servicio')
 '''
+# Categoria
+class CategoriaList(ListView):
+    model = Categoria
+    template_name = 'listar_categoria.html'
+    success_url = reverse_lazy('listar_ctegoria')

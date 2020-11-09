@@ -1,5 +1,5 @@
 from django import forms
-from .models import Persona, Encargado, Pais, Provincia, Localidad, TipoHabitacion, Rol, Cliente, Vendedor, Servicio
+from .models import Persona, Encargado, Pais, Provincia, Localidad, TipoHabitacion, Rol, Cliente, Vendedor, Servicio, Categoria
 from django.contrib.auth.models import User
 
 #Formularios de personas
@@ -185,3 +185,9 @@ class ServicioForm(forms.ModelForm):
             'descripcion': 'Descripcion',
         }
 '''
+
+#formularios de categoria
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = '__all__'    
