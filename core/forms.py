@@ -45,6 +45,7 @@ class VendedorForm(forms.ModelForm):
             'password2': 'Confirme la contraseña'
         }
         
+        
 #Formulario para crear al vendedor
 class CrearVendedorForm(VendedorForm):
     usuario = forms.CharField(widget=forms.TextInput)

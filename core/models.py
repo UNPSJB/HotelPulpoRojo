@@ -150,6 +150,12 @@ class Persona(models.Model):
     def sos_administrador(self):
         return self.usuario is not None and self.usuario.groups.filter(name="Administrador").exists()
     
+    def hacer_encargado(self):
+        encargado = Encargado()
+        self.agregar_rol(encargado)
+        self.save()
+        return encargado
+    
     def hacer_vendedor(self, user_name, email, password):
         vendedor = Vendedor()
         self.agregar_rol(vendedor)
@@ -194,7 +200,8 @@ class Encargado(Rol):
     TIPO = 1
 
     # Clave Autogenerada? un token?
-    clave = models.CharField(max_length=10, default=lambda n = 10: str_alfanumerico(n))
+    # clave = models.CharField(max_length=10, default=lambda n = 10: str_alfanumerico(n))
+    clave = models.CharField(max_length=10, default='dfspijgdf')
 
 class Vendedor(Rol):
     TIPO = 2

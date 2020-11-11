@@ -1,7 +1,7 @@
 from django.db import models
 from decimal import Decimal
 from datetime import date, timedelta
-from core.models import Localidad, Categoria, Servicio, TipoHabitacion, Vendedor
+from core.models import Localidad, Categoria, Servicio, TipoHabitacion, Vendedor, Encargado
 from .exceptions import DescuentoException, TipoHotelException
 
 class HotelManager(models.Manager):
@@ -17,13 +17,14 @@ class Hotel(models.Model):
     nombre = models.CharField(max_length=200)
     direccion = models.CharField(max_length=800)
     #TODO: Email
-    email = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
     telefono = models.CharField(max_length=200)
     localidad = models.ForeignKey(Localidad, on_delete=models.CASCADE)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     servicios = models.ManyToManyField(Servicio)
     tipos = models.ManyToManyField(TipoHabitacion, through='PrecioPorTipo', through_fields=('hotel', 'tipo'))
     vendedores = models.ManyToManyField(Vendedor)
+    encargado = models.ForeignKey(Encargado, on_delete=models.CASCADE)
 
     def es_comercializable(self):
         return self.vendedores.count() > 0

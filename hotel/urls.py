@@ -7,7 +7,7 @@ urlpatterns = [
 
     #Hotel
     path('listar_hotel/',HotelList.as_view() ,name = 'listar_hotel'),
-    path('crear_hotel/',HotelCreate.as_view(),name = 'crear_hotel'),
+    path('afiliar_hotel/',HotelCreate.as_view(),name = 'afiliar_hotel'),
     path('editar_hotel/<int:pk>/',HotelUpdate.as_view(),name = 'editar_hotel'),
     path('eliminar_hotel/<int:pk>/', HotelDelete.as_view(), name = 'eliminar_hotel'),
     

@@ -8,11 +8,13 @@
 <div class="ui grid">
         
         <div class="ui text container">
-            <h2 class="ui header">Crear Hotel</h2>
+            <h2 class="ui header">Afiliar Hotel</h2>
+            
             <form class="ui form" method="post">
                 {% csrf_token %}
+                {{ forms.non_field_errors }}
                 {{ form }}
-                <button class="ui button" type="submit">CREAR O EDITAR</button>
+                <button class="ui button" type="submit">GUARDAR</button>
                 <a href="{% url 'listar_hotel' %}">CANCELAR</a>
             </form>
             
