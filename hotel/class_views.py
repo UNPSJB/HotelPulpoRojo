@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView,ListView,DeleteView,UpdateView, DetailView #View
 from django.urls import reverse_lazy
-from .forms import HotelForm, PaqueteTuristicoForm
-from .models import Hotel,PaqueteTuristico
+from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm
+from .models import Hotel,PaqueteTuristico, Habitacion
 
 #Hotel
 class HotelList(ListView):
@@ -54,3 +54,24 @@ class PaqueteTuristicoDelete(DeleteView):
     model = PaqueteTuristico
     template_name = 'verificacion_paquete_turistico.html'
     success_url = reverse_lazy('listar_paquete_turistico')
+#Habitacion
+class HabitacionList(ListView):
+    model = Habitacion
+    template_name = 'listar_habitacion.html'
+
+class HabitacionCreate(CreateView):
+    model = Habitacion
+    form_class = HabitacionForm
+    template_name = 'crear_habitacion.html'
+    success_url = reverse_lazy('listar_habitacion')
+
+class HabitacionUpdate(UpdateView):
+    model = Habitacion
+    form_class = HabitacionForm
+    template_name = 'crear_habitacion.html'
+    success_url = reverse_lazy('listar_habitacion')
+
+class HabitacionDelete(DeleteView):
+    model = Habitacion
+    template_name = 'verificacion.html'
+    success_url = reverse_lazy('listar_habitacion')

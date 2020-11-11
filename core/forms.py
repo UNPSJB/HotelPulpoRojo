@@ -154,6 +154,35 @@ class PaisForm(forms.ModelForm):
         model = Pais
         fields = '__all__'
 
+# class TipoHabitacionForm(forms.ModelForm):
+#     class Meta:
+#         model = TipoHabitacion
+#         fields = [
+#             'nombre',
+#             'descripcion',
+#             'pasajeros',
+#             'cuartos',
+#         ]
+#         labels = {
+#             'nombre': 'Nombre',
+#             'descripcion': 'Descripcion',
+#             'pasajeros': 'Pasajeros',
+#             'cuartos': 'Cuartos',
+#         }    
+
+# class CrearTipoHabitacionForm(TipoHabitacionForm):
+#     nombre = forms.CharField(widget=forms.TextInput)
+#     descripcion = forms.CharField(widget=forms.TextInput)
+#     pasajeros = forms.IntegerField(widget=forms.NumberInput)
+
+#     def clean_tipoHabitacion(self):
+#         tipoHabitacion = self.cleaned_data["nombre"]
+#         if len(tipoHabitacion)<6:
+#             raise forms.ValidationError("La longitud mínima para un tipo de habitacion es de 6 caracteres")
+#         if " " in tipoHabitacion:
+#             raise forms.ValidationError("nombre invalido")
+#         return tipoHabitacion
+
 class TipoHabitacionForm(forms.ModelForm):
     class Meta:
         model = TipoHabitacion

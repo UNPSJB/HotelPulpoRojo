@@ -9,31 +9,33 @@
         <!-- <h1 class="ui huge header" style="margin-top: 10px;" >Listado de tipos de habitacion</h1> -->
         <h1 class="ui huge header" >Listado tipos de habitacion</h1>
     </div>
-    <div class="ui raised very padded text container segment">
+    <div class="ui raised container segment">
         <h2 class="ui header">Listado Tipos de habitacion</h2>
         <table class="ui single line table">
             <thead>
                 <tr>
                     <th>Nombre</th>
                     <th>Descripcion</th>
-                    <th>Cant. max. de pasajeros</th>
+                    <th>Cant. max. de huespedes</th>
                     <th>Cant. cuartos</th>
-                    <th>Es departamento?</th>
+                    <th>¿Es un departamento?</th>
                     <th>OPCIÓN</th>
                 </tr>
                 <tbody>
                     {% for tipo_h in object_list %} 
-                    
                     <tr>
-                        <td>{{tipo_h.nombre}}</td>
-                        <td>{{tipo_h.descripcion}}</td>
-                        <td>{{tipo_h.pasajeros}}</td>
-                        <td>{{tipo_h.cuartos}}</td>
-                        <td>{{tipo_h.es_departamento}}</td>
-                        <td>
+                        <td class="blue">{{tipo_h.nombre}}</td>
+                        <td class="blue">{{tipo_h.descripcion}}</td>
+                        <td class="blue">{{tipo_h.pasajeros}}</td>
+                        <td class="blue">{{tipo_h.cuartos}}</td>
+                        {% if tipo_h.es_departamento %}
+                        <td class="blue">Si</td>
+                        {% else %}
+                        <td class="blue">No</td>
+                        {% endif %}
+                        <td class="center aligned blue">
                             <a href="{% url 'editar_tipo_habitacion' tipo_h.id %}"><i class="edit icon"></i></a>
                             <a href="{% url 'eliminar_tipo_habitacion' tipo_h.id %}"><i class="trash icon"></i></a> 
-                            <a href=""><i class="info circle icon"></i></a> 
                         </td>
                     </tr>
                     {% endfor %}

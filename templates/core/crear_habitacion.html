@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Formulario de Contacto{% endblock titulo %}
+{% block titulo %}Crear habitacion{% endblock titulo %}
 
 {% block cuerpo%} 
 
@@ -9,9 +9,9 @@
         
         <div class="ui text container">
             {% if not object %}
-            <h2 class="ui header">Crear tipo de habitacion</h2>
+            <h2 class="ui header">Crear habitacion</h2>
             {% else %}
-            <h2 class="ui header">Editar tipo de habitacion</h2>
+            <h2 class="ui header">Editar habitacion</h2>
             {% endif %}
 
             {{ forms.non_field_errors }}
@@ -25,7 +25,7 @@
                 <button class="ui button" type="submit">EDITAR</button>
                 {% endif %}
                 
-                <a href="{% url 'listar_tipo_habitacion' %}">CANCELAR</a>
+                <a href="{% url 'listar_habitacion' %}">CANCELAR</a>
             </form>
             
         </div>
