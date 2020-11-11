@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView,ListView,DeleteView,UpdateView #View
+from django.views.generic import CreateView,ListView,DeleteView,UpdateView, DetailView #View
 from django.urls import reverse_lazy
-from .forms import HotelForm
-from .models import Hotel
+from .forms import HotelForm, PaqueteTuristicoForm
+from .models import Hotel,PaqueteTuristico
 
 #Hotel
 class HotelList(ListView):
@@ -25,3 +25,32 @@ class HotelDelete(DeleteView):
     model = Hotel
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_hotel')
+
+    
+
+#PaqueteTuristico
+
+class PaqueteTuristicoList(ListView):
+    model = PaqueteTuristico
+    template_name = 'listar_paquete_turistico.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['object_list'] = PaqueteTuristico.objects.filter(hotel_id=self.kwargs['id'])
+        return super(PaqueteTuristicoList, self).get_context_data(**kwargs)
+
+class PaqueteTuristicoCreate(CreateView):
+    model = PaqueteTuristico
+    form_class = PaqueteTuristicoForm
+    template_name = 'crear_paquete_turistico.html'
+    success_url = reverse_lazy('listar_paquete_turistico')
+
+class PaqueteTuristicoUpdate(UpdateView):
+    model = PaqueteTuristico
+    form_class = PaqueteTuristicoForm
+    template_name = 'crear_paquete_turistico.html'
+    success_url = reverse_lazy('listar_paquete_turistico')
+
+class PaqueteTuristicoDelete(DeleteView):
+    model = PaqueteTuristico
+    template_name = 'verificacion_paquete_turistico.html'
+    success_url = reverse_lazy('listar_paquete_turistico')

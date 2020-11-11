@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Informacion hotel{% endblock titulo %}
+
+{% block cuerpo %}
+    <div class="ui raised  container segment">
+        <h2 class="ui header">Informacion de {{hotel.nombre}}</h2>
+        <button class="ui button"><a href="{% url 'listar_paquete_turistico' hotel.id %}">LISTAR PAQUETE TURISTICO</a></button>
+        <a href="{% url 'listar_hotel' %}">ATRAS</a>
+    </div>
+{% endblock cuerpo %}

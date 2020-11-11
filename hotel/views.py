@@ -48,3 +48,10 @@ def listarHotel(request):
 #     persona = Persona.objects.get(id = id)
 #     persona.delete()
 #     return redirect('listar_persona')
+
+def info_hotel(request,id):
+    hotel = Hotel.objects.get(id = id)
+    contexto = { 
+        'hotel':hotel
+    }
+    return render(request,"info_hotel.html",contexto)
