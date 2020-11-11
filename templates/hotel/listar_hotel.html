@@ -35,7 +35,7 @@
                             <td>
                                 <a href="{% url 'editar_hotel' hotel.id %}"><i class="edit icon"></i></a>
                                 <a href="{% url 'eliminar_hotel' hotel.id %}"><i class="trash icon"></i></a> 
-                                <a href=""><i class="info circle icon"></i></a> 
+                                <a href="{% url 'info_hotel' hotel.id %}"><i class="info circle icon"></i></a> 
                             </td>
                         </tr>
                         {% endfor %}

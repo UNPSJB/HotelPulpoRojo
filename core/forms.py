@@ -1,5 +1,5 @@
 from django import forms
-from .models import Persona, Encargado, Pais, Provincia, Localidad, TipoHabitacion, Rol, Cliente, Vendedor, Servicio
+from .models import Persona, Encargado, Pais, Provincia, Localidad, TipoHabitacion, Rol, Cliente, Vendedor, Servicio, Categoria
 from django.contrib.auth.models import User
 
 #Formularios de personas
@@ -155,6 +155,35 @@ class PaisForm(forms.ModelForm):
         model = Pais
         fields = '__all__'
 
+# class TipoHabitacionForm(forms.ModelForm):
+#     class Meta:
+#         model = TipoHabitacion
+#         fields = [
+#             'nombre',
+#             'descripcion',
+#             'pasajeros',
+#             'cuartos',
+#         ]
+#         labels = {
+#             'nombre': 'Nombre',
+#             'descripcion': 'Descripcion',
+#             'pasajeros': 'Pasajeros',
+#             'cuartos': 'Cuartos',
+#         }    
+
+# class CrearTipoHabitacionForm(TipoHabitacionForm):
+#     nombre = forms.CharField(widget=forms.TextInput)
+#     descripcion = forms.CharField(widget=forms.TextInput)
+#     pasajeros = forms.IntegerField(widget=forms.NumberInput)
+
+#     def clean_tipoHabitacion(self):
+#         tipoHabitacion = self.cleaned_data["nombre"]
+#         if len(tipoHabitacion)<6:
+#             raise forms.ValidationError("La longitud mínima para un tipo de habitacion es de 6 caracteres")
+#         if " " in tipoHabitacion:
+#             raise forms.ValidationError("nombre invalido")
+#         return tipoHabitacion
+
 class TipoHabitacionForm(forms.ModelForm):
     class Meta:
         model = TipoHabitacion
@@ -186,3 +215,9 @@ class ServicioForm(forms.ModelForm):
             'descripcion': 'Descripcion',
         }
 '''
+
+#formularios de categoria
+class CategoriaForm(forms.ModelForm):
+    class Meta:
+        model = Categoria
+        fields = '__all__'    
