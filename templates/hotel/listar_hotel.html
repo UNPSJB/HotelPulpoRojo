@@ -30,7 +30,7 @@
                             <td>{{hotel.direccion}}</td>
                             <td>{{hotel.localidad}}</td>
                             <td>{{hotel.get_categoria_display}}</td>
-                            <td>{{hotel.encargado}}</td>
+                            <td>{{hotel.encargado.persona}}</td>
                             <td>{{hotel.telefono}}</td>
                             <td>
                                 <a href="{% url 'editar_hotel' hotel.id %}"><i class="edit icon"></i></a>

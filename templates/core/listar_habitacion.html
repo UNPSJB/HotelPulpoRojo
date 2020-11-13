@@ -22,8 +22,8 @@
                     {% for habitacion in object_list %} 
                     <tr>
                         <td class="blue">{{habitacion.hotel}}</td>
-                        <td class="blue">{{habitacion.numero}}</td>
-                        <td class="blue">{{habitacion.numero}}</td>
+                        <td class="blue">{{habitacion.get_numero}}</td>
+                        <td class="blue">{{habitacion.piso}}</td>
                         <td class="blue">{{habitacion.tipo}}</td>
                         <td class="center aligned blue">
                             <a href="{% url 'editar_habitacion' habitacion.id %}"><i class="edit icon"></i></a>

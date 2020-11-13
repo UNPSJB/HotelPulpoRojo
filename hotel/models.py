@@ -3,6 +3,7 @@ from decimal import Decimal
 from datetime import date, timedelta
 from core.models import Localidad, Categoria, Servicio, TipoHabitacion, Vendedor, Encargado
 from .exceptions import DescuentoException, TipoHotelException
+from django.core.validators import MaxValueValidator, MinValueValidator 
 
 class HotelManager(models.Manager):
     def en_zona(self, zona):
@@ -72,11 +73,18 @@ class PrecioPorTipo(models.Model):
 # Habitación
 class Habitacion(models.Model):
     hotel = models.ForeignKey(Hotel, related_name="habitaciones", on_delete=models.CASCADE)
-    numero = models.PositiveSmallIntegerField() # 403 <Piso><Cuarto>
+    numero = models.PositiveSmallIntegerField(default=11, validators=[MinValueValidator(11), MaxValueValidator(99)]) # 403 <Piso><Cuarto>
     tipo = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = (('hotel', 'numero'), )
+
+    def get_numero(self):
+        num = self.numero
+        return str(num)[1]
+
+    def piso(self):
+        return str(self.numero)[0]
 
     def __str__(self):
         return f"{self.hotel}, Habitacion: {self.numero}"
