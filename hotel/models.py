@@ -84,6 +84,7 @@ class Habitacion(models.Model):
             num = str(self.numero)[2] + str(self.numero)[3]
         if len(str(self.numero)) == 3:
             num = str(self.numero)[1] + str(self.numero)[2]
+        # Este if solo es para habitaciones cargadas con dos digitos
         if len(str(self.numero)) == 2:
             num = str(self.numero)[0]
         return num
