@@ -73,18 +73,26 @@ class PrecioPorTipo(models.Model):
 # Habitación
 class Habitacion(models.Model):
     hotel = models.ForeignKey(Hotel, related_name="habitaciones", on_delete=models.CASCADE)
-    numero = models.PositiveSmallIntegerField(default=11, validators=[MinValueValidator(11), MaxValueValidator(99)]) # 403 <Piso><Cuarto>
+    numero = models.PositiveSmallIntegerField(default=101, validators=[MinValueValidator(101), MaxValueValidator(9999)]) # 403 <Piso><Cuarto> y cada habitacion puede ser del 1 al 99 al igual que los pisos
     tipo = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = (('hotel', 'numero'), )
 
     def get_numero(self):
-        num = self.numero
-        return str(num)[1]
+        if len(str(self.numero)) == 4:
+            num = str(self.numero)[2] + str(self.numero)[3]
+        if len(str(self.numero)) == 3:
+            num = str(self.numero)[1] + str(self.numero)[2]
+        if len(str(self.numero)) == 2:
+            num = str(self.numero)[0]
+        return num
 
     def piso(self):
-        return str(self.numero)[0]
+        if len(str(self.numero)) == 4:
+            return str(self.numero)[0] + str(self.numero)[1]
+        else:
+            return str(0) + str(self.numero)[0]
 
     def __str__(self):
         return f"{self.hotel}, Habitacion: {self.numero}"
