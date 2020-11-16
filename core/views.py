@@ -80,3 +80,8 @@ class ServicioCreate (CreateView):
 class CategoriaList (ListView):
     model = Categoria
     template_name = 'templates/core/listar_categoria.html'
+
+class CategoriaCreate (CreateView):
+    model = Categoria
+    form_class = CategoriaForm
+    template_name = 'templates/core/crear_categoria.html'
