@@ -1,5 +1,5 @@
 from django.urls import path
-from hotel.class_views import HotelCreate, HotelDelete, HotelList, HotelUpdate, PaqueteTuristicoCreate, PaqueteTuristicoDelete, PaqueteTuristicoList, PaqueteTuristicoUpdate,HabitacionCreate, HabitacionDelete, HabitacionList, HabitacionUpdate
+from hotel.class_views import HotelCreate, HotelDelete, HotelList, HotelUpdate, PaqueteTuristicoCreate, PaqueteTuristicoDelete, PaqueteTuristicoList, PaqueteTuristicoUpdate,HabitacionCreate, HabitacionDelete, HabitacionList, HabitacionUpdate, TemporadaAltaCreate, TemporadaAltaDelete, TemporadaAltaList, TemporadaAltaUpdate
 from hotel.views import info_hotel
 
 urlpatterns = [
@@ -21,4 +21,10 @@ urlpatterns = [
     path('crear_habitacion/',HabitacionCreate.as_view(),name = 'crear_habitacion'),
     path('editar_habitacion/<int:pk>/',HabitacionUpdate.as_view(),name = 'editar_habitacion'),
     path('eliminar_habitacion/<int:pk>/', HabitacionDelete.as_view(), name = 'eliminar_habitacion'),
+
+    #Temporada Alta
+    path('listar_temporada_alta/',TemporadaAltaList.as_view() ,name = 'listar_temporada_alta'),
+    path('crear_temporada_alta/',TemporadaAltaCreate.as_view(),name = 'crear_temporada_alta'),
+    path('editar_temporada_alta/<int:pk>/',TemporadaAltaUpdate.as_view(),name = 'editar_temporada_alta'),
+    path('eliminar_temporada_alta/<int:pk>/', TemporadaAltaDelete.as_view(), name = 'eliminar_temporada_alta'),
 ]

@@ -3,9 +3,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import CreateView,ListView,DeleteView,UpdateView, DetailView #View
 from django.urls import reverse_lazy
 from .models import Hotel
-from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm
+from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm, TemporadaAltaForm
 from core.forms import EncargadoForm
-from .models import Hotel,PaqueteTuristico, Habitacion
+from .models import Hotel, PaqueteTuristico, Habitacion, TemporadaAlta
 from core.models import Encargado
 
 #Hotel
@@ -59,6 +59,7 @@ class PaqueteTuristicoDelete(DeleteView):
     model = PaqueteTuristico
     template_name = 'verificacion_paquete_turistico.html'
     success_url = reverse_lazy('listar_paquete_turistico')
+
 #Habitacion
 class HabitacionList(ListView):
     model = Habitacion
@@ -80,3 +81,25 @@ class HabitacionDelete(DeleteView):
     model = Habitacion
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_habitacion')
+
+#Temporada Alta
+class TemporadaAltaList(ListView):
+    model = TemporadaAlta
+    template_name = 'listar_temporada_alta.html'
+
+class TemporadaAltaCreate(CreateView):
+    model = TemporadaAlta
+    form_class = TemporadaAltaForm
+    template_name = 'crear_temporada_alta.html'
+    success_url = reverse_lazy('listar_temporada_alta')
+
+class TemporadaAltaUpdate(UpdateView):
+    model = TemporadaAlta
+    form_class = TemporadaAltaForm
+    template_name = 'crear_temporada_alta.html'
+    success_url = reverse_lazy('listar_temporada_alta')
+
+class TemporadaAltaDelete(DeleteView):
+    model = TemporadaAlta
+    template_name = 'verificacion.html'
+    success_url = reverse_lazy('listar_temporada_alta')

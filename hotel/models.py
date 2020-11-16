@@ -1,9 +1,10 @@
 from django.db import models
 from decimal import Decimal
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from core.models import Localidad, Categoria, Servicio, TipoHabitacion, Vendedor, Encargado
 from .exceptions import DescuentoException, TipoHotelException
-from django.core.validators import MaxValueValidator, MinValueValidator 
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ValidationError
 
 class HotelManager(models.Manager):
     def en_zona(self, zona):
@@ -118,11 +119,26 @@ class Habitacion(models.Model):
         return total
 
 # Temporada Alta
+def validate_date_not_in_past(value):
+    date = value
+    if date.day < datetime.now().day:
+        raise ValidationError('El dia es inferior al actual')
+    if date.month < datetime.now().month:
+        raise ValidationError('El mes es inferior al actual')
+    if date.year < datetime.now().year:
+        raise ValidationError('El año es inferior al actual')
+
 class TemporadaAlta(models.Model):
     nombre = models.CharField(max_length=200)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="temporadas")
-    inicio = models.DateField()
+    inicio = models.DateField(default=datetime.today, validators=[validate_date_not_in_past])
     fin = models.DateField()
+
+    def clean_inicio(self):
+        date = self.cleaned_data['inicio']
+        if date < datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the past!")
+        return date
 
 # Descuentos
 class Descuento(models.Model):

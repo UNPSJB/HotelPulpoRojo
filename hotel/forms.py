@@ -58,6 +58,9 @@ class HabitacionForm(forms.ModelForm):
         model = Habitacion
         fields = '__all__'
 
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
 class TemporadaAltaForm(forms.ModelForm):
     class Meta:
         model = TemporadaAlta
