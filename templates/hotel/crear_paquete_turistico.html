@@ -11,10 +11,48 @@
             <h2 class="ui header">Crear Paquete Turistico</h2>
             <form class="ui form" method="post">
                 {% csrf_token %}
-                {{ form }}
-                <button class="ui button" type="submit">CREAR O EDITAR</button>
-                <a href="{% url 'listar_paquete_turistico' %}">CANCELAR</a>
+
+                <div class="field">
+                    <label>Nombre</label>
+                    {{form.nombre}}
+                </div>
+                
+                <div class="field">
+                    <label>Coeficiente</label>
+                    {{form.coeficiente}}
+                </div>
+                <div class="field">
+                    <label>Hotel</label>
+                    {{form.hotel}}
+                </div>
+                <div class="field">
+                  <label>Elegir habitaciones</label>
+                  {{form.habitaciones}}
+              </div>
+                <div class="two fields">
+                  <div class="field">
+                    <label>Start date</label>
+                    <div class="ui calendar" id="rangestart">
+                      <div class="ui input left icon">
+                        <i class="calendar icon"></i>
+                        <input type="text" placeholder="Start">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label>End date</label>
+                    <div class="ui calendar" id="rangeend">
+                      <div class="ui input left icon">
+                        <i class="calendar icon"></i>
+                        <input type="text" placeholder="End">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a href="{% url 'listar_zona' %}">CANCELAR</a>
+                <button class="ui right floated button" type="submit">ACEPTAR</button>
             </form>
+
             
         </div>
 </div>
@@ -24,7 +62,19 @@
 <script>
 $('.dropdown')
     .dropdown({
-})
-;
+});
+
+$('#rangestart').calendar({
+    type: 'date',
+    endCalendar: $('#rangeend'),
+    onChange: function (date, text) {
+      var newValue = text;
+  },
+});
+
+$('#rangeend').calendar({
+    type: 'date',
+    startCalendar: $('#rangestart')
+});
 </script>
 {% endblock js %}
