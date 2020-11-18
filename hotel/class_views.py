@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView,ListView,DeleteView,UpdateView, DetailView #View
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView #View
 from django.urls import reverse_lazy
 from .models import Hotel
-from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm
+from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm, DescuentoForm
 from core.forms import EncargadoForm
-from .models import Hotel,PaqueteTuristico, Habitacion
+from .models import Hotel,PaqueteTuristico, Habitacion, Descuento
 from core.models import Encargado
 
 #Hotel
@@ -18,7 +18,6 @@ class HotelCreate(CreateView):
     form_class = HotelForm
     template_name = 'afiliar_hotel.html'
     success_url = reverse_lazy('listar_hotel')
-
 
 class HotelUpdate(UpdateView):
     model = Hotel
@@ -80,3 +79,25 @@ class HabitacionDelete(DeleteView):
     model = Habitacion
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_habitacion')
+
+#Descuento
+class DescuentoList(ListView):
+    model = Descuento
+    template_name = 'listar_descuento.html'
+
+class DescuentoCreate(CreateView):
+    model = Descuento
+    form_class = DescuentoForm
+    template_name = 'crear_descuento.html'
+    success_url = reverse_lazy('listar_descuento')
+
+class DescuentoUpdate(UpdateView):
+    model = Descuento
+    form_class = DescuentoForm
+    template_name = 'crear_descuento.html' #Reutiliza la vista del crear para no usar dos templates diferentes
+    success_url = reverse_lazy('listar_descuento')
+    
+class DescuentoDelete(DeleteView):
+    model = Descuento
+    template_name = 'verificacion_descuento.html'
+    success_url = reverse_lazy('listar_descuento')
