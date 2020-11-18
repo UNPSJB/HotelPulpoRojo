@@ -186,13 +186,13 @@ class ServicioList(ListView):
     model = Servicio
     template_name = 'listar_servicio.html'
     success_url = reverse_lazy('listar_servicio')
-'''
+
 class ServicioUpdate(UpdateView):
     model = Servicio
     form_class = ServicioForm
     template_name = 'crear_servicio.html'
     success_url = reverse_lazy('listar_servicio')
-
+'''
 class ServicioDelete(DeleteView):
     model = Servicio
     template_name = 'verificacion.html'
@@ -203,3 +203,15 @@ class CategoriaList(ListView):
     model = Categoria
     template_name = 'listar_categoria.html'
     success_url = reverse_lazy('listar_ctegoria')
+
+class CategoriaCreate(CreateView):
+    model = Categoria
+    form_class = CategoriaForm
+    template_name = 'crear_categoria.html'
+    success_url = reverse_lazy('listar_categoria')
+
+class CategoriaUpdate(UpdateView):
+    model = Categoria
+    form_class = CategoriaForm
+    template_name = 'crear_categoria.html'
+    success_url = reverse_lazy('listar_categoria')

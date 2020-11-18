@@ -1,5 +1,6 @@
 from django.urls import path
 from hotel.class_views import HotelCreate, HotelDelete, HotelList, HotelUpdate, PaqueteTuristicoCreate, PaqueteTuristicoDelete, PaqueteTuristicoList, PaqueteTuristicoUpdate,HabitacionCreate, HabitacionDelete, HabitacionList, HabitacionUpdate
+from hotel.class_views import DescuentoCreate, DescuentoDelete, DescuentoUpdate, DescuentoList
 from hotel.views import info_hotel
 
 urlpatterns = [
@@ -21,4 +22,11 @@ urlpatterns = [
     path('crear_habitacion/',HabitacionCreate.as_view(),name = 'crear_habitacion'),
     path('editar_habitacion/<int:pk>/',HabitacionUpdate.as_view(),name = 'editar_habitacion'),
     path('eliminar_habitacion/<int:pk>/', HabitacionDelete.as_view(), name = 'eliminar_habitacion'),
+
+    #Descuento
+    path('listar_descuento/',DescuentoList.as_view() ,name = 'listar_descuento'),
+    path('crear_descuento/',DescuentoCreate.as_view(),name = 'crear_descuento'),
+    path('editar_descuento/<int:pk>/',DescuentoUpdate.as_view(),name = 'editar_descuento'),
+    path('eliminar_descuento/<int:pk>/',DescuentoDelete.as_view(),name = 'eliminar_descuento'),
+    
 ]
