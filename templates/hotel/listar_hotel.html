@@ -11,7 +11,7 @@
     <div class="ui raised  container segment">
         <h2 class="ui header">Listado de Hoteles</h2>
         
-            <table class="ui single line table">
+            <table class="ui sortable single line table">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -29,8 +29,8 @@
                             <td>{{hotel.nombre}}</td>
                             <td>{{hotel.direccion}}</td>
                             <td>{{hotel.localidad}}</td>
-                            <td>{{hotel.get_categoria_display}}</td>
-                            <td>{{hotel.encargado}}</td>
+                            <td>{{hotel.categoria}}</td>
+                            <td>{{hotel.encargado.persona}}</td>
                             <td>{{hotel.telefono}}</td>
                             <td>
                                 <a href="{% url 'editar_hotel' hotel.id %}"><i class="edit icon"></i></a>

@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
 
 # Create your views here.
+from core.models import Vendedor
 from .models import Hotel
-from .forms import HotelForm
+from .forms import HotelForm, AsignarForm
 
 def listarHotel(request):
     hoteles = Hotel.objects.all() #select * from Hotel
@@ -11,47 +12,19 @@ def listarHotel(request):
         }
     return render(request,'listar_hotel.html',contexto)
 
-# def crearHotel(request):
-#     if request.method == 'GET':
-#         form = HotelForm()
-#         contexto = {
-#             'form':form
-#             }
-#     else:
-#         form = HotelForm(request.POST)
-#         contexto = {
-#             'form':form
-#         }
-#         if form.is_valid():
-#             form.save()
-#             return redirect('listar_persona')
-#     return render(request,'crear_persona.html',contexto)
-
-# def editarPersona(request,id):
-#     persona = Hotel.objects.get(id = id)
-#     if request.method == 'GET':
-#         form = HotelForm(instance=persona)
-#         contexto = {
-#             'form':form
-#         }
-#     else:
-#         form = PersonaForm(request.POST,instance=persona)
-#         contexto = {
-#             'form':form
-#         }
-#         if form.is_valid():
-#             form.save()
-#             return redirect('listar_persona')
-#     return render(request,'crear_persona.html',contexto)
-
-# def eliminarPersona(request,id):
-#     persona = Persona.objects.get(id = id)
-#     persona.delete()
-#     return redirect('listar_persona')
-
 def info_hotel(request,id):
     hotel = Hotel.objects.get(id = id)
+    asignar_form = AsignarForm(request.POST)
     contexto = { 
-        'hotel':hotel
+        'hotel':hotel,
+        'lista_servicios': hotel.servicios.all(),
+        'lista_vendedores': hotel.vendedores.all(),
+        'asignar_form': asignar_form
     }
-    return render(request,"info_hotel.html",contexto)
+    return render(request,'info_hotel.html',contexto)
+    
+def desasignar_vendedor(request,id):
+    pass
+
+def asignar_vendedor(request,id):
+    pass

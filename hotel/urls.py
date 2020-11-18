@@ -1,6 +1,8 @@
 from django.urls import path
-from hotel.class_views import HotelCreate, HotelDelete, HotelList, HotelUpdate, PaqueteTuristicoCreate, PaqueteTuristicoDelete, PaqueteTuristicoList, PaqueteTuristicoUpdate,HabitacionCreate, HabitacionDelete, HabitacionList, HabitacionUpdate
-from hotel.views import info_hotel
+from hotel.class_views import HotelCreate, HotelDelete, HotelList, HotelUpdate
+from hotel.class_views import PaqueteTuristicoCreate, PaqueteTuristicoDelete, PaqueteTuristicoList, PaqueteTuristicoUpdate
+from hotel.class_views import HabitacionCreate, HabitacionDelete, HabitacionList, HabitacionUpdate
+from hotel.views import info_hotel, desasignar_vendedor, asignar_vendedor
 
 urlpatterns = [
 
@@ -10,6 +12,9 @@ urlpatterns = [
     path('editar_hotel/<int:pk>/',HotelUpdate.as_view(),name = 'editar_hotel'),
     path('eliminar_hotel/<int:pk>/', HotelDelete.as_view(), name = 'eliminar_hotel'),
     path('info_hotel/<int:id>/', info_hotel, name='info_hotel'),
+    path('desasignar_vendedor/<int:id>/', desasignar_vendedor, name='desasignar_vendedor'),
+    path('asignar_vendedor/<int:id>', asignar_vendedor, name='asignar_vendedor'),
+    
     #Paquete Turistico
     path('info_hotel/<int:id>/listar_paquete_turistico/',PaqueteTuristicoList.as_view() ,name = 'listar_paquete_turistico'),
     path('crear_paquete_turistico/',PaqueteTuristicoCreate.as_view(),name = 'crear_paquete_turistico'),

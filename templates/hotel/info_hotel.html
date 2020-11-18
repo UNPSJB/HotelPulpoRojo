@@ -1,12 +1,88 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Informacion hotel{% endblock titulo %}
+{% block titulo %}Información hotel{% endblock titulo %}
 
 {% block cuerpo %}
     <div class="ui raised  container segment">
         <h2 class="ui header">Informacion de {{hotel.nombre}}</h2>
-        <button class="ui button"><a href="{% url 'listar_paquete_turistico' hotel.id %}">LISTAR PAQUETE TURISTICO</a></button>
-        <a href="{% url 'listar_hotel' %}">ATRAS</a>
+
+        <!-- info del hotel -->
+        <div class="ui list">
+            <div class="item">
+              <div class="header">Dirección</div>
+              {{hotel.direccion}}
+            </div>
+            <div class="item">
+              <div class="header">Email</div>
+              {{hotel.email}}
+            </div>
+            <div class="item">
+              <div class="header">Teléfono</div>
+              {{hotel.telefono}}
+            </div>
+            <div class="item">
+              <div class="header">Localidad</div>
+              {{hotel.localidad}}
+            </div>
+            <div class="item">
+                <div class="header">Categoría</div>
+                {{hotel.categoria}}
+            </div>
+            <div class="item">
+                <div class="header">Servicios</div>
+                <ul>
+                {% for servicio in lista_servicios %} 
+                    <li> {{ servicio }} </li>
+                {% endfor %}
+                </ul>
+            </div>
+          </div>
+        <hr>
+
+        <!-- info de Encargado -->
+        <h3>Encargado</h3>
+        <div class="ui list">
+            <div class="item">
+              <div class="header">{{hotel.encargado.persona}}</div>
+              <div>{{hotel.encargado.persona.get_tipo_documento_display}} {{hotel.encargado.persona.documento}}</div>
+            </div>
+        </div>
+        <hr>
+
+        <!-- info de Encargado -->
+        <h3>Vendedores</h3>
+        <div class="ui middle aligned divided list">
+            {% for vendedor in lista_vendedores %}
+            <div class="item">
+                <div class="right floated content">
+                    <div class="ui button" href="{% url 'desasignar_vendedor' hotel.id %}">Desasignar</div>
+                </div>
+                <div class="content">
+                    {{ vendedor }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>        
+        <button class="ui button" onclick="abrir_modal()">ASIGNAR VENDEDOR</button>
+        <hr>
+
+        <!-- info de Paquete turístico -->
+        <h3>Paquetes Turísticos</h3>
+        <button class="ui button"><a href="{% url 'listar_paquete_turistico' hotel.id %}">LISTAR PAQUETES TURISTICOS</a></button>
+        <hr>
+
+        <div><a href="{% url 'listar_hotel' %}">VOLVER</a></div>
     </div>
+
+
+    <!-- modales -->
+    <div class="basic">
+      {% include "asignar_vendedor.html" %}    
+    </div>
+
+
+
+
 {% endblock cuerpo %}
+
