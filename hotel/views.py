@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect, get_object_or_404
 
 # Create your views here.
 from core.models import Vendedor
@@ -23,8 +23,19 @@ def info_hotel(request,id):
     }
     return render(request,'info_hotel.html',contexto)
     
-def desasignar_vendedor(request,id):
-    pass
+def desasignar_vendedor(request,hotel_pk, vendedor_pk):
+    hotel = get_object_or_404(Hotel, id = hotel_pk)
+    # hotel = Hotel.objects.get(id = hotel_pk)
+    vendedor = get_object_or_404(Vendedor, id = vendedor_pk)
+    # vendedor = Vendedor.objects.get(id = vendedor_pk)
+    hotel.vendedores.remove(vendedor)
+    return redirect('info_hotel', hotel_pk)
 
-def asignar_vendedor(request,id):
-    pass
+def asignar_vendedor(request, hotel_pk):
+    hotel = Hotel.objects.get(id = hotel_pk)
+    asignarform = AsignarForm(request.POST)
+    asignarform.save(hotel)
+    print(hotel_pk)
+    print(request.POST)
+    
+    return redirect('info_hotel', hotel_pk)

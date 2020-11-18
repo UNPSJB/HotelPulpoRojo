@@ -56,7 +56,7 @@
             {% for vendedor in lista_vendedores %}
             <div class="item">
                 <div class="right floated content">
-                    <div class="ui button" href="{% url 'desasignar_vendedor' hotel.id %}">Desasignar</div>
+                    <a class="ui button" href="{% url 'desasignar_vendedor' hotel.id vendedor.id %}">Desasignar</a>
                 </div>
                 <div class="content">
                     {{ vendedor }}

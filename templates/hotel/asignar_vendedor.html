@@ -3,7 +3,7 @@
     <div class="header">
       Profile Picture
     </div>
-    <form action="{% url 'asignar_vendedor' hotel.id %}" method="post"></form>
+    <form action="{% url 'asignar_vendedor' hotel.id %}" method="post">
       <div class="content">
         <div class="description">          
           {% csrf_token %}
@@ -11,10 +11,10 @@
         </div>
       </div>
       <div class="actions">
-        <div class="ui positive right labeled icon button" type="submit">
+        <button class="ui positive right labeled icon button" type="submit">
           Asignar
         <i class="checkmark icon"></i>
-        </div>
+        </button>
       </div>
     </form>
   </div>

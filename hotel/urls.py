@@ -13,8 +13,8 @@ urlpatterns = [
     path('editar_hotel/<int:pk>/',HotelUpdate.as_view(),name = 'editar_hotel'),
     path('eliminar_hotel/<int:pk>/', HotelDelete.as_view(), name = 'eliminar_hotel'),
     path('info_hotel/<int:id>/', info_hotel, name='info_hotel'),
-    path('desasignar_vendedor/<int:id>/', desasignar_vendedor, name='desasignar_vendedor'),
-    path('asignar_vendedor/<int:id>', asignar_vendedor, name='asignar_vendedor'),
+    path('desasignar_vendedor/<int:hotel_pk>/<int:vendedor_pk>', desasignar_vendedor, name='desasignar_vendedor'),
+    path('asignar_vendedor/<int:hotel_pk>/', asignar_vendedor, name='asignar_vendedor'),
     
     #Paquete Turistico
     path('info_hotel/<int:id>/listar_paquete_turistico/',PaqueteTuristicoList.as_view() ,name = 'listar_paquete_turistico'),
