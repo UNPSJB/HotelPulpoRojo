@@ -1,6 +1,7 @@
 from django import forms
+
 from core.models import Persona, Encargado, Vendedor
-from .models import Hotel, PrecioPorTipo, Habitacion, TemporadaAlta,Descuento,PaqueteTuristico
+from .models import Hotel, PrecioPorTipo, Habitacion, TemporadaAlta, Descuento, PaqueteTuristico
 from django.http import request
 
 class HotelForm(forms.ModelForm):
@@ -62,7 +63,6 @@ class AsignarForm(forms.Form): # TODO: ¿Sería un form o un modelform?
     #     hotel.save()
     #     return hotel
         
-
 
 class PrecioPorTipoForm(forms.ModelForm):
     class Meta:
