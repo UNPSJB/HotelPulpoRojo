@@ -121,18 +121,45 @@ class Habitacion(models.Model):
 # Temporada Alta
 def validate_date_not_in_past(value):
     date = value
+    validar_fecha_año_pasado(date)
+    if date.year == datetime.now().year:
+        validar_fecha_dia_pasado(date)
+        validar_fecha_mes_pasado(date)
+
+def validar_fecha_dia_actual(value):
+    date = value
+    if date.day == datetime.now().day:
+        raise ValidationError('El dia es igual al actual')
+
+def validar_fecha_dia_pasado(value):
+    date = value
     if date.day < datetime.now().day:
         raise ValidationError('El dia es inferior al actual')
+
+def validar_fecha_mes_pasado(value):
+    date = value
     if date.month < datetime.now().month:
         raise ValidationError('El mes es inferior al actual')
+
+def validar_fecha_año_pasado(value):
+    date = value
     if date.year < datetime.now().year:
         raise ValidationError('El año es inferior al actual')
+
+def validate_date_not_incorrect(value):
+    date = value
+    validar_fecha_año_pasado(date)
+    if date.year == datetime.now().year:
+            validar_fecha_dia_actual(date)
+            validar_fecha_dia_pasado(date)
+            validar_fecha_mes_pasado(date)
+        
 
 class TemporadaAlta(models.Model):
     nombre = models.CharField(max_length=200)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="temporadas")
     inicio = models.DateField(default=datetime.today, validators=[validate_date_not_in_past])
-    fin = models.DateField()
+    fin = models.DateField(default=datetime.today, validators=[validate_date_not_incorrect])
 
     def clean_inicio(self):
         date = self.cleaned_data['inicio']
