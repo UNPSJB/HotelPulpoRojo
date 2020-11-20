@@ -6,7 +6,7 @@ from .models import Hotel
 from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm, DescuentoForm
 from core.forms import EncargadoForm
 from .models import Hotel,PaqueteTuristico, Habitacion, Descuento
-from core.models import Encargado
+from core.models import Encargado, Vendedor
 
 #Hotel
 class HotelList(ListView):
@@ -29,6 +29,7 @@ class HotelDelete(DeleteView):
     model = Hotel
     template_name = 'verificacion_hotel.html'
     success_url = reverse_lazy('listar_hotel')
+
 
     
 

@@ -1,0 +1,30 @@
+<div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Profile Picture
+    </div>
+    <form action="{% url 'asignar_vendedor' hotel.id %}" method="post">
+      <div class="content">
+        <div class="description">          
+          {% csrf_token %}
+          {{ asignar_form }}
+        </div>
+      </div>
+      <div class="actions">
+        <button class="ui positive right labeled icon button" type="submit">
+          Asignar
+        <i class="checkmark icon"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+{% block js %}
+<script type="application/javascript">
+    function abrir_modal(){
+        $('.ui.modal')
+            .modal('show');
+    }
+</script>
+{% endblock %}
+
