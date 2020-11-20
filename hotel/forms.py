@@ -1,5 +1,5 @@
 from django import forms
-from core.models import Persona, Encargado
+from core.models import Persona, Encargado, Vendedor
 from .models import Hotel, PrecioPorTipo, Habitacion, TemporadaAlta,Descuento,PaqueteTuristico
 from django.http import request
 
@@ -45,7 +45,22 @@ class HotelForm(forms.ModelForm):
         hotel.save()
         return hotel
     
-
+class AsignarForm(forms.Form): # TODO: ¿Sería un form o un modelform?
+    vendedores = forms.ModelChoiceField(
+            queryset= Vendedor.objects.all(),
+            label="Vendedores",
+            widget= forms.Select(attrs={
+                'placeholder':'Seleccione un vendedor'
+            })
+        )
+    
+    def save(self, hotel):    
+        
+        vendedor = self.data.get('vendedores')     
+        print(vendedor)
+        hotel.vendedores.add(vendedor)
+        return hotel
+        
 
 
 class PrecioPorTipoForm(forms.ModelForm):

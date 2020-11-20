@@ -202,22 +202,16 @@ class CrearServicioForm(ServicioForm):
     def save(self, commit=True):
         servicio = ServicioForm(self.cleaned_data).save(commit=commit)
 
-'''
-class ServicioForm(forms.ModelForm):
-    class Meta:
-        model = Servicio
-        fields = [
-            'nombre',
-            'descripcion',
-        ]
-        labels = {
-            'nombre': 'Nombre',
-            'descripcion': 'Descripcion',
-        }
-'''
-
 #formularios de categoria
 class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
         fields = '__all__'    
+
+class CrearCategoriaForm(CategoriaForm):
+    estrellas = forms.ChoiceField(label='estrellas', choices=Categoria.ESTRELLAS)
+    nombre = forms.CharField(widget=forms.TextInput)    
+    servicios = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, label='servicios')
+
+    def save(self, commit=True):
+        categoria = CategoriaForm(self.cleaned_data).save(commit=commit)

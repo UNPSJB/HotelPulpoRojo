@@ -11,13 +11,17 @@
             <tr>
                 <th>Nombre</th>
                 <th>Descripcion</th>
+                <th>Editar</th>
             </tr>
             <tbody>
             {% if object_list %}
                 {% for servicio in object_list %} 
                 <tr>
-                    <td>{{servicio.nombre}}</td>
-                    <td>{{servicio.descripcion}}</td>
+                    <td class="blue">{{servicio.nombre}}</td>
+                    <td class="blue">{{servicio.descripcion}}</td>
+                    <td class="center aligned blue">
+                        <a href="{% url 'editar_servicio' servicio.id %}"><i class="edit icon"></i></a>
+                    </td>
                     </td>
                 </tr>
                 {% endfor %}

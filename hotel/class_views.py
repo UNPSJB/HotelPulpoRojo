@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.views.generic import CreateView,ListView,DeleteView,UpdateView, DetailView #View
+from django.views.generic import CreateView, ListView, DeleteView, UpdateView, DetailView #View
 from django.urls import reverse_lazy
 from .models import Hotel
-from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm, TemporadaAltaForm
+from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm, TemporadaAltaForm, DescuentoForm
 from core.forms import EncargadoForm
-from .models import Hotel, PaqueteTuristico, Habitacion, TemporadaAlta
-from core.models import Encargado
+from .models import Hotel, PaqueteTuristico, Habitacion, TemporadaAlta, Descuento
+from core.models import Encargado, Vendedor
 
 #Hotel
 class HotelList(ListView):
@@ -19,7 +19,6 @@ class HotelCreate(CreateView):
     template_name = 'afiliar_hotel.html'
     success_url = reverse_lazy('listar_hotel')
 
-
 class HotelUpdate(UpdateView):
     model = Hotel
     form_class = HotelForm
@@ -30,6 +29,7 @@ class HotelDelete(DeleteView):
     model = Hotel
     template_name = 'verificacion_hotel.html'
     success_url = reverse_lazy('listar_hotel')
+
 
     
 
@@ -103,3 +103,24 @@ class TemporadaAltaDelete(DeleteView):
     model = TemporadaAlta
     template_name = 'verificacion.html'
     success_url = reverse_lazy('listar_temporada_alta')
+#Descuento
+class DescuentoList(ListView):
+    model = Descuento
+    template_name = 'listar_descuento.html'
+
+class DescuentoCreate(CreateView):
+    model = Descuento
+    form_class = DescuentoForm
+    template_name = 'crear_descuento.html'
+    success_url = reverse_lazy('listar_descuento')
+
+class DescuentoUpdate(UpdateView):
+    model = Descuento
+    form_class = DescuentoForm
+    template_name = 'crear_descuento.html' #Reutiliza la vista del crear para no usar dos templates diferentes
+    success_url = reverse_lazy('listar_descuento')
+    
+class DescuentoDelete(DeleteView):
+    model = Descuento
+    template_name = 'verificacion_descuento.html'
+    success_url = reverse_lazy('listar_descuento')

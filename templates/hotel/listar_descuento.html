@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Listado de Descuentos{% endblock titulo %}
+
+{% block cuerpo %}
+    
+    <div class="ui raised  container segment">
+        <h2 class="ui header">Listado de Descuentos</h2>
+            <table class="ui single line table">
+                <thead>
+                    <tr>
+                        <th>Hotel</th>
+                        <th>Cantidad de Habitaciones</th>
+                        <th>Coeficiente</th>
+                    </tr>
+                    <tbody>
+                        {% for descuento in object_list %} 
+                        <tr>
+                            <td>{{descuento.hotel}}</td>
+                            <td>{{descuento.cantidad_habitaciones}}</td>
+                            <td>{{descuento.coeficiente}}</td>
+                            <td>
+                                <a href="{% url 'editar_descuento' descuento.id %}"><i class="edit icon"></i></a>
+                                <a href="{% url 'eliminar_descuento' descuento.id %}"><i class="trash icon"></i></a> 
+                                <a href=""><i class="info circle icon"></i></a> 
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+        <a href="{% url 'crear_descuento' %}">CREAR DESCUENTO</a>
+    </div>
+{% endblock cuerpo %}
