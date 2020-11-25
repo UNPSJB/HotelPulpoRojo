@@ -1,8 +1,4 @@
 {
   "python.venvPath": "~/.virtualenvs",
-<<<<<<< HEAD
   "python.pythonPath": "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
-=======
-  "python.pythonPath": "C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe"
->>>>>>> 15e22dcd90ebc8bb7f0e97ce2a540f44fe44f165
 }

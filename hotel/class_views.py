@@ -74,12 +74,7 @@ class PaqueteTuristicoUpdate(UpdateView):
 class PaqueteTuristicoDelete(DeleteView):
     model = PaqueteTuristico
     template_name = 'verificacion_paquete_turistico.html'
-<<<<<<< HEAD
-    success_url = reverse_lazy('listar_paquete_turistico')
-
-=======
     success_url = reverse_lazy('listar_hotel')
->>>>>>> 15e22dcd90ebc8bb7f0e97ce2a540f44fe44f165
 #Habitacion
 class HabitacionList(ListView):
     model = Habitacion
