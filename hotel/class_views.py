@@ -69,12 +69,22 @@ class PaqueteTuristicoUpdate(UpdateView):
     model = PaqueteTuristico
     form_class = PaqueteTuristicoForm
     template_name = 'crear_paquete_turistico.html'
-    success_url = reverse_lazy('listar_hotel')
+
+    def get_success_url(self):
+        paqueteTuristico = PaqueteTuristico.objects.get(id=self.kwargs.get('pk'))
+        return reverse_lazy('listar_paquete_turistico', kwargs={'hotel_pk': paqueteTuristico.hotel.pk})
+
+
+
 
 class PaqueteTuristicoDelete(DeleteView):
     model = PaqueteTuristico
     template_name = 'verificacion_paquete_turistico.html'
-    success_url = reverse_lazy('listar_hotel')
+
+    def get_success_url(self):
+        paqueteTuristico = PaqueteTuristico.objects.get(id=self.kwargs.get('pk'))
+        return reverse_lazy('listar_paquete_turistico', kwargs={'hotel_pk': paqueteTuristico.hotel.pk})
+    
 #Habitacion
 class HabitacionList(ListView):
     model = Habitacion

@@ -30,13 +30,11 @@
                             <td>
                                 <a href="{% url 'editar_paquete_turistico' paqueteturistico.id %}"><i class="edit icon"></i></a>
                                 <a href="{% url 'eliminar_paquete_turistico' paqueteturistico.id %}"><i class="trash icon"></i></a> 
-                                <a href=""><i class="info circle icon"></i></a> 
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </thead>
             </table>
-        <a href="{% url 'crear_paquete_turistico' %}">CREAR PAQUETE TURISTICO</a>
     </div>
 {% endblock cuerpo %}
