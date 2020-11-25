@@ -9,10 +9,10 @@
         
         <div class="ui text container">
             <h2 class="ui header">Crear Paquete Turistico</h2>
-            <form class="ui form" method="post">
+            <form class="ui form" method="post" >
                 {% csrf_token %}
-
-                <div class="field">
+                {{ form }}
+                <!-- <div class="field">
                     <label>Nombre</label>
                     {{form.nombre}}
                 </div>
@@ -21,39 +21,24 @@
                     <label>Coeficiente</label>
                     {{form.coeficiente}}
                 </div>
+                
                 <div class="field">
-                    <label>Hotel</label>
-                    {{form.hotel}}
+                    <label>Elegir habitaciones</label>
+                    {{form.habitaciones}}
+                </div>
+                
+                <div class="field">
+                    <label>Inicio</label>
+                    {{form.inicio}}
                 </div>
                 <div class="field">
-                  <label>Elegir habitaciones</label>
-                  {{form.habitaciones}}
-              </div>
-                <div class="two fields">
-                  <div class="field">
-                    <label>Start date</label>
-                    <div class="ui calendar" id="rangestart">
-                      <div class="ui input left icon">
-                        <i class="calendar icon"></i>
-                        <input type="text" placeholder="Start">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="field">
-                    <label>End date</label>
-                    <div class="ui calendar" id="rangeend">
-                      <div class="ui input left icon">
-                        <i class="calendar icon"></i>
-                        <input type="text" placeholder="End">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <a href="{% url 'listar_zona' %}">CANCELAR</a>
+                    <label>Fin</label>
+                    {{form.fin}}
+                </div> -->
+        
+                <a href="{% url 'listar_hotel' %}">CANCELAR</a>
                 <button class="ui right floated button" type="submit">ACEPTAR</button>
             </form>
-
-            
         </div>
 </div>
 {% endblock cuerpo %}
