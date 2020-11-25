@@ -89,6 +89,6 @@ class DescuentoForm(forms.ModelForm):
 class PaqueteTuristicoForm(forms.ModelForm):
     class Meta:
         model = PaqueteTuristico
-        fields = '__all__'
+        exclude = ['hotel']
 
-   
+    

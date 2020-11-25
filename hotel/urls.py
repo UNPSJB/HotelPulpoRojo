@@ -17,8 +17,8 @@ urlpatterns = [
     path('asignar_vendedor/<int:hotel_pk>/', asignar_vendedor, name='asignar_vendedor'),
     
     #Paquete Turistico
-    path('info_hotel/<int:id>/listar_paquete_turistico/',PaqueteTuristicoList.as_view() ,name = 'listar_paquete_turistico'),
-    path('crear_paquete_turistico/',PaqueteTuristicoCreate.as_view(),name = 'crear_paquete_turistico'),
+    path('listar_paquete_turistico/<int:hotel_pk>/',PaqueteTuristicoList.as_view() ,name = 'listar_paquete_turistico'),
+    path('crear_paquete_turistico/<int:hotel_pk>/',PaqueteTuristicoCreate.as_view(),name = 'crear_paquete_turistico'),
     path('editar_paquete_turistico/<int:pk>/',PaqueteTuristicoUpdate.as_view(),name = 'editar_paquete_turistico'),
     path('eliminar_paquete_turistico/<int:pk>/',PaqueteTuristicoDelete.as_view(),name = 'eliminar_paquete_turistico'),
     

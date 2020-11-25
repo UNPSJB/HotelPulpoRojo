@@ -39,3 +39,10 @@ def asignar_vendedor(request, hotel_pk):
     print(request.POST)
     
     return redirect('info_hotel', hotel_pk)
+
+def crear_paquete(request, hotel_pk):
+    hotel = Hotel.objects.get(id = hotel_pk)
+    paquete = CrearPaquete(request.POST)
+    paquete.save(hotel)
+    
+    return redirect('info_hotel', hotel_pk)
