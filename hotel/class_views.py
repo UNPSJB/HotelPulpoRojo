@@ -90,22 +90,49 @@ class HabitacionList(ListView):
     model = Habitacion
     template_name = 'listar_habitacion.html'
 
+    def get_context_data(self, **kwargs):
+        kwargs['object_list'] = Habitacion.objects.filter(hotel_id=self.kwargs['hotel_pk'])
+        
+        return super(HabitacionList, self).get_context_data(**kwargs)
+
 class HabitacionCreate(CreateView):
     model = Habitacion
     form_class = HabitacionForm
     template_name = 'crear_habitacion.html'
-    success_url = reverse_lazy('listar_habitacion')
+    #success_url = reverse_lazy('listar_habitacion')
+
+    def get_context_data(self, **kwargs):
+        print(self.kwargs['hotel_pk'])
+        return super(HabitacionCreate, self).get_context_data(**kwargs)
+
+    def form_valid(self, form):
+        hotel = Hotel.objects.get(id=self.kwargs.get('hotel_pk'))
+        habitacion = form.save(commit=False)
+        habitacion.hotel = hotel
+        #article.save()  # This is redundant, see comments.
+        return super(HabitacionCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('info_hotel', kwargs={'id': self.kwargs.get('hotel_pk')})
 
 class HabitacionUpdate(UpdateView):
     model = Habitacion
     form_class = HabitacionForm
     template_name = 'crear_habitacion.html'
-    success_url = reverse_lazy('listar_habitacion')
+    #success_url = reverse_lazy('listar_habitacion')
+
+    def get_success_url(self):
+        habitacion = Habitacion.objects.get(id=self.kwargs.get('pk'))
+        return reverse_lazy('listar_habitacion', kwargs={'hotel_pk': habitacion.hotel.pk})
 
 class HabitacionDelete(DeleteView):
     model = Habitacion
     template_name = 'verificacion.html'
-    success_url = reverse_lazy('listar_habitacion')
+    #success_url = reverse_lazy('listar_habitacion')
+
+    def get_success_url(self):
+        habitacion = habitacion.objects.get(id=self.kwargs.get('pk'))
+        return reverse_lazy('listar_habitacion', kwargs={'hotel_pk': habitacion.hotel.pk})
 
 #Temporada Alta
 class TemporadaAltaList(ListView):

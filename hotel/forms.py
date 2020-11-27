@@ -71,7 +71,7 @@ class PrecioPorTipoForm(forms.ModelForm):
 class HabitacionForm(forms.ModelForm):
     class Meta:
         model = Habitacion
-        fields = '__all__'
+        exclude = ['hotel']
 
 class DateInput(forms.DateInput):
     input_type = 'date'

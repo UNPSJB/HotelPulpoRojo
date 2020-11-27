@@ -23,8 +23,8 @@ urlpatterns = [
     path('eliminar_paquete_turistico/<int:pk>/',PaqueteTuristicoDelete.as_view(),name = 'eliminar_paquete_turistico'),
     
     #Habitacion
-    path('listar_habitacion/',HabitacionList.as_view() ,name = 'listar_habitacion'),
-    path('crear_habitacion/',HabitacionCreate.as_view(),name = 'crear_habitacion'),
+    path('listar_habitacion/<int:hotel_pk>/',HabitacionList.as_view() ,name = 'listar_habitacion'),
+    path('crear_habitacion/<int:hotel_pk>/',HabitacionCreate.as_view(),name = 'crear_habitacion'),
     path('editar_habitacion/<int:pk>/',HabitacionUpdate.as_view(),name = 'editar_habitacion'),
     path('eliminar_habitacion/<int:pk>/', HabitacionDelete.as_view(), name = 'eliminar_habitacion'),
 
