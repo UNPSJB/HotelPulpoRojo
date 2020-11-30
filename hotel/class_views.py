@@ -30,11 +30,7 @@ class HotelDelete(DeleteView):
     template_name = 'verificacion_hotel.html'
     success_url = reverse_lazy('listar_hotel')
 
-
-    
-
 #PaqueteTuristico
-
 class PaqueteTuristicoList(ListView):
     model = PaqueteTuristico
     template_name = 'listar_paquete_turistico.html'

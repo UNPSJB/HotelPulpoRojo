@@ -1,15 +1,30 @@
-{% extends 'base.html' %}
-
-{% block titulo %}Eliminar{% endblock titulo %}
-
-{% block cuerpo %}
-    <h2 class="ui header">Eliminar</h2>
-    <div class="ui text container">
-        <form class="ui form" method = "POST">
-            {% csrf_token %}
-            <h1>¿Desea desasignar al vendedor {{ object }} del hotel ?</h1>
-            <button class="ui button" type="submit" name="button">Confirmar</button>
-            <a href="{% url 'listar_hotel' %}">CANCELAR</a>
-        </form>
+<div class="ui modal">
+    <i class="close icon"></i>
+    <div class="header">
+      Desasignar Vendedor
     </div>
-{% endblock cuerpo %}
+    <form action="{% url 'desasignar_vendedor' hotel.id vendedor.id %}" method="post">
+      <div class="content">
+        <div class="description">          
+          {% csrf_token %}
+          <h1>¿Desea desasignar al vendedor {{ object }} del hotel?</h1>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="{% url 'info_hotel' %}">Cancelar</a>
+        <button class="ui positive right labeled icon button" type="submit">
+          Confirmar
+        <i class="checkmark icon"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+
+{% block js %}
+<script type="application/javascript">
+    function abrir_modal_desasignar(){
+        $('.ui.modal')
+            .modal('show');
+    }
+</script>
+{% endblock %}

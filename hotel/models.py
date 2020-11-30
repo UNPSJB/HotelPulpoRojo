@@ -100,6 +100,9 @@ class Habitacion(models.Model):
             desde += timedelta(days=1)
         return total
 
+    def esta_disponible(self, desde, hasta):
+       return not self.alquileres.filter(inicio__lte=desde, fin__gt=hasta).exists()
+
 # Temporada Alta
 class TemporadaAlta(models.Model):
     nombre = models.CharField(max_length=200)
