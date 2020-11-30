@@ -67,9 +67,16 @@
         <button class="ui button" onclick="abrir_modal_asignar()">ASIGNAR VENDEDOR</button>
         <hr>
 
+        <!-- info de Habitaciones -->
+        <h3>Habitaciones</h3>
+        <button class="ui button"><a href="{% url 'listar_habitacion' hotel.id %}">LISTAR HABITACIONES</a></button>
+        <button class="ui button"><a href="{% url 'crear_habitacion' hotel.id %}">CREAR HABITACION</a></button>
+        <hr>
+        
         <!-- info de Paquete turístico -->
         <h3>Paquetes Turísticos</h3>
         <button class="ui button"><a href="{% url 'listar_paquete_turistico' hotel.id %}">LISTAR PAQUETES TURISTICOS</a></button>
+        <button class="ui button"><a href="{% url 'crear_paquete_turistico' hotel.id %}">CREAR PAQUETES TURISTICOS</a></button>
         <hr>
 
         <div><a href="{% url 'listar_hotel' %}">VOLVER</a></div>

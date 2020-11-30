@@ -69,7 +69,10 @@ class PrecioPorTipoForm(forms.ModelForm):
 class HabitacionForm(forms.ModelForm):
     class Meta:
         model = Habitacion
-        fields = '__all__'
+        exclude = ['hotel']
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 class TemporadaAltaForm(forms.ModelForm):
     class Meta:
@@ -84,6 +87,6 @@ class DescuentoForm(forms.ModelForm):
 class PaqueteTuristicoForm(forms.ModelForm):
     class Meta:
         model = PaqueteTuristico
-        fields = '__all__'
+        exclude = ['hotel']
 
-   
+    

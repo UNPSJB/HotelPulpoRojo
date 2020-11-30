@@ -9,13 +9,36 @@
         
         <div class="ui text container">
             <h2 class="ui header">Crear Paquete Turistico</h2>
-            <form class="ui form" method="post">
+            <form class="ui form" method="post" >
                 {% csrf_token %}
                 {{ form }}
-                <button class="ui button" type="submit">CREAR O EDITAR</button>
-                <a href="{% url 'listar_paquete_turistico' %}">CANCELAR</a>
+                <!-- <div class="field">
+                    <label>Nombre</label>
+                    {{form.nombre}}
+                </div>
+                
+                <div class="field">
+                    <label>Coeficiente</label>
+                    {{form.coeficiente}}
+                </div>
+                
+                <div class="field">
+                    <label>Elegir habitaciones</label>
+                    {{form.habitaciones}}
+                </div>
+                
+                <div class="field">
+                    <label>Inicio</label>
+                    {{form.inicio}}
+                </div>
+                <div class="field">
+                    <label>Fin</label>
+                    {{form.fin}}
+                </div> -->
+        
+                <a href="{% url 'listar_hotel' %}">CANCELAR</a>
+                <button class="ui right floated button" type="submit">ACEPTAR</button>
             </form>
-            
         </div>
 </div>
 {% endblock cuerpo %}
@@ -24,7 +47,19 @@
 <script>
 $('.dropdown')
     .dropdown({
-})
-;
+});
+
+$('#rangestart').calendar({
+    type: 'date',
+    endCalendar: $('#rangeend'),
+    onChange: function (date, text) {
+      var newValue = text;
+  },
+});
+
+$('#rangeend').calendar({
+    type: 'date',
+    startCalendar: $('#rangestart')
+});
 </script>
 {% endblock js %}

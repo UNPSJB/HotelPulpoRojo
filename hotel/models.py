@@ -1,8 +1,10 @@
 from django.db import models
 from decimal import Decimal
-from datetime import date, timedelta
+from datetime import date, timedelta, datetime
 from core.models import Localidad, Categoria, Servicio, TipoHabitacion, Vendedor, Encargado
 from .exceptions import DescuentoException, TipoHotelException
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.exceptions import ValidationError
 
 class HotelManager(models.Manager):
     def en_zona(self, zona):
@@ -72,11 +74,33 @@ class PrecioPorTipo(models.Model):
 # Habitación
 class Habitacion(models.Model):
     hotel = models.ForeignKey(Hotel, related_name="habitaciones", on_delete=models.CASCADE)
-    numero = models.PositiveSmallIntegerField() # 403 <Piso><Cuarto>
+    numero = models.PositiveSmallIntegerField(default=101, validators=[MinValueValidator(101), MaxValueValidator(9999)]) # 403 <Piso><Cuarto> y cada habitacion puede ser del 1 al 99 al igual que los pisos
     tipo = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = (('hotel', 'numero'), )
+
+    def validate_unique(self, *args, **kwargs):
+        super(Habitacion, self).validate_unique(*args, **kwargs)
+        qs = Habitacion.objects.filter(numero=self.numero)
+        if qs.filter(numero=self.numero).exists():
+            raise ValidationError({'numero':['Ya existe una habitacion con este número y piso',]})
+
+    def get_numero(self):
+        if len(str(self.numero)) == 4:
+            num = str(self.numero)[2] + str(self.numero)[3]
+        if len(str(self.numero)) == 3:
+            num = str(self.numero)[1] + str(self.numero)[2]
+        # Este if solo es para habitaciones cargadas con dos digitos
+        if len(str(self.numero)) == 2:
+            num = str(self.numero)[0]
+        return num
+
+    def piso(self):
+        if len(str(self.numero)) == 4:
+            return str(self.numero)[0] + str(self.numero)[1]
+        else:
+            return str(0) + str(self.numero)[0]
 
     def __str__(self):
         return f"{self.hotel}, Habitacion: {self.numero}"
@@ -104,11 +128,53 @@ class Habitacion(models.Model):
        return not self.alquileres.filter(inicio__lte=desde, fin__gt=hasta).exists()
 
 # Temporada Alta
+def validate_date_not_in_past(value):
+    date = value
+    validar_fecha_año_pasado(date)
+    if date.year == datetime.now().year:
+        validar_fecha_dia_pasado(date)
+        validar_fecha_mes_pasado(date)
+
+def validar_fecha_dia_actual(value):
+    date = value
+    if date.day == datetime.now().day:
+        raise ValidationError('El dia es igual al actual')
+
+def validar_fecha_dia_pasado(value):
+    date = value
+    if date.day < datetime.now().day:
+        raise ValidationError('El dia es inferior al actual')
+
+def validar_fecha_mes_pasado(value):
+    date = value
+    if date.month < datetime.now().month:
+        raise ValidationError('El mes es inferior al actual')
+
+def validar_fecha_año_pasado(value):
+    date = value
+    if date.year < datetime.now().year:
+        raise ValidationError('El año es inferior al actual')
+
+def validate_date_not_incorrect(value):
+    date = value
+    validar_fecha_año_pasado(date)
+    if date.year == datetime.now().year:
+            validar_fecha_dia_actual(date)
+            validar_fecha_dia_pasado(date)
+            validar_fecha_mes_pasado(date)
+        
+
 class TemporadaAlta(models.Model):
     nombre = models.CharField(max_length=200)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE, related_name="temporadas")
-    inicio = models.DateField()
-    fin = models.DateField()
+    inicio = models.DateField(default=datetime.today, validators=[validate_date_not_in_past])
+    fin = models.DateField(default=datetime.today, validators=[validate_date_not_incorrect])
+
+    def clean_inicio(self):
+        date = self.cleaned_data['inicio']
+        if date < datetime.date.today():
+            raise forms.ValidationError("The date cannot be in the past!")
+        return date
 
 # Descuentos
 class Descuento(models.Model):

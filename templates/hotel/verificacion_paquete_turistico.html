@@ -9,7 +9,7 @@
             {% csrf_token %}
             <h1>Seguro que desea eliminar la Paquete Turistico {{ object.paqueteturistico.nombre }}?</h1>
             <button class="ui button" type="submit" name="button">Confirmar</button>
-            <a href="{% url 'listar_paquete_turistico' %}">CANCELAR</a>
+            <a href="{% url 'listar_hotel' %}">CANCELAR</a>
         </form>
     </div>
 {% endblock cuerpo %}
