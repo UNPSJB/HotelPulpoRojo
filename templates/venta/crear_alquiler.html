@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Formulario de Alquiler{% endblock titulo %}
+
+{% block cuerpo%} 
+
+<div class="ui grid">
+        
+        <div class="ui text container">
+            <h2 class="ui header">Crear Alquiler</h2>
+            
+            <form class="ui form" method="post">
+                {% csrf_token %}
+                {{ forms.non_field_errors }}
+                {{ form }}
+                <button class="ui button" type="submit">GUARDAR</button>
+                <a href="{% url 'alquilar_habitacion' %}">CANCELAR</a>
+            </form>
+            
+        </div>
+</div>
+{% endblock cuerpo %}
+
+{% block js %}
+<script>
+$('.dropdown')
+    .dropdown({
+})
+;
+</script>
+{% endblock js %}

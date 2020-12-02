@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Alquilar habitación{% endblock titulo %}
+
+{% block cuerpo %}
+    <!-- Buscador -->
+    <div class="ui two column centered grid">
+        <div class="one wide column"></div>
+        <div class="ten wide column">
+            <form class="ui form" action="/" method="POST">
+                <div class="five fields">
+                    <div class="field">
+                        <label>Localidad</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="localidad" placeholder="Localidad">
+                            <i class="globe icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Check in</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="fecha_desde" placeholder="Check in">
+                            <i class="calendar alternate icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Check out</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="fecha_hasta" placeholder="Check out">
+                            <i class="calendar alternate outline icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Huéspedes</label>
+                        <div class="ui left icon input">
+                            <input type="text" name="huespedes" placeholder="Huéspedes">
+                            <i class="user friends icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="actions" style="margin-top: 25px; position: static;">
+                            <button class="ui fluid positive right labeled icon button"  type="submit">
+                            Buscar
+                            <i class="search icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% csrf_token %}
+            </form>
+        </div>
+        <div class="one wide column"></div>
+    </div>
+
+
+    
+
+
+    <!-- Listado de habitaciones -->
+    <div class="ui sizer vertical segment">
+        <h1 class="ui huge header" >Seleccione una habitación</h1>
+    </div>
+    <div class="ui raised very padded text container segment">
+        <input class="ui icon input" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar.." title="Ingrese un dato">
+        <table id="myTable" class="ui blue inverted center aligned table">
+            <thead>
+                <tr>
+                    <th>Hotel</th>
+                    <th>Número</th>
+                    <th>Piso</th>
+                    <th>Tipo de habitacion</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    {% for habitacion in object_list %} 
+                    <tr>
+                        <td class="blue">{{habitacion.hotel}}</td>
+                        <td class="blue">{{habitacion.get_numero}}</td>
+                        <td class="blue">{{habitacion.piso}}</td>
+                        <td class="blue">{{habitacion.tipo}}</td>
+                        <td class="center aligned blue">
+                            <button class="ui button"><a href="{% url 'crear_alquiler' habitacion.id %}">Alquilar</a></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+{% endblock cuerpo %}
+
+{% block js %}
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {// Hide the row initially.
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (var j = 0; j < td.length; j++) {
+                    cell = tr[i].getElementsByTagName("td")[j];
+                    if (cell) {
+                        if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+{% endblock js %}
+
+

@@ -32,6 +32,7 @@ class Factura(models.Model):
     # medio_de_pago
     # Tipo, Monto
     fecha = models.DateField(auto_now_add=True)
+    fue_pagado = models.BooleanField(default=False)
 
 
     def alquilar_habitaciones(self, habitaciones_con_fecha):
@@ -68,7 +69,7 @@ class Factura(models.Model):
     def total(self):
         return sum([a.total for a in self.alquileres.all()])
 
-# Alquiler
+# Alquiler (Renglón de factura)
 class Alquiler(models.Model):
     factura = models.ForeignKey(Factura, related_name="alquileres", on_delete=models.CASCADE)
     # De un mismo hotel
@@ -78,4 +79,4 @@ class Alquiler(models.Model):
     inicio = models.DateField()
     fin = models.DateField()
     total = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal(0))
-    facturado = models.BooleanField(default=False)
+    fue_pagado = models.BooleanField(default=False)
