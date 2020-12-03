@@ -11,7 +11,7 @@ from hotel.models import Habitacion, Hotel
 
 
 class AlquilerCreate(CreateView):
-     model = Alquiler
-     form_class = AlquilerForm
-     template_name = 'crear_alquiler.html'
-     success_url = reverse_lazy('listar_habitaciones')
+    model = Alquiler
+    form_class = AlquilerForm
+    template_name = 'crear_alquiler.html'
+    success_url = reverse_lazy('listar_habitaciones')

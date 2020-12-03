@@ -19,16 +19,21 @@
                     </div>
                     <div class="field">
                         <label>Check in</label>
-                        <div class="ui left icon input">
-                            <input type="text" name="fecha_desde" placeholder="Check in">
-                            <i class="calendar alternate icon"></i>
+                        <div class="ui calendar" id="rangestart">
+                            <div class="ui input left icon">
+                                <i class="calendar alternate icon"></i>
+                                <input type="text" name="fecha_desde" placeholder="Check in">
+                            </div>
                         </div>
                     </div>
                     <div class="field">
                         <label>Check out</label>
-                        <div class="ui left icon input">
-                            <input type="text" name="fecha_hasta" placeholder="Check out">
-                            <i class="calendar alternate outline icon"></i>
+
+                        <div class="ui calendar" id="rangeend">
+                            <div class="ui input left icon">
+                                <i class="calendar alternate outline icon"></i>
+                                <input type="text" name="fecha_hasta" placeholder="Check out">
+                            </div>
                         </div>
                     </div>
                     <div class="field">
@@ -62,7 +67,7 @@
         <h1 class="ui huge header" >Seleccione una habitación</h1>
     </div>
     <div class="ui raised very padded text container segment">
-        <input class="ui icon input" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar.." title="Ingrese un dato">
+        <!-- <input class="ui icon input" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar.." title="Ingrese un dato"> -->
         <table id="myTable" class="ui blue inverted center aligned table">
             <thead>
                 <tr>
@@ -73,7 +78,7 @@
                     <th></th>
                 </tr>
                 <tbody>
-                    {% for habitacion in object_list %} 
+                    {% for habitacion in habitaciones %} 
                     <tr>
                         <td class="blue">{{habitacion.hotel}}</td>
                         <td class="blue">{{habitacion.get_numero}}</td>
@@ -92,26 +97,36 @@
 
 {% block js %}
     <script>
-        function myFunction() {
-            var input, filter, table, tr, td, i;
-            input = document.getElementById("myInput");
-            filter = input.value.toUpperCase();
-            table = document.getElementById("myTable");
-            tr = table.getElementsByTagName("tr");
-            for (i = 1; i < tr.length; i++) {// Hide the row initially.
-                tr[i].style.display = "none";
-                td = tr[i].getElementsByTagName("td");
-                for (var j = 0; j < td.length; j++) {
-                    cell = tr[i].getElementsByTagName("td")[j];
-                    if (cell) {
-                        if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
-                            tr[i].style.display = "";
-                            break;
-                        }
-                    }
-                }
-            }
-        }
+    
+    $('#rangestart').calendar({
+        type: 'date',
+        endCalendar: $('#rangeend')
+    });
+    $('#rangeend').calendar({
+        type: 'date',
+        startCalendar: $('#rangestart')
+    });
+
+        // function myFunction() {
+        //     var input, filter, table, tr, td, i;
+        //     input = document.getElementById("myInput");
+        //     filter = input.value.toUpperCase();
+        //     table = document.getElementById("myTable");
+        //     tr = table.getElementsByTagName("tr");
+        //     for (i = 1; i < tr.length; i++) {// Hide the row initially.
+        //         tr[i].style.display = "none";
+        //         td = tr[i].getElementsByTagName("td");
+        //         for (var j = 0; j < td.length; j++) {
+        //             cell = tr[i].getElementsByTagName("td")[j];
+        //             if (cell) {
+        //                 if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        //                     tr[i].style.display = "";
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
     </script>
 {% endblock js %}
 

@@ -22,4 +22,4 @@ def alquilar_habitacion(request):
     #     huespedes = int(request.POST.get('huespedes'))
     #     habitaciones = habitaciones.filter(localidad=localidad)
 
-    return render(request, "alquilar_habitacion.html", {'habtaciones': habitaciones})
+    return render(request, "alquilar_habitacion.html", {'habitaciones': habitaciones})
