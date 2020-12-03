@@ -101,16 +101,9 @@ class HabitacionCreate(CreateView):
     template_name = 'crear_habitacion.html'
     #success_url = reverse_lazy('listar_habitacion')
 
-    def get_context_data(self, **kwargs):
-        print(self.kwargs['hotel_pk'])
-        return super(HabitacionCreate, self).get_context_data(**kwargs)
-
-    def form_valid(self, form):
+    def get_initial(self):
         hotel = Hotel.objects.get(id=self.kwargs.get('hotel_pk'))
-        habitacion = form.save(commit=False)
-        habitacion.hotel = hotel
-        #article.save()  # This is redundant, see comments.
-        return super(HabitacionCreate, self).form_valid(form)
+        return {'hotel':hotel}
 
     def get_success_url(self):
         return reverse_lazy('info_hotel', kwargs={'id': self.kwargs.get('hotel_pk')})
