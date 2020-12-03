@@ -45,7 +45,7 @@ class HotelForm(forms.ModelForm):
         hotel.save()
         return hotel
     
-class AsignarForm(forms.Form): # TODO: ¿Sería un form o un modelform?
+class AsignarForm(forms.Form): 
     vendedores = forms.ModelChoiceField(
             queryset= Vendedor.objects.all(),
             label="Vendedores",
@@ -55,9 +55,7 @@ class AsignarForm(forms.Form): # TODO: ¿Sería un form o un modelform?
         )
     
     def save(self, hotel):    
-        
         vendedor = self.data.get('vendedores')     
-        print(vendedor)
         hotel.vendedores.add(vendedor)
         return hotel
         

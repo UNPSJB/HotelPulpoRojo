@@ -99,6 +99,7 @@ class Habitacion(models.Model):
     def __str__(self):
         return f"{self.hotel}, Habitacion: {self.numero}"
 
+    # Calcula el precio unitario de una habitación 
     def precio_por_noche(self, fecha):
         precio_por_tipo = self.hotel.tarifario.filter(tipo=self.tipo).first()
         if precio_por_tipo is None:
@@ -108,6 +109,7 @@ class Habitacion(models.Model):
             return precio_por_tipo.alta
         return precio_por_tipo.baja
 
+    # Suma el precio por noche desde la fecha inicial hasta la final
     def precio_alquiler(self, desde, hasta):
         if desde >= hasta:
             #TODO: Custom exception
@@ -117,6 +119,10 @@ class Habitacion(models.Model):
             total += self.precio_por_noche(desde)
             desde += timedelta(days=1)
         return total
+
+    # Confirma la disponibilidad de una habitación en una fecha dada. Es decir, si está alquilada o no en esa fecha.
+    def esta_disponible(self, desde, hasta):
+       return not self.alquileres.filter(inicio__lte=desde, fin__gt=hasta).exists()
 
 # Temporada Alta
 def validate_date_not_in_past(value):

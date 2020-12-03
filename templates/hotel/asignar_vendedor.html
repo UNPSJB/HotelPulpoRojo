@@ -1,7 +1,7 @@
 <div class="ui modal">
     <i class="close icon"></i>
     <div class="header">
-      Profile Picture
+      Asignar Vendedor
     </div>
     <form action="{% url 'asignar_vendedor' hotel.id %}" method="post">
       <div class="content">
@@ -21,7 +21,7 @@
 
 {% block js %}
 <script type="application/javascript">
-    function abrir_modal(){
+    function abrir_modal_asignar(){
         $('.ui.modal')
             .modal('show');
     }

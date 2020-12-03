@@ -35,7 +35,4 @@ def asignar_vendedor(request, hotel_pk):
     hotel = Hotel.objects.get(id = hotel_pk)
     asignarform = AsignarForm(request.POST)
     asignarform.save(hotel)
-    print(hotel_pk)
-    print(request.POST)
-    
     return redirect('info_hotel', hotel_pk)

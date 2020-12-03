@@ -1,7 +1,11 @@
 from django.urls import path
-#from .views import (aca ponen las funciones de views que quieran importar)
-#from .class_views import (aca ponen las funciones de class_views que quieran importar)
+from django.conf.urls import url
+from .views import alquilar_habitacion
+from .class_views import AlquilerCreate
+
+
 
 urlpatterns = [
-    
+    path('alquilar_habitacion/', alquilar_habitacion, name='alquilar_habitacion'),
+    path('crear_alquiler/<int:habitacion_pk>',AlquilerCreate.as_view(),name = 'crear_alquiler'),
 ]

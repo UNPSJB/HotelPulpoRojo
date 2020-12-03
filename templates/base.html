@@ -31,7 +31,7 @@
             <div class="ui simple dropdown item">
                 Alquileres <i class="dropdown icon"></i>
                     <div class="menu">
-                        <a class="item" href="#">Alquilar Habitación</a>
+                        <a class="item" href="/alquilar_habitacion">Alquilar Habitación</a>
                         <a class="item" href="#">Venta de Paquete Turístico</a>
                         <a class="item" href="/listar_temporada_alta">Listado</a>
                     </div>
@@ -44,8 +44,9 @@
                         <a class="item" href="#">Listado</a>
                     </div>
             </div>
-
+            {% if not request.user.is_superuser %}
             <a href="/listar_cliente" class="item">Listado de Clientes</a>
+            {% endif %}
 
             <!-- Sección pertinente solo al Superusuario -->
             {% if perms.core.add_tipohabitacion %}
@@ -113,7 +114,7 @@
         
         <!-- Pepe -->
         <div>
-            <img class="img fixed right" src='{% static "pepe-cry.png" %}' style="position: fixed; bottom: 0;right: 0; margin-bottom: 0px;">
+            <img class="img fixed right" src='{% static "pepe-cry-navidad.png" %}' style="position: fixed; bottom: 0;right: 0; margin-bottom: 0px;">
         </div>
     </div>
 </body>
