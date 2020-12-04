@@ -20,6 +20,7 @@
                         <th>Categoria</th>
                         <th>Encargado</th>
                         <th>Teléfono</th>
+                        <!-- <th>Pais</th> -->
                         <th>OPCIÓN</th>
                     </tr>
                     <tbody>
@@ -32,6 +33,7 @@
                             <td>{{hotel.categoria}}</td>
                             <td>{{hotel.encargado.persona}}</td>
                             <td>{{hotel.telefono}}</td>
+                            <!-- <td>{{hotel.get_pais}}</td> -->
                             <td>
                                 <a href="{% url 'editar_hotel' hotel.id %}"><i class="edit icon"></i></a>
                                 <a href="{% url 'eliminar_hotel' hotel.id %}"><i class="trash icon"></i></a> 

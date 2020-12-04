@@ -31,6 +31,12 @@ class Hotel(models.Model):
     def es_comercializable(self):
         return self.vendedores.count() > 0
 
+    # def get_provincia(self):
+    #     return self.localidad.provincia
+
+    # def get_pais(self):
+    #     return self.localidad.provincia.pais
+
     def es_hospedaje(self):
         return self.categoria.estrellas in [Categoria.ESTRELLA_A, Categoria.ESTRELLA_B, Categoria.ESTRELLA_C]
 
