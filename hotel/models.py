@@ -78,13 +78,7 @@ class Habitacion(models.Model):
     tipo = models.ForeignKey(TipoHabitacion, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = (('hotel', 'numero'), )
-
-    def validate_unique(self, *args, **kwargs):
-        super(Habitacion, self).validate_unique(*args, **kwargs)
-        qs = Habitacion.objects.filter(numero=self.numero)
-        if qs.filter(numero=self.numero).exists():
-            raise ValidationError({'numero':['Ya existe una habitacion con este número y piso',]})
+        unique_together = ('hotel', 'numero')
 
     def get_numero(self):
         if len(str(self.numero)) == 4:
