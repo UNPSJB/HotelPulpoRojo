@@ -17,11 +17,6 @@ def alquilar_habitacion(request):
     fin_texto = ""
     huespedes = ""
     
-    # Parámetros de búsqueda:
-    # destino 
-    # fecha_desde
-    # fecha_hasta
-    # huespedes
 
     #Esta es la parte de la búsqueda/filtro
     if request.method == 'POST':

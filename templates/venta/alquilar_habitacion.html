@@ -84,7 +84,7 @@
                         <td class="blue">{{habitacion.piso}}</td>
                         <td class="blue">{{habitacion.tipo}}</td>
                         <td class="center aligned blue">
-                            <button class="ui button"><a href="{% url 'crear_alquiler' habitacion.id %}?habitacion={{habitacion.id}}&fecha_desde={{fecha_desde}}&fecha_hasta={{fecha_hasta}}&huespedes={{huespedes}}">Alquilar</a></button>
+                            <button class="ui button"><a href="{% url 'crear_alquiler' %}?habitacion={{habitacion.id}}&fecha_desde={{fecha_desde}}&fecha_hasta={{fecha_hasta}}&huespedes={{huespedes}}">Alquilar</a></button>
                         </td>
                     </tr>
                     {% endfor %}

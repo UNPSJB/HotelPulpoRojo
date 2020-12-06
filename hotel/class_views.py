@@ -46,7 +46,6 @@ class PaqueteTuristicoCreate(CreateView):
     template_name = 'crear_paquete_turistico.html'
 
     def get_context_data(self, **kwargs):
-        print(self.kwargs['hotel_pk'])
         return super(PaqueteTuristicoCreate, self).get_context_data(**kwargs)
 
     def form_valid(self, form):
