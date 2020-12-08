@@ -128,8 +128,8 @@ class Habitacion(models.Model):
 
     # Confirma la disponibilidad de una habitación en una fecha dada. Es decir, si está alquilada o no en esa fecha.
     def esta_disponible(self, desde, hasta):
-       return not self.alquileres.filter(inicio__lte=desde, fin__gt=hasta).exists()
-
+        return not self.alquileres.filter(inicio__lte=desde, fin__gte=hasta).exists()
+        
 # Temporada Alta
 def validate_date_not_in_past(value):
     date = value

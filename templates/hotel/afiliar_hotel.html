@@ -6,9 +6,12 @@
 {% block cuerpo%} 
 
 <div class="ui grid">
-        
         <div class="ui text container">
+            {% if not object %}
             <h2 class="ui header">Afiliar Hotel</h2>
+            {% else %}
+            <h2 class="ui header">Editar Hotel</h2>
+            {% endif %}
             
             <form class="ui form" method="post">
                 {% csrf_token %}

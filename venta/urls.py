@@ -7,5 +7,5 @@ from .class_views import AlquilerCreate
 
 urlpatterns = [
     path('alquilar_habitacion/', alquilar_habitacion, name='alquilar_habitacion'),
-    path('crear_alquiler/<int:habitacion_pk>',AlquilerCreate.as_view(),name = 'crear_alquiler'),
+    path('crear_alquiler/',AlquilerCreate.as_view(),name = 'crear_alquiler'),
 ]
