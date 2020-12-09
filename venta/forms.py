@@ -15,6 +15,7 @@ class AlquilerForm(forms.ModelForm):
             'paquete',
             'fue_pagado'
         ]
+        # widgets = {'cantidad_huespedes':forms.HiddenInput}
     
     def clean(self):
         cleaneddata = super().clean()
