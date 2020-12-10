@@ -32,7 +32,7 @@ class Factura(models.Model):
     # medio_de_pago
     # Tipo, Monto
     fecha = models.DateField(auto_now_add=True)
-    fue_pagado = models.BooleanField(default=False)
+    monto = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal(0))
 
 
     def alquilar_habitaciones(self, habitaciones_con_fecha):
@@ -79,4 +79,4 @@ class Alquiler(models.Model):
     inicio = models.DateField()
     fin = models.DateField()
     total = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal(0))
-    fue_pagado = models.BooleanField(default=False)
+    # fue_pagado = models.BooleanField(default=False)

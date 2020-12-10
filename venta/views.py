@@ -32,8 +32,6 @@ def alquilar_habitacion(request):
         huespedes = int(request.POST.get('huespedes'))
         habitaciones = Habitacion.objects.filter(hotel__localidad__in=zona, tipo__pasajeros__gte=huespedes).exclude(alquileres__inicio__lte=fecha_desde, alquileres__fin__gte=fecha_hasta)
 
-    print(inicio_texto)
-    print(fin_texto)
     return render(request, "alquilar_habitacion.html", {'habitaciones': habitaciones,
                                                         "destino": destino,
                                                         "fecha_desde": inicio_texto,

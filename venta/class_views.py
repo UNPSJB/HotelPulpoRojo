@@ -4,7 +4,8 @@ from django.views.generic import CreateView, ListView, DeleteView, UpdateView, D
 from django.urls import reverse_lazy
 from .forms import AlquilerForm
 from .models import Alquiler, Factura, Liquidacion
-from hotel.models import Habitacion, Hotel
+from hotel.models import Hotel, Habitacion
+from datetime import datetime
 
 
 
@@ -22,8 +23,13 @@ class AlquilerCreate(CreateView):
         fecha_desde = self.request.GET['fecha_desde']
         fecha_hasta = self.request.GET['fecha_hasta']
         huespedes = int(self.request.GET['huespedes'])
+
+        culo = Habitacion.objects.get(id=habitacion)
+        inicio = datetime.strptime(fecha_desde, '%d/%m/%Y').date()
+        fin = datetime.strptime(fecha_hasta, '%d/%m/%Y').date()
+        total = culo.precio_alquiler(inicio, fin)
         
-        return {'habitaciones': habitacion, 'inicio': fecha_desde, 'fin': fecha_hasta, 'cantidad_huespedes': huespedes}
+        return {'habitaciones': habitacion, 'inicio': fecha_desde, 'fin': fecha_hasta, 'cantidad_huespedes': huespedes, 'total': total}
 
     # def get_initial(self):
     #     habitacion = self.get_params()
