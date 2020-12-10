@@ -24,7 +24,6 @@ class AlquilerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         # Primero llamar a super. 
         super().__init__(*args, **kwargs)
-        print(self.instance.pk)
         if self.instance.pk is not None:
             self.fields['nombreCliente'].initial = self.instance.cliente.persona.nombre
             self.fields['apellidoCliente'].initial = self.instance.cliente.persona.apellido

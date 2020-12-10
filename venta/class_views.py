@@ -14,17 +14,16 @@ class AlquilerCreate(CreateView):
     form_class = AlquilerForm
     template_name = 'crear_alquiler.html'
     success_url = reverse_lazy('listar_habitaciones')
-    request = HttpRequest()
-    request.method = 'GET'
-    hues = request.GET.get('cantidad_huespedes','no funco')
-    print(hues)
 
 
-    # def get_initial(self):
-    #     return {'cantidad_huespedes':4}
 
-    # def get_params(self, request):
-    #     return request.GET.get('habitacion')
+    def get_initial(self):
+        habitacion = int(self.request.GET['habitacion'])
+        fecha_desde = self.request.GET['fecha_desde']
+        fecha_hasta = self.request.GET['fecha_hasta']
+        huespedes = int(self.request.GET['huespedes'])
+        
+        return {'habitaciones': habitacion, 'inicio': fecha_desde, 'fin': fecha_hasta, 'cantidad_huespedes': huespedes}
 
     # def get_initial(self):
     #     habitacion = self.get_params()
