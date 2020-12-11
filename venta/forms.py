@@ -1,6 +1,7 @@
 from django import forms
 from .models import Factura, Alquiler, Liquidacion
-from core.models import Persona, Cliente
+from core.models import Persona, Cliente, Vendedor
+from hotel.models import Habitacion
 from django.http import request
 
 class AlquilerForm(forms.ModelForm):
@@ -8,14 +9,14 @@ class AlquilerForm(forms.ModelForm):
     apellidoCliente = forms.CharField(label='Apellido del Cliente:')
     tipodocumentoCliente = forms.ChoiceField(label='Tipo de Documento:', choices=Persona.TIPOS_DOCUMENTO)
     documentoCliente = forms.IntegerField( label='Documento:')
+    vendedor = forms.CharField(label='Vendedor:')
     class Meta:
         model = Alquiler
         exclude = [
             'factura',
-            'paquete',
-            'fue_pagado'
+            'paquete'
         ]
-        # widgets = {'cantidad_huespedes':forms.HiddenInput}
+        # widgets = {'vendedor':forms.HiddenInput}
     
     def clean(self):
         cleaneddata = super().clean()
@@ -29,3 +30,24 @@ class AlquilerForm(forms.ModelForm):
             self.fields['apellidoCliente'].initial = self.instance.cliente.persona.apellido
             self.fields['tipodocumentoCliente'].initial = self.instance.cliente.persona.tipo_documento
             self.fields['documentoCliente'].initial = self.instance.cliente.persona.documento
+    
+    def save(self, commit=True):    
+        cliente = Persona.objects.create(
+            nombre = self.cleaned_data['nombreCliente'],
+            apellido = self.cleaned_data['apellidoCliente'],
+            tipo_documento = self.cleaned_data['tipodocumentoCliente'],
+            documento = self.cleaned_data['documentoCliente'])
+        
+        seller = Vendedor.objects.get(id=self.cleaned_data['vendedor'])
+        factura = Factura.objects.create(
+            cliente = cliente.hacer_cliente(),
+            vendedor = seller
+            
+        )
+        factura.save()
+
+        alquiler = super().save(commit=False)
+        alquiler.factura = factura
+        alquiler.habitaciones=self.cleaned_data['habitaciones'].set()
+        alquiler.save()
+        return alquiler
