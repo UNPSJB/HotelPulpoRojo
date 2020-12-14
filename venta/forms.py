@@ -5,6 +5,7 @@ from hotel.models import Habitacion
 from django.http import request
 
 class AlquilerForm(forms.ModelForm):
+    # habitacion = forms.CharField(label='Habitación:')
     nombreCliente = forms.CharField(label='Nombre del Cliente:')
     apellidoCliente = forms.CharField(label='Apellido del Cliente:')
     tipodocumentoCliente = forms.ChoiceField(label='Tipo de Documento:', choices=Persona.TIPOS_DOCUMENTO)
@@ -13,6 +14,7 @@ class AlquilerForm(forms.ModelForm):
     class Meta:
         model = Alquiler
         exclude = [
+            # 'habitaciones',
             'factura',
             'paquete'
         ]
@@ -48,6 +50,10 @@ class AlquilerForm(forms.ModelForm):
 
         alquiler = super().save(commit=False)
         alquiler.factura = factura
-        alquiler.habitaciones=self.cleaned_data['habitaciones'].set()
         alquiler.save()
+        # alquiler.habitaciones=self.cleaned_data['habitaciones']
+        for habitacion in self.cleaned_data['habitaciones']:
+            alquiler.habitaciones.add(habitacion)
+        print('Habitaciones: ', self.cleaned_data['habitaciones'])
+        
         return alquiler

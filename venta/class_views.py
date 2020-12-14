@@ -20,19 +20,19 @@ class AlquilerCreate(CreateView):
 
 
     def get_initial(self):
-        habitacion = self.request.GET['habitacion']
+        hab = self.request.GET['habitacion']
         fecha_desde = self.request.GET['fecha_desde']
         fecha_hasta = self.request.GET['fecha_hasta']
         huespedes = int(self.request.GET['huespedes'])
         
         vendedor = self.request.user.id
 
-        culo = Habitacion.objects.get(id=habitacion)
+        room = Habitacion.objects.get(id=hab)
         inicio = datetime.strptime(fecha_desde, '%d/%m/%Y').date()
         fin = datetime.strptime(fecha_hasta, '%d/%m/%Y').date()
-        total = culo.precio_alquiler(inicio, fin)
+        total = room.precio_alquiler(inicio, fin)
         
-        return {'habitaciones': habitacion,
+        return {'habitacion': hab,
                 'inicio': fecha_desde,
                 'fin': fecha_hasta,
                 'cantidad_huespedes': huespedes,
