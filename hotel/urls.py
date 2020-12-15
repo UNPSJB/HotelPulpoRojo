@@ -29,8 +29,8 @@ urlpatterns = [
     path('eliminar_habitacion/<int:pk>/', HabitacionDelete.as_view(), name = 'eliminar_habitacion'),
 
     #Temporada Alta
-    path('listar_temporada_alta/',TemporadaAltaList.as_view() ,name = 'listar_temporada_alta'),
-    path('crear_temporada_alta/',TemporadaAltaCreate.as_view(),name = 'crear_temporada_alta'),
+    path('listar_temporada_alta/<int:hotel_pk>/',TemporadaAltaList.as_view() ,name = 'listar_temporada_alta'),
+    path('crear_temporada_alta/<int:hotel_pk>/',TemporadaAltaCreate.as_view(),name = 'crear_temporada_alta'),
     path('editar_temporada_alta/<int:pk>/',TemporadaAltaUpdate.as_view(),name = 'editar_temporada_alta'),
     path('eliminar_temporada_alta/<int:pk>/', TemporadaAltaDelete.as_view(), name = 'eliminar_temporada_alta'),
     

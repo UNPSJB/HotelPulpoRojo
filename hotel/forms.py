@@ -2,6 +2,7 @@ from django import forms
 from core.models import Persona, Encargado, Vendedor
 from .models import Hotel, PrecioPorTipo, Habitacion, TemporadaAlta,Descuento,PaqueteTuristico
 from django.http import request
+from datetime import date, datetime
 
 class HotelForm(forms.ModelForm):
     nombreEncargado = forms.CharField(label='Nombre del Encargado:')
@@ -78,6 +79,39 @@ class TemporadaAltaForm(forms.ModelForm):
     class Meta:
         model = TemporadaAlta
         fields = '__all__'
+        widgets = {'hotel':forms.HiddenInput}
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        inicio = cleaned_data.get('inicio')
+        fin = cleaned_data.get('fin')
+        
+        # Validacion de fechas ingresadas
+        if inicio.year == fin.year:
+            if inicio.month == fin.month:
+                # validar que el dia de inicio no sea mayor al de fin
+                if inicio.day > fin.day:
+                    raise forms.ValidationError("La fecha ingresada en fin es inferior a la de inicio")
+                # validar que el dia de inicio y fin no sean iguales
+                if inicio.day == fin.day:
+                    raise forms.ValidationError("El dia de inicio y fin no pueden ser iguales")
+            # validar que el mes de inicio no sea mayor al de fin en el mismo año    
+            if inicio.month > fin.month:
+                raise forms.ValidationError("La fecha ingresada en fin es inferior a la de inicio")
+            # validar que el mes de inicio no sea menor al del mes actual
+            if inicio.month < datetime.now().month:
+                raise forms.ValidationError("La fecha de inicio es inferior a la actual")
+            # validar que el mes de fin no sea mayor al del mes actual
+            if fin.month < datetime.now().month:
+                raise forms.ValidationError("La fecha de fin es inferior a la actual")
+        # validar que el año de inicio no sea menor que el del año actual
+        if inicio.year < datetime.now().year:
+            raise forms.ValidationError("La fecha de inicio es inferior a la actual")
+        # validar que el año de fin no sea menor que el actual
+        if fin.year < datetime.now().year:
+            raise forms.ValidationError("La fecha de fin es inferior a la actual")
+        
+        
 
 class DescuentoForm(forms.ModelForm):
     class Meta:

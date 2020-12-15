@@ -73,6 +73,12 @@
         <button class="ui button"><a href="{% url 'crear_habitacion' hotel.id %}">CREAR HABITACION</a></button>
         <hr>
         
+        <!-- info de Habitaciones -->
+        <h3>Temporadas Altas</h3>
+        <button class="ui button"><a href="{% url 'listar_temporada_alta' hotel.id %}">LISTAR TEMPORADAS ALTAS</a></button>
+        <button class="ui button"><a href="{% url 'crear_temporada_alta' hotel.id %}">CREAR TEMPORADA ALTA</a></button>
+        <hr>
+
         <!-- info de Paquete turístico -->
         <h3>Paquetes Turísticos</h3>
         <button class="ui button"><a href="{% url 'listar_paquete_turistico' hotel.id %}">LISTAR PAQUETES TURISTICOS</a></button>
