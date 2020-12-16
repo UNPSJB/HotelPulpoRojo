@@ -7,6 +7,7 @@ from .forms import HotelForm, PaqueteTuristicoForm, HabitacionForm, TemporadaAlt
 from core.forms import EncargadoForm
 from .models import Hotel, PaqueteTuristico, Habitacion, TemporadaAlta, Descuento
 from core.models import Encargado, Vendedor
+from datetime import date, datetime
 
 #Hotel
 class HotelList(ListView):
@@ -115,11 +116,11 @@ class HabitacionUpdate(UpdateView):
 
 class HabitacionDelete(DeleteView):
     model = Habitacion
-    template_name = 'verificacion.html'
+    template_name = 'verificacion_habitacion.html'
     #success_url = reverse_lazy('listar_habitacion')
 
     def get_success_url(self):
-        habitacion = habitacion.objects.get(id=self.kwargs.get('pk'))
+        habitacion = Habitacion.objects.get(id=self.kwargs.get('pk'))
         return reverse_lazy('listar_habitacion', kwargs={'hotel_pk': habitacion.hotel.pk})
 
 #Temporada Alta
@@ -152,7 +153,7 @@ class TemporadaAltaUpdate(UpdateView):
 
 class TemporadaAltaDelete(DeleteView):
     model = TemporadaAlta
-    template_name = 'verificacion.html'
+    template_name = 'verificacion_temporada_alta.html'
     #success_url = reverse_lazy('listar_temporada_alta')
 
     def get_success_url(self):

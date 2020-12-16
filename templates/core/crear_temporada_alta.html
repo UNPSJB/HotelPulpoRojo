@@ -18,13 +18,47 @@
             <form class="ui form" method="post">
                 {% csrf_token %}
                 {{ forms.non_field_errors }}
-                {{ form }}
                 
-                {% if not object %}
+                
+                <div class="row">
+                    <div class="form-group">
+                        <label>{{ form.nombre.label }}</label>
+                        {{ form.nombre }}
+                    </div>
+
+                    {{ form.hotel }}
+
+                    <div class="field">
+                        <label>{{ form.inicio.label }}</label>
+                        
+                        <div class="ui calendar" id="fecha_inicio">
+                            <div class="ui input left icon">
+                                <i class="calendar alternate icon"></i>
+                                
+                                <input id="start" value="{{inicio}}" type="text" name="inicio" placeholder="Check in">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label>{{ form.fin.label }}</label>
+                        
+                        <div class="ui calendar" id="fecha_fin">
+                            <div class="ui input left icon">
+                                <i class="calendar alternate icon"></i>
+                                
+                                <input id="end" value="{{fin}}" type="text" name="fin" placeholder="Check out">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <button class="ui button" type="submit">CREAR</button>
+                <!-- {% if not object %}
                 <button class="ui button" type="submit">CREAR</button>
                 {% else %}
                 <button class="ui button" type="submit">EDITAR</button>
-                {% endif %}
+                {% endif %} -->
                 
                 <a href="{% url 'listar_hotel' %}">CANCELAR</a>
             </form>
@@ -35,6 +69,39 @@
 
 {% block js %}
 <script>
+
+get_calendar('#fecha_inicio',null,'#fecha_fin');
+get_calendar('#fecha_fin','#fecha_inicio');
+
+// Validador de rango de fechas: MEJORAR
+$(document)
+    .ready(function() {
+        $('.ui.form')
+            .form({
+                fields: {
+                    fecha_inicio: {
+                        identifier  : 'fecha_inicio',
+                        rules: [
+                            {
+                            type   : 'empty',
+                            prompt : 'Por favor, ingrese un rango de fechas válido'
+                            }
+                        ]
+                    },
+                    fecha_fin: {
+                        identifier  : 'fecha_fin',    
+                        rules: [
+                            {
+                            type   : 'empty',
+                            prompt : 'Por favor, ingrese un rango de fechas válido'
+                            }
+                       ]     
+                    }
+                }
+            });
+    })
+;
+
 $('.dropdown')
     .dropdown({
 })

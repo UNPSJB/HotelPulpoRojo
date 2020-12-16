@@ -123,7 +123,7 @@ class TipoHabitacionUpdate(UpdateView):
 
 class TipoHabitacionDelete(DeleteView):
     model = TipoHabitacion
-    template_name = 'verificacion.html'
+    template_name = 'verificacion_tipo_habitacion.html'
     success_url = reverse_lazy('listar_tipo_habitacion')
 # Zona
 class ZonaList(ListView):
