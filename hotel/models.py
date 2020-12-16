@@ -55,13 +55,15 @@ class Hotel(models.Model):
         pass 
 
     def agregar_descuento(self, habitaciones, coeficiente):
-        if habitaciones <= 0:
-            raise DescuentoException("El mínimo de habitaciones para aplicar descuento es de 1")
-        if coeficiente < 0:
-            raise DescuentoException("El descuento no puede ser negativo")
-        # Condicion loca?
-        if self.descuentos.filter(cantidad_habitaciones__lt=habitaciones, coeficiente__gt=coeficiente).exists():
-            raise DescuentoException("No se puede crear un descuento menor a un descuento ya otorgado por menos habitaciones")
+        # if habitaciones <= 0:
+        #     raise DescuentoException("El mínimo de habitaciones para aplicar descuento es de 1")
+        # if coeficiente < 0:
+        #     raise DescuentoException("El descuento no puede ser negativo")
+        # if coeficiente >= 1:
+        #     raise DescuentoException("El descuento no puede ser mayor a 1")
+        # # Condicion loca?
+        # if self.descuentos.filter(cantidad_habitaciones__lt=habitaciones, coeficiente__gt=coeficiente).exists():
+        #     raise DescuentoException("No se puede crear un descuento menor a un descuento ya otorgado por menos habitaciones")
         return self.descuentos.create(cantidad_habitaciones=habitaciones, coeficiente=coeficiente)
 
     def obtener_descuento(self, habitaciones):

@@ -139,6 +139,31 @@ class DescuentoForm(forms.ModelForm):
         model = Descuento
         fields = '__all__'
 
+    def save(self, commit=True):    
+        descuento = super().save(commit=False)
+        hotel = self.cleaned_data['hotel']
+        habitaciones = self.cleaned_data['cantidad_habitaciones']
+        coeficiente = self.cleaned_data['coeficiente']
+        
+        hotel.agregar_descuento(habitaciones, coeficiente)
+        return descuento
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        habitaciones = int(cleaned_data.get('cantidad_habitaciones'))
+        coeficiente = float(cleaned_data.get('coeficiente'))
+        hotel = cleaned_data.get('hotel')
+        if habitaciones <= 0:
+            raise forms.ValidationError("El mínimo de habitaciones para aplicar descuento es de 1")
+        if coeficiente < 0:
+            raise forms.ValidationError("El descuento no puede ser negativo")
+        if coeficiente >= 1:
+            raise forms.ValidationError("El descuento no puede ser mayor a 1")
+        if hotel.descuentos.filter(cantidad_habitaciones__lt=habitaciones, coeficiente__gt=coeficiente).exists():
+            raise forms.ValidationError("No se puede crear un descuento menor a un descuento ya otorgado por menos habitaciones")
+
+
+
 class PaqueteTuristicoForm(forms.ModelForm):
     class Meta:
         model = PaqueteTuristico
