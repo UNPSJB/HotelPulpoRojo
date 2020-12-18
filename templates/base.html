@@ -79,6 +79,7 @@
         </div>
 
         <!-- Boton Cerrar Sesion -->
+        <div class="ui right item" style="font-size: small;" >Hola, {{ request.user }}!</div>
         <a class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
             <i class="power off icon"></i>
             CERRAR SESION
@@ -112,9 +113,9 @@
         </div>
         
         <!-- Pepe -->
-        <div>
+        <div><a href="{% url 'aprobamos' %}">
             <img class="img fixed right" src='{% static "pepe-cry-navidad.png" %}' style="position: fixed; bottom: 0;right: 0; margin-bottom: 0px;">
-        </div>
+        </a></div>
     </div>
 </body>
 

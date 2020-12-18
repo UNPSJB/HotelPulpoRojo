@@ -4,6 +4,7 @@ from hotel.class_views import PaqueteTuristicoCreate, PaqueteTuristicoDelete, Pa
 from hotel.class_views import HabitacionCreate, HabitacionDelete, HabitacionList, HabitacionUpdate
 from hotel.views import info_hotel, desasignar_vendedor, asignar_vendedor
 from hotel.class_views import DescuentoCreate, DescuentoDelete, DescuentoUpdate, DescuentoList
+from hotel.class_views import PrecioPorTipoCreate, PrecioPorTipoDelete, PrecioPorTipoList, PrecioPorTipoUpdate
 
 urlpatterns = [
 
@@ -39,5 +40,11 @@ urlpatterns = [
     path('crear_descuento/',DescuentoCreate.as_view(),name = 'crear_descuento'),
     path('editar_descuento/<int:pk>/',DescuentoUpdate.as_view(),name = 'editar_descuento'),
     path('eliminar_descuento/<int:pk>/',DescuentoDelete.as_view(),name = 'eliminar_descuento'),
+
+    #Precio Por Tipo
+    path('listar_precio_por_tipo/',PrecioPorTipoList.as_view() ,name = 'listar_precio_por_tipo'),
+    path('crear_precio_por_tipo/',PrecioPorTipoCreate.as_view(),name = 'crear_precio_por_tipo'),
+    path('editar_precio_por_tipo/<int:pk>/',PrecioPorTipoUpdate.as_view(),name = 'editar_precio_por_tipo'),
+    path('eliminar_precio_por_tipo/<int:pk>/',PrecioPorTipoDelete.as_view(),name = 'eliminar_precio_por_tipo'),
     
 ]

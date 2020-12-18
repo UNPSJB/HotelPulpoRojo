@@ -34,7 +34,6 @@ class Factura(models.Model):
     fecha = models.DateField(auto_now_add=True)
     monto = models.DecimalField(max_digits=20, decimal_places=2, default=Decimal(0))
 
-
     def alquilar_habitaciones(self, habitaciones_con_fecha):
         alquileres = []
         for (habitacion, huespedes, desde, hasta) in habitaciones_con_fecha:
@@ -46,7 +45,7 @@ class Factura(models.Model):
     def alquilar_habitacion(self, habitacion, huespedes, desde, hasta, paquete = None):
         if huespedes > habitacion.tipo.pasajeros + settings.TOLERANCIA_PASAJEROS:
             #TODO: Custom exception
-            raise MaxPasajerosException(f"No puede superar la cantidad de pasajeros permitida: {habitacion.tipo.pasajeros}")
+            raise MaxPasajerosException(f"No puede superar la cantidad de huéspedes permitida: {habitacion.tipo.pasajeros}")
         hotel = habitacion.hotel
         alquiler = self.alquileres.filter(habitaciones__hotel__in=[hotel], inicio=desde, fin=hasta).first()
         if alquiler is None:

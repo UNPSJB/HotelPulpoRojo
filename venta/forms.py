@@ -10,7 +10,7 @@ class AlquilerForm(forms.ModelForm):
     apellidoCliente = forms.CharField(label='Apellido del Cliente:')
     tipodocumentoCliente = forms.ChoiceField(label='Tipo de Documento:', choices=Persona.TIPOS_DOCUMENTO)
     documentoCliente = forms.IntegerField( label='Documento:')
-    vendedor = forms.CharField(label='Vendedor:')
+    vendedor = forms.CharField(label='Vendedor:', widget=forms.HiddenInput())
     class Meta:
         model = Alquiler
         exclude = [
@@ -18,7 +18,6 @@ class AlquilerForm(forms.ModelForm):
             'factura',
             'paquete'
         ]
-        # widgets = {'vendedor':forms.HiddenInput}
     
     def clean(self):
         cleaneddata = super().clean()
@@ -47,13 +46,21 @@ class AlquilerForm(forms.ModelForm):
             
         )
         factura.save()
+        
+        #INTENTO DE IMPLEMENTACIÓN DEL MÉTODO DEL MODELO.
+        #Creamos el diccionario:
+        # habitaciones_con_fecha = {
+        #     'habitacion': self.cleaned_data['habitaciones'],
+        #     'huespedes': self.cleaned_data['cantidad_huespedes'],
+        #     'desde': self.cleaned_data['inicio'],
+        #     'hasta': self.cleaned_data['fin']}
+        # factura.alquilar_habitaciones(habitaciones_con_fecha)
 
+        # Nuestro save:
         alquiler = super().save(commit=False)
         alquiler.factura = factura
         alquiler.save()
-        # alquiler.habitaciones=self.cleaned_data['habitaciones']
+        # alquiler.habitaciones=self.cleaned_data['habitaciones']   #Así no se añaden habitaciones
         for habitacion in self.cleaned_data['habitaciones']:
             alquiler.habitaciones.add(habitacion)
-        print('Habitaciones: ', self.cleaned_data['habitaciones'])
-        
         return alquiler

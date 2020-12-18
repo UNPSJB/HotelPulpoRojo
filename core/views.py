@@ -8,6 +8,9 @@ from .forms import TipoHabitacionForm, ServicioForm, CategoriaForm
 from django.views.generic import ListView, CreateView
 
 
+def aprobamos(request):
+    return render(request, 'aprobamos.html')
+
 def index(request):
     # Si estamos identificados devolvemos la portada
     if request.user.is_authenticated:

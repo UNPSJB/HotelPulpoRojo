@@ -24,7 +24,13 @@
                     {% for alquiler in object_list %} 
                     <tr>
                         <td class="blue">{{alquiler.factura}}</td>
-                        <td class="blue">{{alquiler.habitaciones.all | join:','}}</td>
+                            <!-- <td class="blue">{{alquiler.habitaciones.all | join:','}}</td> -->
+                        <td class="blue">
+                            {% for habitacion in alquiler.habitaciones.all %}
+                                {{habitacion.numero}}<br> <!-- Así mostramos todas las habitaciones del hotel, pero más bonito -->
+                            {% endfor %}
+                        </td>
+
                         <td class="blue">{{alquiler.paquete}}</td>
                         <td class="blue">{{alquiler.cantidad_huespedes}}</td>
                         <td class="blue">{{alquiler.inicio}}</td>
