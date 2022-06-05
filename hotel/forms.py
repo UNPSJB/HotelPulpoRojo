@@ -70,7 +70,7 @@ class HabitacionForm(forms.ModelForm):
     class Meta:
         model = Habitacion
         fields = '__all__'
-        widgets = {'hotel':forms.HiddenInput}
+        #widgets = {'hotel':forms.HiddenInput}
 
 class DateInput(forms.DateInput):
     input_type = 'date'

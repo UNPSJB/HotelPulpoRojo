@@ -1,50 +1,44 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Listado tipos de habitacion{% endblock titulo %}
+{% block titulo %}Listado de tipos de habitacion{% endblock titulo %}
 
 {% block cuerpo %}
 
-    <div class="ui sizer vertical segment">
-        <!-- <h1 class="ui huge header" style="margin-top: 10px;" >Listado de tipos de habitacion</h1> -->
-        <h1 class="ui huge header" >Listado tipos de habitacion</h1>
-    </div>
-    <div class="ui raised container segment">
-        <h2 class="ui header">Listado Tipos de habitacion</h2>
-        <table class="ui single line table">
-            <thead>
+<div class="ui raised container segment">
+    <h2 class="ui header">Listado de tipos de habitacion</h2>
+    <table class="ui blue inverted single line table padded">
+        <thead>
+            <tr>
+                <th class="center aligned">Nombre</th>
+                <th class="center aligned">Descripcion</th>
+                <th class="center aligned">Cantidad maxima de huespedes</th>
+                <th class="center aligned">Cantidad de cuartos</th>
+                <th class="center aligned">¿Es un departamento?</th>
+                <th class="center aligned">OPCIÓN</th>
+            </tr>
+            <tbody>
+                {% for tipo_h in object_list %} 
                 <tr>
-                    <th>Nombre</th>
-                    <th>Descripcion</th>
-                    <th>Cant. max. de huespedes</th>
-                    <th>Cant. cuartos</th>
-                    <th>¿Es un departamento?</th>
-                    <th>OPCIÓN</th>
+                    <td class="blue center aligned">{{tipo_h.nombre}}</td>
+                    <td class="blue center aligned">{{tipo_h.descripcion}}</td>
+                    <td class="blue center aligned">{{tipo_h.pasajeros}}</td>
+                    <td class="blue center aligned">{{tipo_h.cuartos}}</td>
+                    {% if tipo_h.es_departamento %}
+                        <td class="blue center aligned">Si</td>
+                    {% else %}
+                        <td class="blue center aligned">No</td>
+                    {% endif %}
+                    <td class="blue center aligned">
+                        <a href="{% url 'editar_tipo_habitacion' tipo_h.id %}"><i class="edit icon"></i></a>
+                        <a href="{% url 'eliminar_tipo_habitacion' tipo_h.id %}"><i class="trash icon"></i></a> 
+                    </td>
                 </tr>
-                <tbody>
-                    {% for tipo_h in object_list %} 
-                    <tr>
-                        <td class="blue">{{tipo_h.nombre}}</td>
-                        <td class="blue">{{tipo_h.descripcion}}</td>
-                        <td class="blue">{{tipo_h.pasajeros}}</td>
-                        <td class="blue">{{tipo_h.cuartos}}</td>
-                        {% if tipo_h.es_departamento %}
-                        <td class="blue">Si</td>
-                        {% else %}
-                        <td class="blue">No</td>
-                        {% endif %}
-                        <td class="center aligned blue">
-                            <a href="{% url 'editar_tipo_habitacion' tipo_h.id %}"><i class="edit icon"></i></a>
-                            <a href="{% url 'eliminar_tipo_habitacion' tipo_h.id %}"><i class="trash icon"></i></a> 
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </thead>
-        </table>
-        <a href="{% url 'crear_tipo_habitacion' %}">CREAR TIPO DE HABITACION</a>
-    </div>
-    <div class="ui center container segment">
-        <a class="ui button" href="{% url 'listar_precio_por_tipo' %}">PRECIOS POR TIPO DE HABITACION</a>
-    </div>
+                {% endfor %}
+            </tbody>
+        </thead>
+    </table>
+    <a class="ui button" href="{% url 'crear_tipo_habitacion' %}">CREAR TIPO DE HABITACION</a>
+    <a class="ui right floated button" href="{% url 'listar_precio_por_tipo' %}">PRECIOS POR TIPO DE HABITACION</a>
+</div>
 {% endblock cuerpo %}

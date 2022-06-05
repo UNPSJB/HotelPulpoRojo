@@ -1,33 +1,39 @@
 {% extends 'base.html' %}
 
 
-{% block titulo %}Formulario de Contacto{% endblock titulo %}
+{% block titulo %}
+    {% if not object %}
+            Crear un tipo de habitacion
+    {% else %}
+            Editar un tipo de habitacion
+    {% endif %}
+{% endblock titulo %}
 
 {% block cuerpo%} 
 
 <div class="ui grid">
         
-        <div class="ui text container">
+        <div class="ui raised very padded text container segment">
             {% if not object %}
-            <h2 class="ui header">Crear tipo de habitacion</h2>
+            <h2 class="ui header">Crear un tipo de habitacion</h2>
             {% else %}
-            <h2 class="ui header">Editar tipo de habitacion</h2>
+            <h2 class="ui header">Editar un tipo de habitacion</h2>
             {% endif %}
 
             {{ forms.non_field_errors }}
             <form class="ui form" method="post">
                 {% csrf_token %}
+
                 {{ form }}
-                
+                <br></br>
                 {% if not object %}
-                <button class="ui button" type="submit">CREAR</button>
+                    <button class="ui button" type="submit">CREAR</button>
                 {% else %}
-                <button class="ui button" type="submit">EDITAR</button>
+                    <button class="ui button" type="submit">EDITAR</button>
                 {% endif %}
                 
-                <a href="{% url 'listar_tipo_habitacion' %}">CANCELAR</a>
+                <a class="ui right floated button" href="{% url 'listar_tipo_habitacion' %}">CANCELAR</a>
             </form>
-            
         </div>
 </div>
 {% endblock cuerpo %}

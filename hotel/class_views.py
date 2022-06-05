@@ -88,8 +88,8 @@ class HabitacionList(ListView):
 
     def get_context_data(self, **kwargs):
         kwargs['object_list'] = Habitacion.objects.filter(hotel_id=self.kwargs['hotel_pk'])
-        
         return super(HabitacionList, self).get_context_data(**kwargs)
+        
 
 class HabitacionCreate(CreateView):
     model = Habitacion
@@ -103,6 +103,8 @@ class HabitacionCreate(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('info_hotel', kwargs={'id': self.kwargs.get('hotel_pk')})
+
+
 
 class HabitacionUpdate(UpdateView):
     model = Habitacion
