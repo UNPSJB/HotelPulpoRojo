@@ -9,27 +9,31 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+    <link rel="stylesheet" href="static/css/buena_vista.css" media="screen">
+
     <title>{% block titulo %}{% endblock titulo %}</title>
 
     <!-- Barra Superior -->
-    <div class="ui menu" id="Barra Superior">
+    <div class="ui massive inverted menu" id="Barra Superior">
         <div class="ui container">
-            <a href="#" class="header item">
-            <img class="logo" src='{% static "pulpito-s.png" %}' style="margin-right: 10px;">
+            <a href="/" class="header item">
+            <img class="logo" src='{% static "images/pulpito-s.png" %}' style="margin-right: 10px;">
                 Hotel Pulpo Rojo
             </a>
-            <a href="/" class="item">Página Principal</a>
             
-            <div class="ui simple dropdown item">
-                Hoteles <i class="dropdown icon"></i>
+            <div class="ui simple dropdown inverted item">
+                <i class="building icon"></i>
+                Hoteles
+                <i class="dropdown icon"></i>
                     <div class="menu">
                         <a class="item" href="/afiliar_hotel">Afiliar</a>
                         <a class="item" href="/listar_hotel">Listado</a>
                     </div>
             </div>
 
-            <div class="ui simple dropdown item">
-                Alquileres <i class="dropdown icon"></i>
+            <div class="ui simple dropdown inverted item">
+                <i class="hotel icon"></i>Alquileres
+                <i class="dropdown icon"></i>
                     <div class="menu">
                         <a class="item" href="/alquilar_habitacion">Alquilar Habitación</a>
                         <a class="item" href="#">Venta de Paquete Turístico</a>
@@ -37,8 +41,10 @@
                     </div>
             </div>
 
-            <div class="ui simple dropdown item">
-                Liquidaciones <i class="dropdown icon"></i>
+            <div class="ui simple dropdown inverted item">
+                <i class="credit card outline icon"></i>
+                Liquidaciones
+                <i class="dropdown icon"></i>
                     <div class="menu">
                         <a class="item" href="#">Realizar Liquidación</a>
                         <a class="item" href="#">Listado</a>
@@ -51,7 +57,8 @@
             <!-- Sección pertinente solo al Superusuario -->
             {% if perms.core.add_tipohabitacion %}
             <!-- Boton de Admin -->
-            <div class="ui simple dropdown item">
+            <div class="ui simple dropdown inverted item">
+                <i class="calendar check outline icon"></i>
                 Administración
                 <i class="dropdown icon"></i>
                     <div class="menu">
@@ -73,48 +80,55 @@
             <!-- Boton de Django -->
             {% if request.user.is_superuser %}
             <a href="/admin" class="header item">
-                <img class="logo" src='{% static "django-s.png" %}' style="scale: 2;">
+                <img class="logo" src='{% static "images/django-s.png" %}' style="scale: 2;">
             </a>
             {% endif %}
         </div>
 
         <!-- Boton Cerrar Sesion -->
         <div class="ui right item" style="font-size: small;" >Hola, {{ request.user }}!</div>
-        <a class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
+        <button class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
             <i class="power off icon"></i>
-            CERRAR SESION
+            Cerrar Sesion
         </a>
     </div>
 
 </head>
 
 <body>
-    <style>
-        /* Estilo del scrollbar */
-        body::-webkit-scrollbar{
-            width: 1rem;
-        }
-        body::-webkit-scrollbar-track{
-            background: rgb(39, 39, 39);
-        }
-        body::-webkit-scrollbar-thumb{
-            background: rgb(131, 5, 131);
-            border-radius: 5px;
-        }
-        body::-webkit-scrollbar-thumb:active {
-            background: rgb(85, 5, 85);
-        }
-    </style>
     
     <div class="pusher">
         <div class="ui basic segment">
             {% block cuerpo %}
+            <div class="ui two centered row grid">
+                <div class="row">
+                        <div class="ui massive inverted vertical menu">
+                            <div class="ui massive black label">
+                                <i class="tasks icon"></i> Listados
+                            </div>
+                            <a class="item" href="/listar_hotel">Hoteles</a>
+                            <a class="item" href="/listar_alquiler"> Alquileres</a>
+                            <a class="item" href="#">Liquidaciones</a>
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="ui massive inverted vertical menu">
+                            <a class="ui massive black label">
+                                <i class=" laptop house icon"></i> Alquileres
+                            </a>
+                            <a class="item" href="/afiliar_hotel">Afiliar Hotel</a>
+                            <a class="item" href="/alquilar_habitacion">Alquilar Habitación</a>
+                            <a class="item" href="#">Venta de Paquete Turístico</a>
+                            <a class="item" href="#">Realizar Liquidación</a>
+                        </div>
+            
+                </div>
+            </div>
             {% endblock cuerpo %}
         </div>
-        
         <!-- Pepe -->
         <div><a href="{% url 'aprobamos' %}">
-            <img class="img fixed right" src='{% static "pepe-cry-navidad.png" %}' style="position: fixed; bottom: 0;right: 0; margin-bottom: 0px;">
+            <img class="img fixed right" src='{% static "images/pepe-cry-navidad.png" %}' style="position: fixed; bottom: 0;right: 0; margin-bottom: 0px;">
         </a></div>
     </div>
 </body>
@@ -131,7 +145,6 @@ $('.visible.example .ui.sidebar')
     })
     .sidebar('hide')
 ;
-
 </script> -->
 {% endblock js %}
 

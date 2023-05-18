@@ -7,7 +7,7 @@
 
 <div class="ui raised container segment">
     <h2 class="ui header">Listado de tipos de habitacion</h2>
-    <table class="ui blue inverted single line table padded">
+    <table class="ui inverted single line table padded">
         <thead>
             <tr>
                 <th class="center aligned">Nombre</th>
@@ -18,7 +18,7 @@
                 <th class="center aligned">OPCIÓN</th>
             </tr>
             <tbody>
-                {% for tipo_h in object_list %} 
+                {% for tipo_h in object_list %}
                 <tr>
                     <td class="blue center aligned">{{tipo_h.nombre}}</td>
                     <td class="blue center aligned">{{tipo_h.descripcion}}</td>

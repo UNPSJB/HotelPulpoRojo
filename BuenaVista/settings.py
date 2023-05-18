@@ -134,7 +134,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    ("imagenes", "/static/")
+    ("images", "/static/")
 ]
 
 #Cuanto es la tolerancia permitida de pasajeros al alquilar

@@ -17,8 +17,9 @@
                 {% csrf_token %}
                 {{ forms.non_field_errors }}
                 {{ form }}
-                <button class="ui button" type="submit">GUARDAR</button>
                 <a href="{% url 'listar_hotel' %}">CANCELAR</a>
+                <button class="ui blue button" type="submit">GUARDAR</button>
+                
             </form>
             
         </div>

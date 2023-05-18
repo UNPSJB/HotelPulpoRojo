@@ -1,0 +1,14 @@
+/* Estilo del scrollbar */
+body::-webkit-scrollbar{
+    *width: 1rem;
+}
+body::-webkit-scrollbar-track{
+    background: rgb(39, 39, 39);
+}
+body::-webkit-scrollbar-thumb{
+    background: rgb(131, 5, 131);
+    border-radius: 5px;
+}
+body::-webkit-scrollbar-thumb:active {
+    background: rgb(85, 5, 85);
+}

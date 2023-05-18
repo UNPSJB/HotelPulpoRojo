@@ -9,7 +9,7 @@
         <h1 class="ui huge header" >Listado de Alquileres</h1>
     </div>
     <div class="ui raised very padded text container segment">
-        <table class="ui blue inverted center aligned table">
+        <table class="ui inverted center aligned table">
             <thead>
                 <tr>
                     <th>Factura</th>
@@ -31,10 +31,10 @@
                             {% endfor %}
                         </td>
 
-                        <td class="blue">{{alquiler.paquete}}</td>
-                        <td class="blue">{{alquiler.cantidad_huespedes}}</td>
-                        <td class="blue">{{alquiler.inicio}}</td>
-                        <td class="blue">{{alquiler.fin}}</td>
+                        <td>{{alquiler.paquete}}</td>
+                        <td>{{alquiler.cantidad_huespedes}}</td>
+                        <td>{{alquiler.inicio}}</td>
+                        <td>{{alquiler.fin}}</td>
                         <td class="blue">{{alquiler.total}}</td>
                     </tr>
                     {% endfor %}
