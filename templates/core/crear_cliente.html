@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Formulario de Cliente{% endblock titulo %}
+
+{% block cuerpo%} 
+
+<div class="ui grid">
+        
+        <div class="ui text container">            
+            {% if not object %}
+            <h2 class="ui header">Crear cliente</h2>
+            {% else %}
+            <h2 class="ui header">Editar cliente</h2>
+            {% endif %}
+            
+            <form class="ui form" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button class="ui button" type="submit">GUARDAR</button>
+                <a href="{% url 'listar_cliente' %}">CANCELAR</a>
+            </form>
+            
+        </div>
+</div>
+{% endblock cuerpo %}
+
+{% block js %}
+<script>
+$('.dropdown')
+    .dropdown({
+})
+;
+</script>
+{% endblock js %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de habitaciones{% endblock titulo %}
+
+{% block cuerpo %}
+
+    <div class="ui sizer vertical segment">
+        <h1 class="ui huge header" >Listado de habitaciones</h1>
+    </div>
+    <div class="ui raised very padded text container segment">
+        <table class="ui blue inverted center aligned table">
+            <thead>
+                <tr>
+                    <th>Hotel</th>
+                    <th>Número</th>
+                    <th>Piso</th>
+                    <th>Tipo de habitacion</th>
+                    <th>OPCIÓN</th>
+                </tr>
+                <tbody>
+                    {% for habitacion in object_list %} 
+                    <tr>
+                        <td class="blue">{{habitacion.hotel}}</td>
+                        <td class="blue">{{habitacion.get_numero}}</td>
+                        <td class="blue">{{habitacion.piso}}</td>
+                        <td class="blue">{{habitacion.tipo}}</td>
+                        <td class="center aligned blue">
+                            <a href="{% url 'editar_habitacion' habitacion.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_habitacion' habitacion.id %}"><i class="trash icon"></i></a> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+{% endblock cuerpo %}

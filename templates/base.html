@@ -1,0 +1,160 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- You MUST include jQuery before Fomantic -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+    <title>{% block titulo %}{% endblock titulo %}</title>
+
+    <!-- Barra Superior -->
+    <div class="ui menu" id="Barra Superior">
+        <div class="ui container">
+            <a href="#" class="header item">
+            <img class="logo" src='{% static "pulpito-s.png" %}' style="margin-right: 10px;">
+                Hotel Pulpo Rojo
+            </a>
+            <a href="/" class="item">Página Principal</a>
+            
+            <div class="ui simple dropdown item">
+                Hoteles <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="/afiliar_hotel">Afiliar</a>
+                        <a class="item" href="/listar_hotel">Listado</a>
+                    </div>
+            </div>
+
+            <div class="ui simple dropdown item">
+                Alquileres <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="/alquilar_habitacion">Alquilar Habitación</a>
+                        <a class="item" href="#">Venta de Paquete Turístico</a>
+                        <a class="item" href="/listar_alquiler">Listado</a>
+                    </div>
+            </div>
+
+            <div class="ui simple dropdown item">
+                Liquidaciones <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="#">Realizar Liquidación</a>
+                        <a class="item" href="#">Listado</a>
+                    </div>
+            </div>
+            {% if not request.user.is_superuser %}
+            <a href="/listar_cliente" class="item">Listado de Clientes</a>
+            {% endif %}
+
+            <!-- Sección pertinente solo al Superusuario -->
+            {% if perms.core.add_tipohabitacion %}
+            <!-- Boton de Admin -->
+            <div class="ui simple dropdown item">
+                Administración
+                <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a class="item" href="/listar_tipo_habitacion">Tipo de Habitación</a>
+                        <a class="item" href="/listar_descuento">Gestion de Descuento</a>
+                        <div class="item">
+                            <i class="dropdown icon"></i>
+                            Categoría y Servicios
+                            <div class="menu">
+                                <a class="item" href="/listar_categoria">Categoría</a>
+                                <a class="item" href="/listar_servicio">Servicios</a>
+                            </div>
+                        </div>
+                        <a class="item" href="/listar_zona">Gestionar Zonas</a>
+                        <a class="item" href="/listar_persona">Gestionar Personas</a>
+                    </div> 
+            </div>
+            {% endif %}
+            <!-- Boton de Django -->
+            {% if request.user.is_superuser %}
+            <a href="/admin" class="header item">
+                <img class="logo" src='{% static "django-s.png" %}' style="scale: 2;">
+            </a>
+            {% endif %}
+        </div>
+
+        <!-- Boton Cerrar Sesion -->
+        <div class="ui right item" style="font-size: small;" >Hola, {{ request.user }}!</div>
+        <a class="ui red right floated button" href="{% url 'cerrar_sesion' %}">
+            <i class="power off icon"></i>
+            CERRAR SESION
+        </a>
+    </div>
+
+</head>
+
+<body>
+    <style>
+        /* Estilo del scrollbar */
+        body::-webkit-scrollbar{
+            width: 1rem;
+        }
+        body::-webkit-scrollbar-track{
+            background: rgb(39, 39, 39);
+        }
+        body::-webkit-scrollbar-thumb{
+            background: rgb(131, 5, 131);
+            border-radius: 5px;
+        }
+        body::-webkit-scrollbar-thumb:active {
+            background: rgb(85, 5, 85);
+        }
+    </style>
+    
+    <div class="pusher">
+        <div class="ui basic segment">
+            {% block cuerpo %}
+            {% endblock cuerpo %}
+        </div>
+        
+        <!-- Pepe -->
+        <div><a href="{% url 'aprobamos' %}">
+            <img class="img fixed right" src='{% static "pepe-cry-navidad.png" %}' style="position: fixed; bottom: 0;right: 0; margin-bottom: 0px;">
+        </a></div>
+    </div>
+</body>
+
+</html>
+
+<script src="{% static 'funciones.js' %}"></script>
+
+{% block js %}
+<!-- <script>
+$('.visible.example .ui.sidebar')
+    .sidebar({
+        context: '.visible.example .bottom.segment'
+    })
+    .sidebar('hide')
+;
+
+</script> -->
+{% endblock js %}
+
+
+
+
+<!-- Ejemplo de Menú con Submenúes re piola
+    <div class="ui simple dropdown item">
+        Menú desplegable de prueba 
+        <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="#">Opción 1</a>
+                <a class="item" href="#">Opción 2</a>
+                <div class="divider"></div>
+                <div class="header">Título</div>
+                <div class="item">
+                    <i class="dropdown icon"></i>
+                    Sub Menu
+                    <div class="menu">
+                        <a class="item" href="#">Opción 3</a>
+                        <a class="item" href="#">Opción 4</a>
+                    </div>
+                </div>
+                <a class="item" href="#">Opción 5</a>
+            </div> 
+        </div>-->

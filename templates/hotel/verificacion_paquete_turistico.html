@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Eliminar{% endblock titulo %}
+
+{% block cuerpo %}
+    <h2 class="ui header">Eliminar</h2>
+    <div class="ui text container">
+        <form class="ui form" method = "POST">
+            {% csrf_token %}
+            <h1>Seguro que desea eliminar el Paquete Turistico {{ object.nombre }}?</h1>
+            <button class="ui button" type="submit" name="button">Confirmar</button>
+            <a href="{% url 'listar_hotel' %}">CANCELAR</a>
+        </form>
+    </div>
+{% endblock cuerpo %}

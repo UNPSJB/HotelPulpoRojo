@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}
+    {% if not object %}
+            Crear un precio por tipo de habitacion
+    {% else %}
+            Editar un precio por tipo de habitacion
+    {% endif %}
+{% endblock titulo %}
+    
+{% block cuerpo%} 
+
+<div class="ui grid">
+        
+        <div class="ui raised very padded text container segment">
+            {% if not object %}
+            <h2 class="ui header">Crear precio por tipo de habitacion</h2>
+            {% else %}
+            <h2 class="ui header">Editar precio por tipo de habitacion</h2>
+            {% endif %}
+            <form class="ui form" method="post" >
+                {% csrf_token %}
+                {{ form }}
+                <br></br>
+                {% if not object %}
+                    <button class="ui button" type="submit">CREAR</button>
+                {% else %}
+                    <button class="ui button" type="submit">EDITAR</button>
+                {% endif %}
+                <a class="ui right floated button" href="{% url 'listar_precio_por_tipo' %}">CANCELAR</a>
+                
+            </form>
+        </div>
+</div>
+{% endblock cuerpo %}
+
+{% block js %}
+<script>
+$('.dropdown')
+    .dropdown({
+});
+</script>
+{% endblock js %}

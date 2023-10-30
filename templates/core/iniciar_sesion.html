@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <!-- You MUST include jQuery before Fomantic -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.7/dist/semantic.min.js"></script>
+    <title>Login - Hotel Pulpo Rojo</title>
+    <style type="text/css">
+        body > .grid {
+            height: 100%;
+        }
+        .image {
+            margin-top: -100px;
+        }
+        .column {
+            max-width: 450px;
+        }
+    </style>
+
+    <script>
+        $(document)
+        .ready(function() {
+            $('.ui.form')
+                .form({
+                fields: {
+                    username: {
+                    identifier  : 'username',
+                    rules: [
+                        {
+                        type   : 'empty',
+                        prompt : 'Por favor, ingrese su usuario'
+                        },
+                        {
+                        type   : 'username',
+                        prompt : 'Por favor, ingrese un usuario válido'
+                        }
+                    ]
+                    },
+                    password: {
+                    identifier  : 'password',
+                    rules: [
+                        {
+                        type   : 'empty',
+                        prompt : 'Por favor, ingrese su contraseña'
+                        },
+                        {
+                        type   : 'length[6]',
+                        prompt : 'Su contraseña debe poseer al menos 6 caracteres'
+                        }
+                    ]
+                    }
+                }
+                })
+            ;
+        })
+        ;
+    </script>
+
+</head>
+
+<body>
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            
+        <h2 class="ui image header">
+            {% load static %}
+            <a><img src='{% static "hpr-logo.png" %}'></a>
+        </h2>
+
+        <form class="ui form" method="POST">
+                        
+            <div class="ui stacked segment">
+                
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input for='{{ form.username }}' type="text" name="username" autofocus="" required="" id="id_username" placeholder="Usuario">
+                    </div>
+                </div>
+    
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input for='{{ form.password }}' type="password" name="password" placeholder="Contraseña"> 
+                    </div>
+                </div>
+
+                <div>
+                    <button class="ui fluid large black submit button" type="submit">Iniciar Sesión</button>
+                </div>
+                
+                <div class="ui error message"></div>
+            
+                {% csrf_token %}
+            </div>
+        </form>
+
+        <div class="ui message">
+            ¿Olvidaste tu contraseña? <a href="#"> Haz click aquí</a>
+        </div>
+        </div>
+    </div>
+</body>
+
+</html>

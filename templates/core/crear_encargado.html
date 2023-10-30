@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Formulario de Encargado{% endblock titulo %}
+
+{% block cuerpo%} 
+
+<div class="ui grid">
+        
+        <div class="ui text container">
+            {% if not object %}
+            <h2 class="ui header">Crear encargado</h2>
+            {% else %}
+            <h2 class="ui header">Editar encargado</h2>
+            {% endif %}
+            
+            <form class="ui form" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <button class="ui button" type="submit">GUARDAR</button>
+                <a href="{% url 'listar_persona' %}">CANCELAR</a>
+            </form>
+            
+        </div>
+</div>
+{% endblock cuerpo %}
+
+{% block js %}
+<script>
+$('.dropdown')
+    .dropdown({
+})
+;
+</script>
+{% endblock js %}

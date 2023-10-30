@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Listado de categorias{% endblock titulo %}
+
+{% block cuerpo %}
+<div class="ui raised very padded text container segment">
+    <h2 class="ui header">Listado de Categorias</h2>
+    <table class="ui single line table">
+        <thead>
+            <tr>
+                <th>Categoria/Estrellas</th>
+                <th>Nombre</th>
+                <!--<th>Servicios</th>-->
+                <th>Editar</th>
+            </tr>
+            <tbody>
+            {% if object_list %}
+                {% for categoria in object_list %} 
+                <tr>
+                    <td class="blue">{{categoria.estrellas}}</td>
+                    <td class="blue">{{categoria.nombre}}</td>
+                    <!--<td class="blue">{{categoria.servicios}}</td>-->
+                    <td class="center aligned blue">
+                        <a href="{% url 'editar_categoria' categoria.id %}"><i class="edit icon"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </thead>
+    </table>
+    <a class="ui button" href="{% url 'crear_categoria' %}">CREAR CATEGORIA</a>
+</div>
+
+{% endblock cuerpo %}

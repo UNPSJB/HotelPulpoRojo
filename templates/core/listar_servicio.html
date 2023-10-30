@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block titulo %}Listado de sevicios{% endblock titulo %}
+
+{% block cuerpo %}
+
+<div class="ui raised very padded text container segment">
+    <h2 class="ui header">Listado de Servicios</h2>
+    <table class="ui single line table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Editar</th>
+            </tr>
+            <tbody>
+            {% if object_list %}
+                {% for servicio in object_list %} 
+                <tr>
+                    <td class="blue">{{servicio.nombre}}</td>
+                    <td class="blue">{{servicio.descripcion}}</td>
+                    <td class="center aligned blue">
+                        <a href="{% url 'editar_servicio' servicio.id %}"><i class="edit icon"></i></a>
+                    </td>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% endif %}
+            </tbody>
+        </thead>
+    </table>
+    <a class="ui button" href="{% url 'crear_servicio' %}">CREAR SERVICIO</a>
+</div>
+
+{% endblock cuerpo %}

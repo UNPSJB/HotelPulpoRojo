@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Crear Pais{% endblock titulo %}
+
+    {% block cuerpo %}
+    
+        <div class="ui grid">
+            <div class="ui text container">
+                <div class="ui raised very padded text container segment">  
+                    <h2 class="ui header">
+                        {% if request.get_full_path == "/crear_pais/" %}
+                        <h2 class="ui header">Crear Pais</h2>
+                        {% else %}
+                        <h2 class="ui header">Editar Pais</h2>
+                        {% endif %}
+                    </h2>
+                    <form class="ui form" method="post">
+                        {% csrf_token %}
+
+                        <div class="field">
+                            <label>Pais</label>
+                            {{form.nombre}}
+                        </div>
+
+                        <a href="{% url 'listar_zona' %}">CANCELAR</a>
+
+                        <button class="ui right floated button" type="submit">ACEPTAR</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endblock cuerpo %}

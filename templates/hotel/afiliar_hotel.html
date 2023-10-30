@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Formulario de Hotel{% endblock titulo %}
+
+{% block cuerpo%} 
+
+<div class="ui grid">
+        <div class="ui text container">
+            {% if not object %}
+            <h2 class="ui header">Afiliar Hotel</h2>
+            {% else %}
+            <h2 class="ui header">Editar Hotel</h2>
+            {% endif %}
+            
+            <form class="ui form" method="post">
+                {% csrf_token %}
+                {{ forms.non_field_errors }}
+                {{ form }}
+                <button class="ui button" type="submit">GUARDAR</button>
+                <a href="{% url 'listar_hotel' %}">CANCELAR</a>
+            </form>
+            
+        </div>
+</div>
+{% endblock cuerpo %}
+
+{% block js %}
+<script>
+$('.dropdown')
+    .dropdown({
+})
+;
+</script>
+{% endblock js %}

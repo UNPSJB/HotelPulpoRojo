@@ -1,3 +1,4 @@
 {
-  "python.venvPath": "~/.virtualenvs"
+  "python.venvPath": "~/.virtualenvs",
+  "python.pythonPath": "C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
 }

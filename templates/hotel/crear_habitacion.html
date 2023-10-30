@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Crear habitacion{% endblock titulo %}
+
+{% block cuerpo%} 
+
+<div class="ui padded grid">
+        <div class="column teal">
+            <div class="ui text container">
+                {% if not object %}
+                <h2 class="ui">Crear habitacion</h2>
+                {% else %}
+                <h2 class="ui">Editar habitacion</h2>
+                {% endif %}
+    
+                {{ forms.non_field_errors }}
+                <form class="ui form" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="field" >
+                        {{form.hotel.as_hidden}}
+                    </div>
+                    
+                    <div class="field">
+                        <label>Número</label>
+                        {{form.numero}}
+                    </div>
+                    
+                    <div class="field">
+                        <label>Tipo</label>
+                        {{form.tipo}}
+                    </div>
+    
+                    {% if not object %}
+                    <button class="ui right floated inverted basic green button" type="submit">CREAR</button>
+                    {% else %}
+                    <button class="ui right floated inverted basic green button" type="submit">EDITAR</button>
+                    {% endif %}
+                    
+                    <a class="ui button inverted basic red" href="{% url 'listar_hotel' %}">CANCELAR</a>
+                </form>
+            </div>
+        </div>
+</div>
+{% endblock cuerpo %}
+
+{% block js %}
+<script>
+$('.dropdown')
+    .dropdown({
+})
+;
+</script>
+{% endblock js %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de Clientes{% endblock titulo %}
+
+{% block cuerpo %}
+
+    <div class="ui sizer vertical segment">
+        <!-- <h1 class="ui huge header" style="margin-top: 10px;" >Listado de personas</h1> -->
+        <h1 class="ui huge header" >Listado de Clientes</h1>
+    </div>
+    <div>
+        <div class="ui center aligned header" style="font: italic; font-size: larger;" >"Porque los clientes también son personas..."</div> 
+    </div>
+    <div class="ui raised very padded text container segment">
+        <h2 class="ui header">Listado de Clientes</h2>
+        <table class="ui single line table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Tipo Documento</th>
+                    <th>Documento</th>
+                    <th>OPCIÓN</th>
+                </tr>
+                <tbody>
+                    {% for persona in object_list %} 
+                        {% if persona.sos_cliente %}
+                        <tr> 
+                            <td>{{persona.nombre}}</td>
+                            <td>{{persona.apellido}}</td>
+                            <td>{{persona.get_tipo_documento_display}}</td>
+                            <td>{{persona.documento}}</td>
+                            <td>{{persona.Tipo}}
+                                <a href="{% url 'editar_cliente' persona.id %}"><i class="edit icon"></i></a>
+                                <a href="{% url 'eliminar_cliente' persona.id %}"><i class="trash icon"></i></a> 
+                                <a href=""><i class="info circle icon"></i></a> 
+                            </td>
+                            
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+{% endblock cuerpo %}

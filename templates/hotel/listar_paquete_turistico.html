@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de Paquete Turistico{% endblock titulo %}
+
+{% block cuerpo %}
+
+    
+    <div class="ui raised  container segment">
+        <h2 class="ui header">Listado de Paquete Turistico</h2>
+            <table class="ui single line table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Coeficiente</th>
+                        <th>Hotel</th>
+                        <th>Inicio</th>
+                        <th>Fin</th>
+                        <th>Habitaciones</th>
+                    </tr>
+                    <tbody>
+                        {% for paqueteturistico in object_list %} 
+                        <tr>
+                            <td>{{paqueteturistico.nombre}}</td>
+                            <td>{{paqueteturistico.coeficiente}}</td>
+                            <td>{{paqueteturistico.hotel.nombre}}</td>
+                            <td>{{paqueteturistico.inicio}}</td>
+                            <td>{{paqueteturistico.fin}}</td>
+                            <td>{{paqueteturistico.habitaciones.tipo}}</td>
+                            <td>
+                                <a href="{% url 'editar_paquete_turistico' paqueteturistico.id %}"><i class="edit icon"></i></a>
+                                <a href="{% url 'eliminar_paquete_turistico' paqueteturistico.id %}"><i class="trash icon"></i></a> 
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+    </div>
+{% endblock cuerpo %}

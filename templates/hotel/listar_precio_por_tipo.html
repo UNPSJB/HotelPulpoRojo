@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de precio por tipo{% endblock titulo %}
+
+{% block cuerpo %}
+
+    
+    <div class="ui raised container segment">
+        <h2 class="ui header">Listado de precio por tipo</h2>
+            <table class="ui blue inverted single line table">
+                <thead>
+                    <tr>
+                        <th class="center aligned">Hotel</th>
+                        <th class="center aligned">Tipo de Habitación</th>
+                        <th class="center aligned">Precio por temporada Baja</th>
+                        <th class="center aligned">Precio por temporada Alta</th>
+                        <th class="center aligned">Opciones</th>
+                    </tr>
+                    <tbody>
+                        {% for precioportipo in object_list %} 
+                        <tr>
+                            <td class="blue center aligned">{{precioportipo.hotel}}</td>
+                            <td class="blue center aligned">{{precioportipo.tipo}}</td>
+                            <td class="blue center aligned">{{precioportipo.baja}}</td>
+                            <td class="blue center aligned">{{precioportipo.alta}}</td>
+                            <td  class="blue center aligned">
+                                <a href="{% url 'editar_precio_por_tipo' precioportipo.id %}"><i class="edit icon"></i></a>
+                                <a href="{% url 'eliminar_precio_por_tipo' precioportipo.id %}"><i class="trash icon"></i></a> 
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+            <a class="ui button" href="{% url 'crear_precio_por_tipo' %}">CREAR PRECIO POR TIPO</a>
+    </div>
+{% endblock cuerpo %}

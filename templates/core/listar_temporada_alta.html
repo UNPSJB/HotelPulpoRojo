@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de temporadas altas{% endblock titulo %}
+
+{% block cuerpo %}
+
+    <div class="ui sizer vertical segment">
+        <h1 class="ui huge header" >Listado de temporadas altas</h1>
+    </div>
+    <div class="ui raised very padded text container segment">
+        <table class="ui blue inverted center aligned table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Hotel</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>OPCIÓN</th>
+                </tr>
+                <tbody>
+                    {% for temporada in object_list %} 
+                    <tr>
+                        <td class="blue">{{temporada.nombre}}</td>
+                        <td class="blue">{{temporada.hotel}}</td>
+                        <td class="blue">{{temporada.inicio}}</td>
+                        <td class="blue">{{temporada.fin}}</td>
+                        <td class="center aligned blue">
+                            <a href="{% url 'editar_temporada_alta' temporada.id %}"><i class="edit icon"></i></a>
+                            <a href="{% url 'eliminar_temporada_alta' temporada.id %}"><i class="trash icon"></i></a> 
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+{% endblock cuerpo %}

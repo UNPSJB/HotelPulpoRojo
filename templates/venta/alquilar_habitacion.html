@@ -1,0 +1,205 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Alquilar habitación{% endblock titulo %}
+
+
+{% block cuerpo %}
+<h1 class="ui huge header" >Alquiler de Habitación</h1>
+    <!-- Buscador -->
+    <div class="ui two column centered grid">
+        <div class="one wide column"></div>
+        <div class="ten wide column">
+            <form class="ui form" action="" method="POST">
+                <div class="five fields">
+                    <div class="field">
+                        <label>Destino</label>
+                        <div class="ui left icon input">
+                            <input value="{{destino}}" type="text" name="destino" placeholder="Destino">
+                            <i class="globe icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Check in</label>
+                        <div class="ui calendar" id="rangestart">
+                            <div class="ui input left icon">
+                                <i class="calendar alternate icon"></i>
+                                <input id="start" value="{{fecha_desde}}" type="text" name="fecha_desde" placeholder="Check in">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Check out</label>
+                        <div class="ui calendar" id="rangeend">
+                            <div class="ui input left icon">
+                                <i class="calendar alternate outline icon"></i>
+                                <input value="{{fecha_hasta}}" type="text" name="fecha_hasta" placeholder="Check out">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Huéspedes</label>
+                        <div class="ui left icon input">
+                            <input value="{{huespedes}}" type="text" name="huespedes" placeholder="Huéspedes">
+                            <i class="user friends icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="actions" style="margin-top: 25px; position: static;">
+                            <button class="ui fluid positive right labeled icon button"  type="submit">
+                            Buscar
+                            <i class="search icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            {% csrf_token %}
+            </form>
+        </div>
+        <div class="one wide column"></div>
+    </div>
+    <!-- <div class="ui error message"></div> -->
+
+
+    {% if fecha_desde and fecha_hasta %}
+        <!-- Listado de habitaciones -->
+        <div class="ui sizer vertical segment"></div>
+            <h2 class="ui header" >Seleccione una habitación:</h2>
+        <div class="ui raised very padded text container segment">
+            <!-- <input class="ui icon input" type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar.." title="Ingrese un dato"> -->
+            <table id="myTable" class="ui blue inverted center aligned table">
+                <thead>
+                    <tr>
+                        <th>Hotel</th>
+                        <th>Número</th>
+                        <th>Piso</th>
+                        <th>Tipo de habitacion</th>
+                        <th></th>
+                    </tr>
+                    <tbody>
+                        {% for habitacion in habitaciones %} 
+                        <tr>
+                            <td class="blue">{{habitacion.hotel}}</td>
+                            <td class="blue">{{habitacion.get_numero}}</td>
+                            <td class="blue">{{habitacion.piso}}</td>
+                            <td class="blue">{{habitacion.tipo}}</td>
+                            <td class="center aligned blue">
+                                <button class="ui button"><a href="{% url 'crear_alquiler' %}?habitacion={{habitacion.id}}&fecha_desde={{fecha_desde}}&fecha_hasta={{fecha_hasta}}&huespedes={{huespedes}}">Alquilar</a></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </thead>
+            </table>
+        </div>
+    {% endif %}
+{% endblock cuerpo %}
+
+{% block js %}
+    <script>
+        // Calendario loko:
+    get_calendar('#rangestart',null,'#rangeend');
+    get_calendar('#rangeend','#rangestart');
+    
+    // Validador de rango de fechas: MEJORAR
+    $(document)
+    .ready(function() {
+        $('.ui.form')
+            .form({
+            fields: {
+                fecha_desde: {
+                    identifier  : 'fecha_desde',
+                    rules: [
+                        {
+                        type   : 'empty',
+                        prompt : 'Por favor, ingrese un rango de fechas válido'
+                        }
+                    ]
+                },
+                fecha_hasta: {
+                    identifier  : 'fecha_hasta',
+                    rules: [
+                        {
+                        type   : 'empty',
+                        prompt : 'Por favor, ingrese un rango de fechas válido'
+                        }
+                    ] 
+                }
+            }
+            });
+    })
+    ;
+
+
+
+
+    // let start = $('#start').val();
+    // if (start != ""){
+        
+    // }
+    // else{
+    //     start=null;
+    // }
+    // $('#rangestart').calendar({
+    //     type: 'date',
+    //     endCalendar: $('#rangeend'),
+    //     // formatInput: false,
+    //     // initialDate: start,
+    //     monthFirst: false,
+    //     formatter: {
+    //         date: function (date, settings) {
+    //             if (!date) return '';
+    //             var day = date.getDate();
+    //             var month = date.getMonth() + 1;
+    //             var year = date.getFullYear();
+    //             return day + '/' + month + '/' + year;
+    //         }
+    //     },
+    //     parser: {
+    //         date: function (text, settings) {
+    //             console.log(text);
+    //             text = text.split('/');
+    //             text=new Date(text[2],text[1]-1,text[0]);
+    //             return text;
+    //         }
+    //     }
+    // });
+    // $('#rangeend').calendar({
+    //     type: 'date',
+    //     startCalendar: $('#rangestart'),
+    //     formatInput: false,
+    //     formatter: {
+    //         date: function (date, settings) {
+    //             if (!date) return '';
+    //             var day = date.getDate();
+    //             var month = date.getMonth() + 1;
+    //             var year = date.getFullYear();
+    //             return day + '/' + month + '/' + year;
+    //         }
+    //     }
+    // });
+
+        // function myFunction() {
+        //     var input, filter, table, tr, td, i;
+        //     input = document.getElementById("myInput");
+        //     filter = input.value.toUpperCase();
+        //     table = document.getElementById("myTable");
+        //     tr = table.getElementsByTagName("tr");
+        //     for (i = 1; i < tr.length; i++) {// Hide the row initially.
+        //         tr[i].style.display = "none";
+        //         td = tr[i].getElementsByTagName("td");
+        //         for (var j = 0; j < td.length; j++) {
+        //             cell = tr[i].getElementsByTagName("td")[j];
+        //             if (cell) {
+        //                 if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        //                     tr[i].style.display = "";
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+    </script>
+{% endblock js %}
+
+

@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User, Group
+from decimal import Decimal
+from .utils import str_alfanumerico
 
 # Pais, Provincia, Localidad
 class Pais(models.Model):
@@ -17,7 +20,19 @@ class Provincia(models.Model):
     def __str__(self):
         return self.nombre
 
+class LocalidadManager(models.Manager):
+    def crear_zona(self, nombre):
+        query = models.Q(nombre__icontains=nombre) | \
+            models.Q(provincia__nombre__icontains=nombre) | \
+            models.Q(provincia__pais__nombre__icontains=nombre)
+        return self.model.objects.filter(query)
+
+class LocalidadQuerySet(models.QuerySet):
+    pass
+
 class Localidad(models.Model):
+    objects = LocalidadManager.from_queryset(LocalidadQuerySet)()
+
     nombre = models.CharField(max_length=200)
     provincia = models.ForeignKey(Provincia, on_delete=models.CASCADE)
 
@@ -51,7 +66,7 @@ class Categoria(models.Model):
         (ESTRELLA_4, "First Class"), 
         (ESTRELLA_5, "Luxury"), 
     )
-    estrellas = models.PositiveSmallIntegerField(choices=ESTRELLAS)
+    estrellas = models.PositiveSmallIntegerField(choices=ESTRELLAS, unique=True)
     nombre = models.CharField(max_length=200)
     servicios = models.ManyToManyField(Servicio)
 
@@ -72,6 +87,19 @@ class TipoHabitacion(models.Model):
     def __str__(self):
         return self.nombre
 
+class PersonaManager(models.Manager):
+    pass
+
+class PersonaQuerySet(models.QuerySet):
+    def vendedores(self):
+        return self.filter(roles__tipo__exact=Vendedor.TIPO)
+
+    def encargados(self):
+        return self.filter(roles__tipo__exact=Encargado.TIPO)
+
+    def clientes(self):
+        return self.filter(roles__tipo__exact=Cliente.TIPO)
+
 # Las Personas
 class Persona(models.Model):
     DNI = 0
@@ -82,10 +110,12 @@ class Persona(models.Model):
         (PASAPORTE, "PASAPORTE"), 
         (LIBRETA, "LIBRETA")
     )
+    objects = PersonaManager.from_queryset(PersonaQuerySet)()
     tipo_documento = models.PositiveSmallIntegerField(choices=TIPOS_DOCUMENTO)
     documento = models.CharField(max_length=13)
     nombre = models.CharField(max_length=200)
     apellido = models.CharField(max_length=200)
+    usuario = models.OneToOneField(User, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.apellido}, {self.nombre}"
@@ -104,6 +134,48 @@ class Persona(models.Model):
     def sos(self, Klass):
         return any([isinstance(rol, Klass) for rol in self.roles_related()])
 
+    @property
+    def sos_vendedor(self):
+        return self.sos(Vendedor)
+
+    @property
+    def sos_cliente(self):
+        return self.sos(Cliente)
+    
+    @property
+    def sos_encargado(self):
+        return self.sos(Encargado)
+
+    @property
+    def sos_administrador(self):
+        return self.usuario is not None and self.usuario.groups.filter(name="Administrador").exists()
+    
+    def hacer_encargado(self):
+        encargado = Encargado()
+        self.agregar_rol(encargado)
+        self.save()
+        return encargado
+    
+    def hacer_vendedor(self, user_name, email, password):
+        vendedor = Vendedor()
+        self.agregar_rol(vendedor)
+        self.usuario = User.objects.create_user(user_name, email, password)
+        self.usuario.groups.add(Group.objects.get(name="Vendedor"))
+        self.save()
+        return vendedor
+
+    def hacer_administrador(self, user_name, email, password):
+        self.usuario = User.objects.create_user(user_name, email, password)
+        self.usuario.groups.add(Group.objects.get(name="Administrador"))
+        self.save()
+        return self
+
+    def hacer_cliente(self):
+        cliente = Cliente()
+        self.agregar_rol(cliente)
+        self.save()
+        return cliente
+    
 # Usamos patron roles para
 # Encargados, Clientes, Vendedores
 class Rol(models.Model):
@@ -133,19 +205,20 @@ class Encargado(Rol):
     TIPO = 1
 
     # Clave Autogenerada? un token?
-    clave = models.CharField(max_length=10)
+    # clave = models.CharField(max_length=10, default=lambda n = 10: str_alfanumerico(n))
+    clave = models.CharField(max_length=10, default='dfspijgdf')
 
 class Vendedor(Rol):
     TIPO = 2
 
     # Coeficiente de Ganancia
-    coeficiente = models.DecimalField(max_digits=3, decimal_places=2)
+    coeficiente = models.DecimalField(max_digits=3, decimal_places=2, default=Decimal(0))
 
 class Cliente(Rol):
     TIPO = 3
 
     # Puntos
-    puntos = models.PositiveIntegerField()
+    puntos = models.PositiveIntegerField(default=0)
 
 for Klass in [Encargado, Vendedor, Cliente]:
     Rol.register(Klass)

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block titulo %}Listado de Alquileres{% endblock titulo %}
+
+{% block cuerpo %}
+
+    <div class="ui sizer vertical segment">
+        <h1 class="ui huge header" >Listado de Alquileres</h1>
+    </div>
+    <div class="ui raised very padded text container segment">
+        <table class="ui blue inverted center aligned table">
+            <thead>
+                <tr>
+                    <th>Factura</th>
+                    <th>Habitación</th>
+                    <th>Paquete</th>
+                    <th>Huespedes</th>
+                    <th>Check in</th>
+                    <th>Check out</th>
+                    <th>Total</th>
+                </tr>
+                <tbody>
+                    {% for alquiler in object_list %} 
+                    <tr>
+                        <td class="blue">{{alquiler.factura}}</td>
+                            <!-- <td class="blue">{{alquiler.habitaciones.all | join:','}}</td> -->
+                        <td class="blue">
+                            {% for habitacion in alquiler.habitaciones.all %}
+                                {{habitacion.numero}}<br> <!-- Así mostramos todas las habitaciones del hotel, pero más bonito -->
+                            {% endfor %}
+                        </td>
+
+                        <td class="blue">{{alquiler.paquete}}</td>
+                        <td class="blue">{{alquiler.cantidad_huespedes}}</td>
+                        <td class="blue">{{alquiler.inicio}}</td>
+                        <td class="blue">{{alquiler.fin}}</td>
+                        <td class="blue">{{alquiler.total}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </thead>
+        </table>
+    </div>
+{% endblock cuerpo %}
